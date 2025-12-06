@@ -1,0 +1,433 @@
+import React, { useState, useRef } from 'react';
+import {
+  Camera,
+  ChevronDown,
+  Calendar,
+  Ruler,
+  User,
+  MapPin,
+  Navigation,
+  Plane,
+  Briefcase,
+  GraduationCap,
+  Languages,
+  Globe,
+  Edit2,
+  Loader2,
+  RotateCw,
+  Trophy,
+  ArrowUp,
+  Cpu,
+  Award,
+  Linkedin,
+  Instagram,
+  MessageCircle,
+  X,
+  Mail,
+} from 'lucide-react';
+
+import { resizeImage } from './helpers';
+import {
+  PLACEHOLDER_GALLERY,
+  DEFAULT_PROFILE,
+  SKILLS,
+  CERTIFICATIONS,
+  TIMELINE_DATA
+} from './constants';
+import {
+  DetailItem,
+  ProfileEditModal,
+  NetworkBackground,
+  FactsModal
+} from './components';
+import {
+  HoroscopeSection,
+  AboutMeSection,
+  FamilySection,
+  GallerySection
+} from './sections';
+
+export default function ShaadiLanding() {
+  const [profile, setProfile] = useState(DEFAULT_PROFILE);
+  const [loading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [flippedCards, setFlippedCards] = useState([]);
+  const [selectedFactItem, setSelectedFactItem] = useState(null);
+  const [fullscreenLandingPhoto, setFullscreenLandingPhoto] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [editForm, setEditForm] = useState(DEFAULT_PROFILE);
+  const [galleryImages, setGalleryImages] = useState(DEFAULT_PROFILE.galleryImages || []);
+
+  const fileInputRef = useRef(null);
+  const journeySectionRef = useRef(null);
+  const profileSectionRef = useRef(null);
+  const horoscopeSectionRef = useRef(null);
+  const aboutSectionRef = useRef(null);
+  const familySectionRef = useRef(null);
+  const gallerySectionRef = useRef(null);
+
+  const handleGalleryReplace = async (e, indexStr) => {
+    if (!e.target.files || e.target.files.length === 0 || indexStr === undefined) return;
+
+    const index = parseInt(indexStr);
+    if (isNaN(index)) return;
+
+    try {
+      const file = e.target.files[0];
+      const base64 = await resizeImage(file);
+
+      let currentImages = [...galleryImages];
+      while (currentImages.length <= index) {
+        currentImages.push(PLACEHOLDER_GALLERY[currentImages.length % PLACEHOLDER_GALLERY.length]);
+      }
+
+      currentImages[index] = base64;
+      setGalleryImages(currentImages);
+    } catch (error) {
+      console.error("Gallery replace failed", error);
+    }
+  };
+
+  const handleDeleteGalleryImage = async (index) => {
+    const updatedGallery = galleryImages.filter((_, i) => i !== index);
+    setGalleryImages(updatedGallery);
+  };
+
+  const handlePhotoUpload = async (e, field = 'photoBase64') => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    setUploading(true);
+    try {
+      const file = e.target.files[0];
+      const base64 = await resizeImage(file);
+      setProfile(prev => ({ ...prev, [field]: base64 }));
+    } catch (error) {
+      console.error("Error uploading photo:", error);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const saveProfile = async () => {
+    setProfile(editForm);
+    setIsEditing(false);
+  };
+
+  const toggleFlip = (id) => {
+    setFlippedCards(prev =>
+      prev.includes(id) ? prev.filter(cardId => cardId !== id) : [...prev, id]
+    );
+  };
+
+  const scrollToJourney = () => {
+    journeySectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToTop = () => {
+    profileSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  if (loading) {
+    return (
+      <div className="h-screen w-full bg-black flex items-center justify-center">
+        <div className="animate-spin text-[#D4AF37]">
+          <Loader2 size={48} />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="h-screen w-full overflow-y-scroll bg-black text-white font-sans selection:bg-[#D4AF37] selection:text-black scroll-smooth snap-y snap-proximity md:snap-mandatory">
+
+      {/* ==================== PAGE 1: PROFILE ==================== */}
+      <div ref={profileSectionRef} className="relative w-full h-screen flex flex-col overflow-hidden snap-start">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-no-repeat transition-all duration-700"
+          style={{
+            backgroundImage: `url('${profile.photoBase64 || "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2187&auto=format&fit=crop"}')`,
+            backgroundPosition: 'center 25%'
+          }}
+        />
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black via-black/80 to-transparent/30" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-black/50" />
+
+        <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center">
+
+          {/* TOP LEFT: SOCIAL CONNECT */}
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex flex-col gap-2 z-30">
+            <p className="text-[#D4AF37] text-[10px] font-bold uppercase tracking-widest opacity-80 pl-1">Connect</p>
+            <div className="flex gap-3">
+              <a href="https://www.linkedin.com/in/bommena-hemanth-2a2834118/" target="_blank" rel="noopener noreferrer" className="p-3 sm:p-2.5 bg-blue-600/20 border border-blue-500/40 rounded-full text-blue-400 hover:bg-blue-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
+                <Linkedin size={16} />
+              </a>
+              <a href="https://www.instagram.com/bommenahemanth/" target="_blank" rel="noopener noreferrer" className="p-3 sm:p-2.5 bg-pink-600/20 border border-pink-500/40 rounded-full text-pink-400 hover:bg-pink-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
+                <Instagram size={16} />
+              </a>
+              <a href="https://wa.me/918124269822?text=Hey%20Hemanth!%20%F0%9F%91%8B%0A%0AJust%20saw%20your%20profile%20and%20loved%20it!%20%E2%9C%A8%0AWould%20love%20to%20connect%20and%20get%20to%20know%20you%20better.%20%F0%9F%98%8A" target="_blank" rel="noopener noreferrer" className="p-3 sm:p-2.5 bg-green-600/20 border border-green-500/40 rounded-full text-green-400 hover:bg-green-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
+                <MessageCircle size={16} />
+              </a>
+              <a href="mailto:bommenahemanth@gmail.com?subject=Hey%20Hemanth!%20Loved%20your%20profile%20%E2%9C%A8&body=Hi%20Hemanth!%20%F0%9F%91%8B%0A%0AI%20just%20saw%20your%20profile%20and%20really%20liked%20it!%0AWould%20love%20to%20connect%20and%20chat.%20%F0%9F%98%8A%0A%0ALooking%20forward%20to%20hearing%20from%20you!" className="p-3 sm:p-2.5 bg-red-600/20 border border-red-500/40 rounded-full text-red-400 hover:bg-red-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
+                <Mail size={16} />
+              </a>
+            </div>
+          </div>
+
+          
+          {/* CENTER: PROFILE CONTENT */}
+          <div className="flex flex-col justify-center max-w-2xl mt-8 mx-auto px-4 sm:px-0 animate-fadeInUp">
+            <div className="mb-6 group relative">
+              <h1 className="text-4xl sm:text-4xl sm:text-5xl lg:text-7xl font-serif tracking-tight leading-none mb-2">
+                <span className="block text-white font-medium">{profile.firstName}</span>
+                <span className="block font-bold bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent drop-shadow-sm">
+                  {profile.lastName}
+                </span>
+              </h1>
+              <button
+                onClick={() => setIsEditing(true)}
+                className="absolute -right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity p-2 text-gray-500 hover:text-[#D4AF37]"
+                title="Edit Profile"
+              >
+                <Edit2 size={18} />
+              </button>
+            </div>
+
+            <div className="flex items-center gap-4 mb-10">
+              <div className="w-0.5 h-10 bg-gradient-to-b from-[#BF953F] to-[#B38728]" />
+              <p className="text-lg lg:text-xl font-light text-gray-300 italic shadow-black drop-shadow-md">
+                {profile.quote}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mb-8">
+              <DetailItem icon={Calendar} value={profile.age} label="Age" />
+              <DetailItem icon={Ruler} value={profile.height} label="Height" />
+              <DetailItem icon={User} value={profile.caste} label="Caste" />
+              <DetailItem icon={MapPin} value={profile.raisedIn} label="Raised in" />
+              <DetailItem icon={Navigation} value={profile.currentLocation} label="Current Location" />
+              <DetailItem icon={Plane} value={profile.movedToUs} subValue="Moved to US" />
+              <DetailItem icon={Briefcase} value={profile.company} subValue={profile.jobTitle} />
+              <DetailItem icon={GraduationCap} value={profile.educationDegree} subValue={profile.educationUni} />
+              <DetailItem icon={Languages} value={profile.languages} label="Languages" />
+              <DetailItem icon={Globe} value={profile.visaStatus} label="Visa Status" />
+            </div>
+
+            {/* BOTTOM CENTER: READ STORY BUTTON */}
+            <div className="flex flex-col gap-6 items-center mt-6">
+              <button
+                onClick={scrollToJourney}
+                className="relative group overflow-hidden bg-gradient-to-r from-[#BF953F] to-[#B38728] text-black font-bold py-3 px-10 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.7)] transition-all duration-300 w-fit animate-pulse-slow"
+              >
+                <span className="relative z-10 flex items-center gap-2 text-lg tracking-wider">
+                  Read Full Story <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      {/* Fullscreen Landing Photo Modal */}
+      {fullscreenLandingPhoto && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer animate-fadeIn"
+          onClick={() => setFullscreenLandingPhoto(false)}
+        >
+          <div className="relative max-w-6xl max-h-[90vh] animate-zoomIn">
+            <img 
+              src={profile.photoBase64} 
+              alt="Profile Fullscreen" 
+              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl shadow-[#D4AF37]/30"
+            />
+            <button 
+              className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110"
+              onClick={() => setFullscreenLandingPhoto(false)}
+            >
+              <X size={24} />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ==================== PAGE 2: JOURNEY (VERTICAL) ==================== */}
+      <div ref={journeySectionRef} className="relative w-full min-h-screen flex flex-col bg-black snap-start">
+        <NetworkBackground />
+
+        <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md">
+          <div>
+            <h3 className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#AA771C] bg-clip-text text-transparent text-xs font-serif italic tracking-widest mb-1">
+              Professional Saga
+            </h3>
+            <h2 className="text-3xl font-serif text-white tracking-wide">
+              The <span className="text-[#D4AF37] italic">Journey</span> So Far
+            </h2>
+          </div>
+          <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20">
+            <span>Back to Top</span>
+            <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
+          </button>
+        </div>
+
+        <div className="text-center my-8 relative z-20 px-4">
+          <p className="text-gray-300 max-w-2xl mx-auto font-serif text-base sm:text-xl leading-relaxed">
+            Ex-<span className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent font-bold">McKinsey</span> Supply Chain Strategy Consultant with <span className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent font-bold">5+ years</span> experience in India, UK, US in the <span className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent font-bold">Retail</span> industry.
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 pb-32 relative z-10 w-full">
+          <div className="absolute left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 hidden md:block bg-white/10" />
+
+          <div className="space-y-8 animate-in slide-in-from-bottom-20 duration-1000">
+            {TIMELINE_DATA.map((item, idx) => {
+              const isEven = idx % 2 === 0;
+              const isFlipped = flippedCards.includes(item.id);
+
+              return (
+                <div key={item.id} className={`relative flex flex-col md:flex-row items-center gap-8 ${isEven ? 'md:flex-row-reverse' : ''}`}>
+                  <div className="flex-1 w-full md:w-[45%] h-[200px] sm:h-[180px] group perspective-1000">
+                    <div
+                      className="relative w-full h-full transition-transform duration-700 cursor-pointer"
+                      style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+                      onClick={() => toggleFlip(item.id)}
+                    >
+                      <div
+                        className="absolute inset-0 bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-3 shadow-2xl flex flex-col hover:border-[#D4AF37]/50 hover:shadow-[#D4AF37]/10 active:scale-[0.98] transition-all duration-300 hover:-translate-y-1 z-20 scale-100 hover:scale-[1.02]"
+                        style={{ backfaceVisibility: 'hidden' }}
+                      >
+                        <div className="text-[#D4AF37] text-[10px] font-black tracking-[0.2em] uppercase mb-1 border-b border-[#D4AF37]/20 pb-1 flex justify-between items-center">
+                          <span>{item.date}</span>
+                          <RotateCw size={12} className="opacity-50" />
+                        </div>
+                        <div className="flex-grow flex flex-col justify-center text-left">
+                          <h3 className="text-lg font-serif text-white mb-0.5 leading-tight">{item.role}</h3>
+                          <div className="flex items-center gap-1.5 mb-2">
+                            <Briefcase size={11} className="text-gray-500" />
+                            <span className="text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent">
+                              {item.org}
+                            </span>
+                          </div>
+                          <p className="text-gray-400 font-serif italic text-xs leading-relaxed border-l-2 border-[#D4AF37]/30 pl-2 line-clamp-2">
+                            "{item.tagline}"
+                          </p>
+                        </div>
+                        <div className="mt-auto pt-1 flex items-center justify-between text-[9px] text-gray-500 uppercase tracking-widest">
+                          <span className="flex items-center gap-2"><MapPin size={9} /> {item.loc}</span>
+                          <span className="text-[#D4AF37]/70 animate-pulse">👆 Tap to flip</span>
+                        </div>
+                      </div>
+
+                      <div
+                        className="absolute inset-0 bg-[#050505] border border-[#D4AF37] rounded-xl p-3 shadow-[0_0_40px_rgba(212,175,55,0.1)] flex flex-col overflow-hidden z-20"
+                        style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                      >
+                        <div className="flex items-center gap-2 mb-2 border-b border-[#D4AF37]/30 pb-1">
+                          <Trophy className="text-[#D4AF37]" size={12} />
+                          <span className="text-white font-serif text-xs">Responsibilities</span>
+                        </div>
+                        <ul className="flex-grow space-y-1.5 overflow-hidden pr-1 flex flex-col justify-center">
+                          {item.responsibilities.slice(0, 3).map((resp, i) => (
+                            <li key={i} className="flex gap-2 text-[10px] text-gray-300 leading-tight">
+                              <span className="text-[#D4AF37] mt-0.5">•</span>
+                              <span>{resp}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-1 pt-1 text-center border-t border-white/5">
+                          <span className="text-[8px] text-[#D4AF37]/60 uppercase tracking-widest hover:text-[#D4AF37] transition-colors">Click to Flip Back</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    onClick={() => setSelectedFactItem(item)}
+                    className="relative flex-shrink-0 z-10 hidden md:block cursor-pointer group"
+                  >
+                    <div className="w-14 h-14 rounded-full bg-black border-[3px] border-[#D4AF37] p-2 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-transform group-hover:scale-110">
+                      <img
+                        src={`https://logo.clearbit.com/${item.domain}`}
+                        alt="logo"
+                        className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                        onError={(e) => { e.target.src = 'https://via.placeholder.com/50/000000/FFFFFF?text=' + item.org[0] }}
+                      />
+                    </div>
+                    <div className={`absolute -top-7 left-1/2 -translate-x-1/2 bg-[#D4AF37] text-black text-[9px] px-2 py-0.5 rounded whitespace-nowrap font-bold pointer-events-none font-serif transition-opacity ${idx === 0 ? 'opacity-100 animate-bounce' : 'opacity-0 group-hover:opacity-100'}`}>
+                      👆 Click Me!
+                    </div>
+                  </div>
+                  <div className="flex-1 hidden md:block" />
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-16 border-t border-[#D4AF37]/20 pt-12">
+            <h3 className="text-center text-2xl font-serif text-white mb-8">
+              Arsenal & <span className="text-[#D4AF37] italic">Accolades</span>
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+              <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-4 hover:border-[#D4AF37]/50 transition-colors">
+                <div className="flex items-center gap-2 mb-4">
+                  <Cpu size={16} className="text-[#D4AF37]" />
+                  <h4 className="text-lg font-serif text-white">Technical Skills</h4>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {SKILLS.map(skill => (
+                    <span key={skill} className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-full text-[11px] text-gray-300 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 transition-colors">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-4 hover:border-[#D4AF37]/50 transition-colors">
+                <div className="flex items-center gap-2 mb-4">
+                  <Award size={16} className="text-[#D4AF37]" />
+                  <h4 className="text-lg font-serif text-white">Certifications</h4>
+                </div>
+                <div className="space-y-2">
+                  {CERTIFICATIONS.map((cert, i) => (
+                    <div key={i} className="flex items-center gap-2 text-[12px] text-gray-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+                      {cert}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="h-24" />
+      </div>
+
+      {/* ==================== PAGE 3: HOROSCOPE ==================== */}
+      <div ref={horoscopeSectionRef} className="relative w-full min-h-screen snap-start">
+        <HoroscopeSection />
+      </div>
+
+      {/* ==================== PAGE 4: ABOUT ME ==================== */}
+      <div ref={aboutSectionRef} className="relative w-full min-h-screen snap-start">
+        <AboutMeSection />
+      </div>
+
+      {/* ==================== PAGE 5: FAMILY ==================== */}
+      <div ref={familySectionRef} className="relative w-full min-h-screen snap-start">
+        <FamilySection profile={profile} />
+      </div>
+
+      {/* ==================== PAGE 6: GALLERY ==================== */}
+      <div ref={gallerySectionRef} className="relative w-full min-h-screen snap-start">
+        <GallerySection profile={{...profile, galleryImages}} />
+      </div>
+
+      <ProfileEditModal
+        isOpen={isEditing}
+        onClose={() => setIsEditing(false)}
+        data={editForm}
+        onChange={setEditForm}
+        onSave={saveProfile}
+      />
+      {selectedFactItem && <FactsModal item={selectedFactItem} onClose={() => setSelectedFactItem(null)} />}
+    </div>
+  );
+}
