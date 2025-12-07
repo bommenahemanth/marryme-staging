@@ -23,7 +23,7 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  ArrowUp, Calculator, Clock, Pizza, Scale, Gem, Plane, ChefHat, Cpu, Users, Instagram, MessageCircle} from 'lucide-react';
+  ArrowUp, Calculator, Clock, Pizza, Scale, Gem, Plane, ChefHat, Cpu, Users, Instagram, MessageCircle, Triangle, BarChart3, Diamond, Dog, Flame, GraduationCap, Map, Megaphone, MonitorSmartphone, Share2, TrendingUp, Wallet, WifiOff, Backpack, Tractor, Apple, PawPrint, Mountain, Waves, Compass, Book, Baby, HeartHandshake, Shield, Smartphone, Smile, Tv, Footprints, Activity, Lightbulb, Bot, Mail, CreditCard, Target, Carrot, Music, Coffee} from 'lucide-react';
 
 import { CompatibilityTab , NetworkBackground } from './components';
 import { TRANSLATIONS, ASTRO_DATA, ASTRO_DATA_TE, PLACEHOLDER_GALLERY, MARRIAGE_DATA, HOROSCOPE_PROFILE, MARRIAGE_DATA_TE, HOROSCOPE_PROFILE_TE } from './constants';
@@ -406,27 +406,27 @@ export function AboutMeSection({ scrollToTop }) {
           </h3>
           <ul className="space-y-3 text-gray-300 text-base">
             <li className="flex items-start gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
+              <Footprints className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
               <span>Walk 10 km daily (and pet <strong>'kukka bangaralu'</strong> on the way).</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
+              <Activity className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
               <span>Play badminton (I was great when my knees were younger).</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
+              <Lightbulb className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
               <span>Give unsolicited advice (<strong>'Uchitha salahalu'</strong>, literally) to young folks who reach out to me on LinkedIn.</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
+              <Bot className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
               <span>Get my hands dirty with new AI tools out there.</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
+              <Smile className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
               <span>Full-time job: Annoying my little sister.</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
+              <Smartphone className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
               <span>Exploring new tech gadgets.</span>
             </li>
           </ul>
@@ -437,7 +437,7 @@ export function AboutMeSection({ scrollToTop }) {
           <Sparkles className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
           <h3 className="text-lg font-bold text-white mb-2">Faith</h3>
           <p className="text-sm text-gray-400 italic">
-            "Grounded in faith. I believe in a Creator and a force beyond human comprehension (but you can choose otherwise)."
+            "Grounded in faith. I believe in a Creator and a force beyond human comprehension. You can choose otherwise — just respect the boundaries."
           </p>
         </div>
 
@@ -449,11 +449,11 @@ export function AboutMeSection({ scrollToTop }) {
           <div className="space-y-3 text-sm">
             <div className="flex justify-between items-center p-2 bg-white/5 rounded-lg">
               <span className="flex items-center gap-2 text-gray-300"><Feather size={16} className="text-orange-400" /> Diet</span>
-              <span className="text-gray-500 text-xs text-right max-w-[120px] leading-tight">Non-Veg, open to vegetarians</span>
+              <span className="text-gray-500 text-xs whitespace-nowrap">Non-Veg (open to veg)</span>
             </div>
             <div className="flex justify-between items-center p-2 bg-white/5 rounded-lg">
               <span className="flex items-center gap-2 text-gray-300"><Wine size={16} className="text-red-400" /> Alcohol</span>
-              <span className="text-gray-500 text-xs text-right max-w-[120px] leading-tight">I don't.. but you can (don't get wasted)</span>
+              <span className="text-gray-500 text-xs whitespace-nowrap">Don't drink, you can!</span>
             </div>
             <div className="flex justify-between items-center p-2 bg-white/5 rounded-lg border border-red-500/20">
               <span className="flex items-center gap-2 text-gray-300"><Wind size={16} className="text-gray-400" /> Smoke</span>
@@ -469,13 +469,18 @@ export function AboutMeSection({ scrollToTop }) {
           </h3>
           <div className="flex flex-wrap gap-2">
             {[
-              "Shiva 🙏", "Family 👨‍👩‍👧", "Late Maths Teacher 📐", "School Friends 🎒", "Farms 🚜", "Fruits 🍎", "Dogs 🐕", "Cows 🐄", "Elephants 🐘", "Whales 🐋",
-              "Oceans 🌊", "Mahabharata 📖", "Kids 👶", "Buggalu & Pilakalu ❤️",
-              "Superman (Henry Cavill) 🦸", "Capt. America (Steve Rogers) 🛡️", "Tech Gadgets 📱",
-              "Sarcasm 😏", "Memes 😂", "Naruto 🍥"
-            ].map((tag, i) => (
-              <span key={i} className="px-3 py-1.5 bg-pink-500/5 rounded-lg text-sm text-pink-200 border border-pink-500/10 hover:bg-pink-500/20 transition-colors cursor-default">
-                {tag}
+              {icon: Sparkles, text: "Shiva"}, {icon: Users, text: "Family"}, {icon: Triangle, text: "Late Maths Teacher"}, 
+              {icon: Backpack, text: "School Friends"}, {icon: Tractor, text: "Farms"}, {icon: Apple, text: "Fruits"}, 
+              {icon: Dog, text: "Dogs"}, {icon: PawPrint, text: "Cows"}, {icon: Mountain, text: "Elephants"}, {icon: Waves, text: "Whales"},
+              {icon: Compass, text: "Oceans"}, {icon: Book, text: "Mahabharata"}, {icon: Baby, text: "Kids"}, {icon: HeartHandshake, text: "Buggalu & Pilakalu"},
+              {icon: Shield, text: "Superman"}, {icon: Star, text: "Capt. America"}, {icon: Smartphone, text: "Tech Gadgets"},
+              {icon: MessageSquare, text: "Sarcasm"}, {icon: Smile, text: "Memes"}, {icon: Tv, text: "Naruto"},
+              {icon: Plane, text: "Drones"}, {icon: Zap, text: "Man of Steel"}, {icon: Bot, text: "AI Tools"},
+              {icon: Activity, text: "Badminton"}, {icon: Music, text: "Old Songs"}, {icon: Sparkles, text: "Aurora Lights"},
+              {icon: Compass, text: "Tropical Islands"}, {icon: Coffee, text: "Boba"}
+            ].map((item, i) => (
+              <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-500/5 rounded-lg text-sm text-pink-200 border border-pink-500/10 hover:bg-pink-500/20 transition-colors cursor-default">
+                <item.icon size={14} className="text-pink-400" /> {item.text}
               </span>
             ))}
           </div>
@@ -495,10 +500,10 @@ export function AboutMeSection({ scrollToTop }) {
                 <CheckCircle2 size={16} /> Big Yes To
               </h4>
               <ul className="space-y-2 text-sm text-gray-300 pl-3 border-l-2 border-green-500/20">
-                <li>• Academically Inclined</li>
-                <li>• Low Digital Footprint</li>
-                <li>• Growth Mindset & High EQ</li>
-                <li>• Knows their finances</li>
+                <li className="flex items-center gap-2"><GraduationCap size={14} className="text-green-400" /> Academically Inclined</li>
+                <li className="flex items-center gap-2"><WifiOff size={14} className="text-green-400" /> Low Digital Footprint</li>
+                <li className="flex items-center gap-2"><TrendingUp size={14} className="text-green-400" /> Growth Mindset & High EQ</li>
+                <li className="flex items-center gap-2"><Wallet size={14} className="text-green-400" /> Knows their finances</li>
               </ul>
             </div>
 
@@ -507,10 +512,10 @@ export function AboutMeSection({ scrollToTop }) {
                 <XCircle size={16} /> Please No
               </h4>
               <ul className="space-y-2 text-sm text-gray-300 pl-3 border-l-2 border-red-500/20">
-                <li>• Heavy Social Media</li>
-                <li>• Materialism</li>
-                <li>• Wokeness & Strong Opinions</li>
-                <li>• Constant Comparisons</li>
+                <li className="flex items-center gap-2"><MonitorSmartphone size={14} className="text-red-400" /> Heavy Social Media</li>
+                <li className="flex items-center gap-2"><Diamond size={14} className="text-red-400" /> Materialism</li>
+                <li className="flex items-center gap-2"><Megaphone size={14} className="text-red-400" /> Wokeness & Strong Opinions</li>
+                <li className="flex items-center gap-2"><BarChart3 size={14} className="text-red-400" /> Constant Comparisons</li>
               </ul>
             </div>
           </div>
@@ -533,14 +538,20 @@ export function AboutMeSection({ scrollToTop }) {
             <Zap className="w-5 h-5" /> Superpowers
           </h4>
           <ul className="space-y-3">
-            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded">
-              <span className="w-2 h-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></span><span>Sharing memes faster than the flu spreads.</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+              <Share2 size={16} className="text-green-400 flex-shrink-0" /><span>Sharing memes faster than the flu spreads.</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded">
-              <span className="w-2 h-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></span><span>Planning travel (Solo traveled 10+ European countries).</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+              <Map size={16} className="text-green-400 flex-shrink-0" /><span>Planning travel (Solo traveled 10+ European countries).</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded">
-              <span className="w-2 h-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></span><span>Mahadev's grace, solid friendships, and a wonderful family.</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+              <Sparkles size={16} className="text-green-400 flex-shrink-0" /><span>Mahadev's grace, solid friendships, and a wonderful family.</span>
+            </li>
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+              <CreditCard size={16} className="text-green-400 flex-shrink-0" /><span>Credit card points wizard, maximizes every swipe.</span>
+            </li>
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+              <Target size={16} className="text-green-400 flex-shrink-0" /><span>Keeps my word. Sets a goal, stays persistent, gets it done.</span>
             </li>
           </ul>
         </div>
@@ -551,14 +562,20 @@ export function AboutMeSection({ scrollToTop }) {
             <AlertTriangle className="w-5 h-5" /> Not So Super
           </h4>
           <ul className="space-y-3">
-            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded">
-              <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 flex-shrink-0"></span><span>Potential to bring Kitchen to ashes.</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+              <Flame size={16} className="text-red-400 flex-shrink-0" /><span>Potential to bring Kitchen to ashes.</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded">
-              <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 flex-shrink-0"></span><span>Keep asking for a dog, baby cow, or an elephant (Please…).</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+              <Dog size={16} className="text-red-400 flex-shrink-0" /><span>Keep asking for a dog, baby cow, or an elephant (Please…).</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded">
-              <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 flex-shrink-0"></span><span>Self esteem could use a little work.</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+              <Heart size={16} className="text-red-400 flex-shrink-0" /><span>Self esteem could use a little work.</span>
+            </li>
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+              <Carrot size={16} className="text-red-400 flex-shrink-0" /><span>Veggies? Meh, only if blended.</span>
+            </li>
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+              <Smartphone size={16} className="text-red-400 flex-shrink-0" /><span>Got a soft spot for tech, wallet takes the hit.</span>
             </li>
           </ul>
         </div>
@@ -605,6 +622,15 @@ export function FamilySection({ profile, scrollToTop }) {
         </button>
       </div>
 
+
+      {/* Family Summary - The Bommena Squad */}
+      <div className="relative z-10 max-w-5xl mx-auto w-full mb-6 px-4">
+        <div className="bg-gradient-to-br from-[#D4AF37]/10 via-[#0c0c0c]/80 to-[#D4AF37]/5 border border-[#D4AF37]/30 rounded-2xl p-6 backdrop-blur-sm">
+          <p className="text-center text-gray-300 text-sm leading-relaxed">We are a close knit family of four, bound by respect, love, and an unshakable bond that only grows stronger with time. When you become part of this family, you will not just gain a husband but a whole tribe that stands by you. Your father in law will always take your side in our tiny fights, your mother in law will pass down her wisdom, drape you in beautiful sarees, and love you like her own daughter. And Meghana already dreams of spoiling you and your kids with endless love and gifts. This is home.</p>
+        </div>
+      </div>
+
+
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto w-full flex-grow items-center">
 
         {/* DAD CARD */}
@@ -639,13 +665,17 @@ export function FamilySection({ profile, scrollToTop }) {
                 <p className="text-gray-300 text-sm leading-relaxed">Good with numbers & kind to people</p>
               </div>
               <div className="flex items-start gap-3 group/item">
-                <Clock size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
-                <p className="text-gray-300 text-sm leading-relaxed">Extremely disciplined</p>
-              </div>
-              <div className="flex items-start gap-3 group/item">
                 <Pizza size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
-                <p className="text-gray-300 text-sm leading-relaxed">Will secretly feed you junk food</p>
+                <p className="text-gray-300 text-sm leading-relaxed">Sneaks junk food like a secret agent</p>
               </div>
+                <div className="flex items-start gap-3 group/item">
+                  <Crown size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
+                  <p className="text-gray-300 text-sm leading-relaxed">Treats me like the male Daddy's princess</p>
+                </div>
+                <div className="flex items-start gap-3 group/item">
+                  <Heart size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
+                  <p className="text-gray-300 text-sm leading-relaxed">Loves mom & cuddles her to sleep daily</p>
+                </div>
             </div>
           </div>
         </div>
@@ -672,7 +702,7 @@ export function FamilySection({ profile, scrollToTop }) {
             <div className="space-y-3 flex-grow text-left">
               <div className="flex items-start gap-3">
                 <Crown size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
-                <p className="text-gray-300 text-sm leading-relaxed">Laxmi of our house, elegant and intelligent</p>
+                <p className="text-gray-300 text-sm leading-relaxed">Laxmi of our house & proud homemaker</p>
               </div>
               <div className="flex items-start gap-3">
                 <Users size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
@@ -682,6 +712,14 @@ export function FamilySection({ profile, scrollToTop }) {
                 <Scale size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">The ultimate decision maker</p>
               </div>
+                <div className="flex items-start gap-3">
+                  <Leaf size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
+                  <p className="text-gray-300 text-sm leading-relaxed">Beat the greens into me as a kid (literally)</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Heart size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
+                  <p className="text-gray-300 text-sm leading-relaxed">Understanding & respects her husband</p>
+                </div>
             </div>
           </div>
         </div>
@@ -711,21 +749,30 @@ export function FamilySection({ profile, scrollToTop }) {
             <div className="space-y-3 flex-grow">
               <div className="flex items-start gap-3">
                 <Gem size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
-                <p className="text-gray-300 text-sm leading-relaxed">Little Laxmi (In our house and the next)</p>
+                <p className="text-gray-300 text-sm leading-relaxed">Potti Laxmi (of our house & the next)</p>
               </div>
               <div className="flex items-start gap-3">
                 <Plane size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
-                <p className="text-gray-300 text-sm leading-relaxed">Reason I moved to US. Dallas grad.</p>
+                <p className="text-gray-300 text-sm leading-relaxed">Analytics grad, reason I moved to US</p>
               </div>
               <div className="flex items-start gap-3">
                 <ChefHat size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Minimalist, creative, and a good cook</p>
               </div>
+                <div className="flex items-start gap-3">
+                  <Smile size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
+                  <p className="text-gray-300 text-sm leading-relaxed">My advocate & feeds me well</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Search size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
+                  <p className="text-gray-300 text-sm leading-relaxed">Job hunting & currently with me</p>
+                </div>
             </div>
           </div>
         </div>
 
       </div>
+
 
       {/* Fullscreen Image Modal */}
       {fullscreenImage && (
@@ -795,7 +842,7 @@ export function GallerySection({ profile, scrollToTop }) {
       <div className="relative z-10 max-w-[1600px] mx-auto w-full mb-6 px-2">
         <div className="bg-black/40 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-300 text-sm text-center sm:text-left">
-            <span className="text-[#D4AF37]">📸 Heads up!</span> I've lost some weight, so I might look different across photos. 
+            <span className="text-[#D4AF37]">📸 Heads up!</span> I've lost some weight, so I might look different across photos.
             <br className="sm:hidden" />
             Also, all fake candids — I don't usually look at cameras 😅
           </p>
@@ -914,15 +961,15 @@ export function GallerySection({ profile, scrollToTop }) {
 
 // --- Family Gallery Section ---
 const FAMILY_GALLERY_IMAGES = [
-  '/marryme/images/family/family1.jpg',
-  '/marryme/images/family/family2.jpg',
-  '/marryme/images/family/family3.jpg',
-  '/marryme/images/family/family4.jpg',
-  '/marryme/images/family/family5.jpg',
-  '/marryme/images/family/IMG_3929.jpg',
-  '/marryme/images/family/IMG_8151.jpg',
-  '/marryme/images/family/IMG_8852.jpg',
-];
+  'images/family/family1.jpg',
+  'images/family/family2.jpg',
+  'images/family/family3.jpg',
+  'images/family/family4.jpg',
+  'images/family/family5.jpg',
+  'images/family/IMG_3929.jpg',
+  'images/family/IMG_8151.jpg',
+  'images/family/IMG_8852.jpg',
+].map(img => import.meta.env.BASE_URL + img);
 
 export function FamilyGallerySection({ scrollToTop }) {
   const [fullscreenIndex, setFullscreenIndex] = useState(null);
@@ -951,27 +998,6 @@ export function FamilyGallerySection({ scrollToTop }) {
           <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
         </button>
       </div>
-
-      {/* Photo Disclaimer */}
-      <div className="relative z-10 max-w-[1600px] mx-auto w-full mb-6 px-2">
-        <div className="bg-black/40 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-gray-300 text-sm text-center sm:text-left">
-            <span className="text-[#D4AF37]">📸 Heads up!</span> I've lost some weight, so I might look different across photos. 
-            <br className="sm:hidden" />
-            Also, all fake candids — I don't usually look at cameras 😅
-          </p>
-          <a 
-            href="https://www.instagram.com/bommenahemanth/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:scale-105 transition-transform whitespace-nowrap"
-          >
-            <Instagram className="w-4 h-4" />
-            Latest on Instagram
-          </a>
-        </div>
-      </div>
-
       <div className="relative z-10 flex-grow overflow-y-auto pb-12 max-w-[1600px] mx-auto w-full">
         <div className="columns-2 sm:columns-2 lg:columns-3 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
           {images.map((img, index) => (
@@ -1121,64 +1147,85 @@ export function ContactSection({ scrollToTop }) {
         {/* Social Buttons */}
         <div className="space-y-4">
           <p className="text-gray-400 text-sm uppercase tracking-wider">Connect with Hemanth</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <a 
-              href={hemanthInstagram}
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-            >
-              <Instagram className="w-4 h-4" />
-              Instagram
-            </a>
-            <a 
-              href={hemanthLinkedIn}
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#0A66C2] text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              LinkedIn
-            </a>
-            <a 
-              href="https://www.facebook.com/bommenahemanth"
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#1877F2] text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              Facebook
-            </a>
-            <a 
-              href="https://wa.me/918124269822?text=Hey%20Hemanth!%20%F0%9F%91%8B%20Saw%20your%20profile%20and%20would%20love%20to%20connect!"
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#25D366] text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              WhatsApp
-            </a>
-            <a 
-              href="tel:+14699967434"
-              className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-              title="Call US Number"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-              Call (US)
-            </a>
-            <a 
-              href="facetime-audio:bommenahemanth@gmail.com"
-              className="flex items-center gap-2 bg-gray-700 text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-              title="FaceTime Audio"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
-              FaceTime
-            </a>
+                    <div className="flex flex-col gap-3 max-w-xl mx-auto">
+            {/* All social buttons - single centered row */}
+            <div className="flex justify-center gap-3 flex-wrap">
+              <a 
+                href={hemanthInstagram}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+              >
+                <Instagram className="w-4 h-4" />
+                Instagram
+              </a>
+              <a 
+                href={hemanthLinkedIn}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#0A66C2] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+              </a>
+              <a 
+                href="https://www.facebook.com/bommenahemanth"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook
+              </a>
+              <a 
+                href="mailto:bommenahemanth@gmail.com?subject=Hey%20Hemanth!%20Your%20profile%20caught%20my%20eye%20%E2%9C%A8&body=Hi%20Hemanth!%20%F0%9F%91%8B%0A%0AI%20just%20went%20through%20your%20profile%20and%20really%20enjoyed%20reading%20it!%0AYou%20seem%20like%20a%20genuine%20and%20fun%20person.%0A%0AWould%20love%20to%20get%20to%20know%20you%20better.%20%F0%9F%98%8A%0A%0ALooking%20forward%20to%20hearing%20from%20you!"
+                className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+              >
+                <Mail className="w-4 h-4" />
+                Email
+              </a>
+              <a 
+                href="https://wa.me/918124269822?text=Hey%20Hemanth!%20%F0%9F%91%8B%0A%0AJust%20stumbled%20upon%20your%20profile%20and%20couldn't%20resist%20saying%20hi!%20%E2%9C%A8%0ALet's%20chat%20and%20see%20if%20our%20stars%20align%20%F0%9F%8C%9F"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+              </a>
+              <a 
+                href="sms:+14699967434&body=Hey%20Hemanth!%20%F0%9F%91%8B%0A%0AFound%20your%20profile%20and%20loved%20it!%20%E2%9C%A8%0ALet's%20connect%20and%20see%20where%20this%20goes%20%F0%9F%98%8A"
+                className="flex items-center gap-2 bg-[#007AFF] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+                title="iMessage (US)"
+              >
+                <MessageCircle className="w-4 h-4" />
+                iMessage
+              </a>
+              <a 
+                href="facetime-audio:bommenahemanth@gmail.com"
+                className="flex items-center gap-2 bg-[#34C759] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+                title="FaceTime Audio"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+                FaceTime
+              </a>
+              <a 
+                href="tel:+14699967434"
+                className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+                title="Call US Number"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                Call (US)
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Talk to Father */}
         <div className="pt-6 border-t border-white/10 space-y-3">
+          <p className="text-[#D4AF37] text-sm font-medium mb-3 bg-[#D4AF37]/10 px-4 py-2 rounded-lg inline-block">
+            ✨ No strict caste preferences? We'd love to hear from you!
+          </p>
           <p className="text-gray-400 text-sm">
             Want to speak with family? Connect with my father directly
           </p>
@@ -1195,14 +1242,19 @@ export function ContactSection({ scrollToTop }) {
 
         {/* Farewell section */}
         <div className="pt-8 mt-4">
-          <div className="bg-gradient-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20 rounded-2xl p-6 space-y-3">
-            <p className="text-gray-300 text-lg font-light">
-              Didn't quite click? <span className="text-[#D4AF37]">No worries!</span> ✨
-            </p>
-            <p className="text-gray-400 text-base font-light italic">
-              Wishing you all the best in your search.<br/>
-              May you find your perfect match soon! 💫
-            </p>
+          <div className="relative bg-gradient-to-br from-[#D4AF37]/15 via-[#D4AF37]/5 to-transparent border border-[#D4AF37]/30 rounded-2xl p-6 overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-2xl"></div>
+            <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4">
+              <div className="text-4xl">🤝</div>
+              <div className="text-center sm:text-left">
+                <p className="text-gray-200 text-lg font-medium mb-1">
+                  Didn't quite click? <span className="text-[#D4AF37] font-semibold">No worries!</span>
+                </p>
+                <p className="text-gray-400 text-sm">
+                  Wishing you all the best in your search. May you find your perfect match soon! ✨
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
