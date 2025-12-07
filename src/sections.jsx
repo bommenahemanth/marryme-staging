@@ -406,10 +406,6 @@ export function AboutMeSection({ scrollToTop }) {
           </h3>
           <ul className="space-y-3 text-gray-300 text-base">
             <li className="flex items-start gap-3">
-              <Footprints className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
-              <span>Walk 10 km daily (and pet <strong>'kukka bangaralu'</strong> on the way).</span>
-            </li>
-            <li className="flex items-start gap-3">
               <Activity className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
               <span>Play badminton (I was great when my knees were younger).</span>
             </li>
@@ -418,16 +414,20 @@ export function AboutMeSection({ scrollToTop }) {
               <span>Give unsolicited advice (<strong>'Uchitha salahalu'</strong>, literally) to young folks who reach out to me on LinkedIn.</span>
             </li>
             <li className="flex items-start gap-3">
+              <Smartphone className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
+              <span>Exploring new tech gadgets.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Footprints className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
+              <span>Walk 10 km daily (and pet <strong>'kukka bangaralu'</strong> on the way).</span>
+            </li>
+            <li className="flex items-start gap-3">
               <Bot className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
               <span>Get my hands dirty with new AI tools out there.</span>
             </li>
             <li className="flex items-start gap-3">
               <Smile className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
-              <span>Full-time job: Annoying my little sister.</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Smartphone className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
-              <span>Exploring new tech gadgets.</span>
+              <span>Annoying my little sister.</span>
             </li>
           </ul>
         </div>
@@ -469,15 +469,13 @@ export function AboutMeSection({ scrollToTop }) {
           </h3>
           <div className="flex flex-wrap gap-2">
             {[
-              {icon: Sparkles, text: "Shiva"}, {icon: Users, text: "Family"}, {icon: Triangle, text: "Late Maths Teacher"}, 
-              {icon: Backpack, text: "School Friends"}, {icon: Tractor, text: "Farms"}, {icon: Apple, text: "Fruits"}, 
-              {icon: Dog, text: "Dogs"}, {icon: PawPrint, text: "Cows"}, {icon: Mountain, text: "Elephants"}, {icon: Waves, text: "Whales"},
-              {icon: Compass, text: "Oceans"}, {icon: Book, text: "Mahabharata"}, {icon: Baby, text: "Kids"}, {icon: HeartHandshake, text: "Buggalu & Pilakalu"},
-              {icon: Shield, text: "Superman"}, {icon: Star, text: "Capt. America"}, {icon: Smartphone, text: "Tech Gadgets"},
-              {icon: MessageSquare, text: "Sarcasm"}, {icon: Smile, text: "Memes"}, {icon: Tv, text: "Naruto"},
-              {icon: Plane, text: "Drones"}, {icon: Zap, text: "Man of Steel"}, {icon: Bot, text: "AI Tools"},
-              {icon: Activity, text: "Badminton"}, {icon: Music, text: "Old Songs"}, {icon: Sparkles, text: "Aurora Lights"},
-              {icon: Compass, text: "Tropical Islands"}, {icon: Coffee, text: "Boba"}
+              {icon: Smartphone, text: "Tech Gadgets"}, {icon: Bot, text: "AI Tools"}, {icon: Plane, text: "Drones"},
+              {icon: Tv, text: "Naruto"}, {icon: Smile, text: "Memes"}, {icon: Shield, text: "Henry Cavill Superman"},
+              {icon: Sparkles, text: "Lord Shiva"}, {icon: Triangle, text: "Late Maths Teacher"}, {icon: Backpack, text: "School Friends"},
+              {icon: Tractor, text: "Farms & Fruits"}, {icon: PawPrint, text: "Animals"},
+              {icon: Compass, text: "Coral Reefs"}, {icon: Book, text: "Mahabharata & Mythology"},
+              {icon: Baby, text: "2 year olds with buggalu & pilakalu"},
+              {icon: Activity, text: "Badminton"}, {icon: Compass, text: "Tropical Islands"}, {icon: Coffee, text: "Boba"}
             ].map((item, i) => (
               <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-500/5 rounded-lg text-sm text-pink-200 border border-pink-500/10 hover:bg-pink-500/20 transition-colors cursor-default">
                 <item.icon size={14} className="text-pink-400" /> {item.text}

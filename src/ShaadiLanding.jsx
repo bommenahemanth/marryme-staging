@@ -274,7 +274,7 @@ export default function ShaadiLanding() {
       )}
 
       {/* ==================== PAGE 2: JOURNEY (VERTICAL) ==================== */}
-      <div ref={journeySectionRef} className="relative w-full min-h-screen flex flex-col bg-black snap-start overflow-y-auto">
+      <div ref={journeySectionRef} className="relative w-full flex flex-col bg-black snap-start overflow-y-auto">
         <NetworkBackground />
 
         <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md">
@@ -298,8 +298,8 @@ export default function ShaadiLanding() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 pb-32 relative z-10 w-full">
-          <div className="absolute left-1/2 top-0 w-[2px] h-[1850px] -translate-x-1/2 bg-white/10" />
+        <div className="max-w-4xl mx-auto px-4 pb-4 relative z-10 w-full">
+          <div className="absolute left-1/2 top-0 w-[2px] h-full -translate-x-1/2 bg-white/10" />
 
           <div className="space-y-8 animate-in slide-in-from-bottom-20 duration-1000">
             {TIMELINE_DATA.map((item, idx) => {
@@ -385,42 +385,8 @@ export default function ShaadiLanding() {
             })}
           </div>
 
-          <div className="mt-16 border-t border-[#D4AF37]/20 pt-12">
-            <h3 className="text-center text-2xl font-serif text-white mb-8">
-              Skills & <span className="text-[#D4AF37] italic">Certifications</span>
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-              <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-4 hover:border-[#D4AF37]/50 transition-colors">
-                <div className="flex items-center gap-2 mb-4">
-                  <Cpu size={16} className="text-[#D4AF37]" />
-                  <h4 className="text-lg font-serif text-white">Technical Skills</h4>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {SKILLS.map(skill => (
-                    <span key={skill} className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-full text-[11px] text-gray-300 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 transition-colors">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-4 hover:border-[#D4AF37]/50 transition-colors">
-                <div className="flex items-center gap-2 mb-4">
-                  <Award size={16} className="text-[#D4AF37]" />
-                  <h4 className="text-lg font-serif text-white">Certifications</h4>
-                </div>
-                <div className="space-y-2">
-                  {CERTIFICATIONS.map((cert, i) => (
-                    <div key={i} className="flex items-center gap-2 text-[12px] text-gray-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-                      {cert}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <div className="h-1" />
+        
       </div>
 
       {/* ==================== PAGE 3: HOROSCOPE ==================== */}

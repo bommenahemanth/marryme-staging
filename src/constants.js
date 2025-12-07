@@ -101,7 +101,7 @@ export const DEFAULT_PROFILE = {
   company: "Walmart, Ex-McKinsey",
   educationDegree: "MSc Business Analytics, 2021",
   educationUni: "#34 QS Uni of Manchester (Ivy League Level), UK",
-  languages: "Telugu, English, Bhayya thoda pyas dhalo",
+  languages: "Telugu, English, Bhayya thoda pyaz dhalo",
   visaStatus: "H1B - i140 Started",
   photoBase64: "./images/mallorca.jpg",
   dadPhoto: "./images/father.jpg",
@@ -252,51 +252,7 @@ export const TIMELINE_DATA = [
       "1,200+ companies recruit on campus — highest packages of ₹2+ Crore"
     ]
   },
-  {
-    id: 7,
-    date: "Jun 2012 - Apr 2014",
-    role: "12th - Maths, Physics & Chemistry",
-    org: "Sri Chaitanya College of Education",
-    loc: "India",
-    domain: "srichaitanya.net",
-    tagline: "Horrible phase of my life",
-    responsibilities: [
-      "Grade: 97.5% — State Top 1%",
-      "Merit Scholarship from Central & State Government",
-      "Competitive Exam Prep: JEE Mains + Advanced"
-    ],
-    facts: [
-      "India's LARGEST coaching network — 400+ branches in 10+ states",
-      "3 LAKH+ students enrolled annually — bigger than many universities",
-      "Produced 50,000+ IIT selections in last 30 years — more than any institute in India",
-      "JEE Advanced AIR-1 multiple times — including 2023 & 2024 toppers",
-      "Revenue of ₹2,500+ Crore — one of India's biggest education companies"
-    ]
-  },
-  {
-    id: 8,
-    date: "Apr 2000 - Apr 2012",
-    role: "10th - High School",
-    org: "Nava Bharat Public School",
-    loc: "Paloncha, India",
-    domain: "",
-    logo: "./images/nbps.jpeg",
-    tagline: "Best phase of my life",
-    responsibilities: [
-      "Grade: 9.4 CGPA — School Topper",
-      "School Captain (Head Boy)",
-      "District-level Quiz & Sports Champion"
-    ],
-    facts: [
-      "Established in 1978, CBSE-affiliated school in Nava Nagar, Paloncha",
-      "10-acre campus with 46 classrooms, library with 4,600+ books",
-      "1,500+ students from LKG to 10th grade",
-      "50+ computers and modern facilities for students",
-      "Managed by Nava Bharat Rural Development Society"
-    ]
-  }
 ];
-
 export const TRANSLATIONS = {
   en: {
     title: "Vedic Horoscope",
