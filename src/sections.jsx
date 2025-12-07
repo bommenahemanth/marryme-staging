@@ -462,6 +462,27 @@ export function AboutMeSection({ scrollToTop }) {
           </div>
         </div>
 
+        {/* 3.5 CAUSES */}
+        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-emerald-500/20 rounded-3xl p-6 hover:border-emerald-500/50 transition-all hover:-translate-y-1">
+          <h3 className="text-xl font-serif text-emerald-400 mb-4 flex items-center gap-2">
+            <Heart className="w-6 h-6" /> Causes I Believe In
+          </h3>
+          <p className="text-gray-400 text-sm mb-4 italic">A promise to myself — monthly donations until my last breath.</p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              {icon: Mountain, text: "Elephant Habitat Protection"},
+              {icon: Dog, text: "Street Dog Vaccination"},
+              {icon: Waves, text: "Whale Conservation"},
+              {icon: Compass, text: "Coral Reef Restoration"},
+              {icon: Sparkles, text: "Bee Breeding & Protection"}
+            ].map((item, i) => (
+              <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 rounded-lg text-sm text-emerald-200 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors cursor-default">
+                <item.icon size={14} className="text-emerald-400" /> {item.text}
+              </span>
+            ))}
+          </div>
+        </div>
+
         {/* 4. LOVES (Wide) */}
         <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-pink-500/20 rounded-3xl p-6 hover:border-pink-500/50 transition-all hover:-translate-y-1">
           <h3 className="text-xl font-serif text-pink-400 mb-4 flex items-center gap-2">
@@ -471,9 +492,8 @@ export function AboutMeSection({ scrollToTop }) {
             {[
               {icon: Smartphone, text: "Tech Gadgets"}, {icon: Bot, text: "AI Tools"}, {icon: Plane, text: "Drones"},
               {icon: Tv, text: "Naruto"}, {icon: Smile, text: "Memes"}, {icon: Shield, text: "Henry Cavill Superman"},
-              {icon: Sparkles, text: "Lord Shiva"}, {icon: Triangle, text: "Late Maths Teacher"}, {icon: Backpack, text: "School Friends"},
-              {icon: Tractor, text: "Farms & Fruits"}, {icon: PawPrint, text: "Animals"},
-              {icon: Compass, text: "Coral Reefs"}, {icon: Book, text: "Mahabharata & Mythology"},
+              {icon: Backpack, text: "School Friends"}, {icon: Tractor, text: "Farms & Fruits"},
+              {icon: Book, text: "Mahabharata & Mythology"},
               {icon: Baby, text: "2 year olds with buggalu & pilakalu"},
               {icon: Activity, text: "Badminton"}, {icon: Compass, text: "Tropical Islands"}, {icon: Coffee, text: "Boba"}
             ].map((item, i) => (
@@ -484,53 +504,7 @@ export function AboutMeSection({ scrollToTop }) {
           </div>
         </div>
 
-        {/* 5. THE SEARCH */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-2 bg-gradient-to-br from-[#1a1a1a] to-black border border-[#D4AF37]/40 rounded-3xl p-6 relative overflow-hidden group flex flex-col">
-          <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4AF37] blur-[80px] opacity-10 pointer-events-none" />
-
-          <h3 className="text-2xl font-serif text-[#D4AF37] mb-4 flex items-center gap-2">
-            <Search className="w-6 h-6" /> About You
-          </h3>
-
-          <div className="flex-grow grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <h4 className="text-green-400 font-bold text-sm mb-2 uppercase tracking-wider flex items-center gap-2">
-                <CheckCircle2 size={16} /> Big Yes To
-              </h4>
-              <ul className="space-y-2 text-sm text-gray-300 pl-3 border-l-2 border-green-500/20">
-                <li className="flex items-center gap-2"><GraduationCap size={14} className="text-green-400" /> Academically Inclined</li>
-                <li className="flex items-center gap-2"><WifiOff size={14} className="text-green-400" /> Low Digital Footprint</li>
-                <li className="flex items-center gap-2"><TrendingUp size={14} className="text-green-400" /> Growth Mindset & High EQ</li>
-                <li className="flex items-center gap-2"><Wallet size={14} className="text-green-400" /> Knows their finances</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-red-400 font-bold text-sm mb-2 uppercase tracking-wider flex items-center gap-2">
-                <XCircle size={16} /> Please No
-              </h4>
-              <ul className="space-y-2 text-sm text-gray-300 pl-3 border-l-2 border-red-500/20">
-                <li className="flex items-center gap-2"><MonitorSmartphone size={14} className="text-red-400" /> Heavy Social Media</li>
-                <li className="flex items-center gap-2"><Diamond size={14} className="text-red-400" /> Materialism</li>
-                <li className="flex items-center gap-2"><Megaphone size={14} className="text-red-400" /> Wokeness & Strong Opinions</li>
-                <li className="flex items-center gap-2"><BarChart3 size={14} className="text-red-400" /> Constant Comparisons</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-6 pt-4 border-t border-white/10">
-            <h4 className="text-yellow-400 font-bold text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
-              <Star size={16} /> Bonus Points If...
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {["Naruto Fan", "Great Meme Game", "Dog Lover", "Smiles often", "Spiritual", "Anime girl", "Dress elegant", "Puts on Bindi", "Buys me Pocket Pom", "Lets me buy tech gadgets", "Hiker", "Gets me Boba"].map((b, i) => (
-                <span key={i} className="text-xs bg-yellow-400/10 text-yellow-200 px-2 py-1 rounded border border-yellow-400/20">{b}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* 6. SUPERPOWERS */}
+        {/* 5. SUPERPOWERS */}
         <div className="col-span-1 md:col-span-2 lg:col-span-2 bg-[#0a110a] border border-green-500/30 rounded-3xl p-6 hover:border-green-500/60 transition-all hover:-translate-y-1">
           <h4 className="text-green-400 font-bold text-lg mb-4 flex items-center gap-2 uppercase tracking-wider">
             <Zap className="w-5 h-5" /> Superpowers
@@ -554,7 +528,7 @@ export function AboutMeSection({ scrollToTop }) {
           </ul>
         </div>
 
-        {/* 7. KRYPTONITE */}
+        {/* 6. KRYPTONITE */}
         <div className="col-span-1 md:col-span-2 lg:col-span-2 bg-[#110a0a] border border-red-500/30 rounded-3xl p-6 hover:border-red-500/60 transition-all hover:-translate-y-1">
           <h4 className="text-red-400 font-bold text-lg mb-4 flex items-center gap-2 uppercase tracking-wider">
             <AlertTriangle className="w-5 h-5" /> Not So Super
@@ -576,6 +550,52 @@ export function AboutMeSection({ scrollToTop }) {
               <Smartphone size={16} className="text-red-400 flex-shrink-0" /><span>Got a soft spot for tech, wallet takes the hit.</span>
             </li>
           </ul>
+        </div>
+
+        {/* 7. THE SEARCH - About You (Full Width) */}
+        <div className="col-span-1 md:col-span-2 lg:col-span-4 bg-gradient-to-br from-[#1a1a1a] to-black border border-[#D4AF37]/40 rounded-3xl p-6 relative overflow-hidden group flex flex-col">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4AF37] blur-[80px] opacity-10 pointer-events-none" />
+
+          <h3 className="text-2xl font-serif text-[#D4AF37] mb-4 flex items-center gap-2">
+            <Search className="w-6 h-6" /> About You
+          </h3>
+
+          <div className="flex-grow grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div>
+              <h4 className="text-green-400 font-bold text-sm mb-2 uppercase tracking-wider flex items-center gap-2">
+                <CheckCircle2 size={16} /> Big Yes To
+              </h4>
+              <ul className="space-y-2 text-sm text-gray-300 pl-3 border-l-2 border-green-500/20">
+                <li className="flex items-center gap-2"><GraduationCap size={14} className="text-green-400" /> Academically Inclined</li>
+                <li className="flex items-center gap-2"><Heart size={14} className="text-green-400" /> Humble, Empathetic & Kind</li>
+                <li className="flex items-center gap-2"><TrendingUp size={14} className="text-green-400" /> Growth Mindset & High EQ</li>
+                <li className="flex items-center gap-2"><Wallet size={14} className="text-green-400" /> Teaches me finances</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-red-400 font-bold text-sm mb-2 uppercase tracking-wider flex items-center gap-2">
+                <XCircle size={16} /> Please No
+              </h4>
+              <ul className="space-y-2 text-sm text-gray-300 pl-3 border-l-2 border-red-500/20">
+                <li className="flex items-center gap-2"><MonitorSmartphone size={14} className="text-red-400" /> Influencer energy</li>
+                <li className="flex items-center gap-2"><Diamond size={14} className="text-red-400" /> Materialism - Values > Valuables</li>
+                <li className="flex items-center gap-2"><Megaphone size={14} className="text-red-400" /> Married to their job</li>
+                <li className="flex items-center gap-2"><BarChart3 size={14} className="text-red-400" /> Constant Comparisons</li>
+              </ul>
+            </div>
+
+            <div className="sm:col-span-2">
+              <h4 className="text-yellow-400 font-bold text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
+                <Star size={16} /> Bonus Points If...
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {["Naruto Fan", "Great Meme Game", "Anime girl", "Lets me buy tech gadgets", "Dog Lover", "Spiritual", "Dress modern yet elegant", "Puts on Bindi & Kajal occasionally", "Welcome home a Pocket Pom", "Teaches me cooking", "Hits gym and drags me too", "Gets ready quick", "Hiker", "Gets me Boba"].map((b, i) => (
+                  <span key={i} className="text-xs bg-yellow-400/10 text-yellow-200 px-2 py-1 rounded border border-yellow-400/20">{b}</span>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 8. CLOSING QUOTE */}
