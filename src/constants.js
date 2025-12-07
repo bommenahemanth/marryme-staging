@@ -2,21 +2,21 @@
 
 // Your actual photos - renamed for URL compatibility
 export const PLACEHOLDER_GALLERY = [
-  "/images/1.jpg",
-  "/images/photo1.jpg",
-  "/images/photo2.jpg",
-  "/images/photo3.jpg",
-  "/images/photo4.jpg",
-  "/images/photo5.jpg",
-  "/images/photo6.jpg",
-  "/images/photo7.jpg",
-  "/images/photo8.jpg",
-  "/images/photo9.jpg",
-  "/images/photo10.jpg",
-  "/images/photo11.jpg",
-  "/images/photo12.jpg",
-  "/images/photo13.jpg",
-  "/images/photo14.jpg"
+  "./images/1.jpg",
+  "./images/photo1.jpg",
+  "./images/photo2.jpg",
+  "./images/photo3.jpg",
+  "./images/photo4.jpg",
+  "./images/photo5.jpg",
+  "./images/photo6.jpg",
+  "./images/photo7.jpg",
+  "./images/photo8.jpg",
+  "./images/photo9.jpg",
+  "./images/photo10.jpg",
+  "./images/photo11.jpg",
+  "./images/photo12.jpg",
+  "./images/photo13.jpg",
+  "./images/photo14.jpg"
 ];
 
 export const ALL_CITIES = [
@@ -88,25 +88,25 @@ export const ALL_CITIES = [
 ].sort();
 
 export const DEFAULT_PROFILE = {
-  firstName: "Hemanth Kumar",
-  lastName: "Bommena",
-  quote: "Looking for a Waifu with whom I can share memes and travel with.",
+  firstName: "Bommena",
+  lastName: "Hemanth",
+  quote: "Looking for a Telugu Waifu\nto share memes & travel.",
   age: "28 Years",
   height: "5.8 ft",
   caste: "No Bar",
-  raisedIn: "Paloncha, TS",
+  raisedIn: "Bhadrachalam, Telangana",
   currentLocation: "Bentonville, AR",
   movedToUs: "May 2024",
   jobTitle: "Sr Manager - Supply Chain Analytics",
   company: "Walmart, Ex-McKinsey",
-  educationDegree: "MSc Business Analytics",
-  educationUni: "Uni of Manchester, 2021",
+  educationDegree: "MSc Business Analytics, 2021",
+  educationUni: "#34 QS Uni of Manchester (Ivy League Level), UK",
   languages: "Telugu, English, Bhayya thoda pyas dhalo",
-  visaStatus: "H1B Holder (No i140 yet)",
-  photoBase64: "/images/mallorca.jpg",
-  dadPhoto: "/images/father.jpg",
-  momPhoto: "/images/mother.JPG",
-  sisPhoto: "/images/potti.jpg",
+  visaStatus: "H1B - i140 Started",
+  photoBase64: "./images/mallorca.jpg",
+  dadPhoto: "./images/father.jpg",
+  momPhoto: "./images/mother.JPG",
+  sisPhoto: "./images/potti.jpg",
   familyPhoto: null,
   galleryImages: null
 };
@@ -121,35 +121,36 @@ export const SKILLS = [
 export const CERTIFICATIONS = [
   "SAP IBP for Supply Chain 2311",
   "O9 IBP - Functional Associate",
-  "Professional Scrum Master I (PSM I)"
+  "Professional Scrum Master I (PSM I)",
+  "Various other certs on Analytics, Blockchain & Supply Chain"
 ];
 
 export const TIMELINE_DATA = [
   {
     id: 1,
     date: "Jul 2025 - Present",
-    role: "Senior Manager - Inventory Transformation",
+    role: "Sr Manager - Inventory Analytics",
     org: "Walmart",
     loc: "Bentonville, AR (On-site)",
     domain: "walmart.com",
     tagline: "Selling Veggies and billion other products",
     responsibilities: [
-      "Advanced Analytics for Inventory Transformation",
-      "Supply Chain Optimization at scale",
-      "Driving data-driven merchandising decisions"
+      "Strategy & Analytics for Inventory Transformation",
+      "Creating Chatbots and automation apps",
+      "Enabling merchant decisions with data and delivering tools"
     ],
     facts: [
-      "🏆 World's #1 company by revenue — $674 BILLION in FY2025",
-      "🌍 If Walmart were a country, it would be the 23rd LARGEST ECONOMY on Earth",
-      "👥 Employs 2.1 MILLION associates — larger than the US Army, Navy & Air Force COMBINED",
-      "🛒 270 MILLION customers visit weekly across 10,750+ stores in 19 countries",
-      "📦 Moves 100 BILLION items per year through its supply chain — more than any company in history"
+      "World's #1 company by revenue — $674 BILLION in FY2025",
+      "If Walmart were a country, it would be the 23rd LARGEST ECONOMY on Earth",
+      "Employs 2.1 MILLION associates — larger than the US Army, Navy & Air Force COMBINED",
+      "270 MILLION customers visit weekly across 10,750+ stores in 19 countries",
+      "Moves 100 BILLION items per year through its supply chain — more than any company in history"
     ]
   },
   {
     id: 2,
     date: "May 2024 - Jul 2025",
-    role: "Senior Supply Chain Analyst",
+    role: "Sr Supply Chain Consultant",
     org: "McKinsey & Company",
     loc: "Dallas, TX (Remote)",
     domain: "mckinsey.com",
@@ -160,17 +161,17 @@ export const TIMELINE_DATA = [
       "Multi-Echelon Inventory Planning ($850K savings)"
     ],
     facts: [
-      "👑 World's MOST prestigious consulting firm — 99 years of shaping global business",
-      "💼 Advises 90% of Fortune 100 companies + 80+ national governments",
-      "🎓 In 2018, 800,000 applied for just 8,000 jobs — 1% acceptance rate (harder than Harvard!)",
-      "💰 $16 BILLION in annual revenue — larger than most countries' GDP",
-      "🏛️ Alumni run 150+ Fortune 500 companies as CEOs — the ultimate CEO factory"
+      "World's MOST prestigious consulting firm — 99 years of shaping global business",
+      "Advises 90% of Fortune 100 companies + 80+ national governments",
+      "In 2018, 800,000 applied for just 8,000 jobs — 1% acceptance rate (harder than Harvard!)",
+      "$16 BILLION in annual revenue — larger than most countries' GDP",
+      "Alumni run 150+ Fortune 500 companies as CEOs — the ultimate CEO factory"
     ]
   },
   {
     id: 3,
     date: "Dec 2021 - May 2023",
-    role: "Senior Data Analyst",
+    role: "Sr Data Analyst - Merch & Supply Chain",
     org: "THG",
     loc: "Manchester, UK",
     domain: "thg.com",
@@ -181,11 +182,11 @@ export const TIMELINE_DATA = [
       "Automated sales forecasting in Python (+£1M revenue)"
     ],
     facts: [
-      "🚀 IPO valued at $6 BILLION in 2020 — the LARGEST London Stock Exchange IPO since 2013",
-      "💄 Owns 100+ brands including Lookfantastic, Myprotein, ESPA, Cult Beauty & Glossybox",
-      "🌐 Ships to 195+ countries — literally almost EVERY country on the planet",
-      "📦 Acquired 30+ companies in 15 years — grew from £0 to £1.75B revenue",
-      "⚡ THG Ingenuity platform powers e-commerce for Nike, Nestlé & P&G"
+      "IPO valued at $6 BILLION in 2020 — the LARGEST London Stock Exchange IPO since 2013",
+      "Owns 100+ brands including Lookfantastic, Myprotein, ESPA, Cult Beauty & Glossybox",
+      "Ships to 195+ countries — literally almost EVERY country on the planet",
+      "Acquired 30+ companies in 15 years — grew from £0 to £1.75B revenue",
+      "THG Ingenuity platform powers e-commerce for Nike, Nestlé & P&G"
     ]
   },
   {
@@ -202,11 +203,11 @@ export const TIMELINE_DATA = [
       "Tableau dashboards (-7 days inventory on hand)"
     ],
     facts: [
-      "🏆 India's MOST VALUABLE company — crossed $200 BILLION market cap in 2021",
-      "👥 600,000+ employees in 46 countries — 4th largest employer in all of India",
-      "💰 $31 BILLION revenue in FY2025 — larger than entire economies of 100+ countries",
-      "🌍 First Indian IT company to hit $100 BILLION market cap (2018)",
-      "🏛️ Part of 156-year-old TATA Group — India's oldest & most respected conglomerate"
+      "India's MOST VALUABLE company — crossed $200 BILLION market cap in 2021",
+      "600,000+ employees in 46 countries — 4th largest employer in all of India",
+      "$31 BILLION revenue in FY2025 — larger than entire economies of 100+ countries",
+      "First Indian IT company to hit $100 BILLION market cap (2018)",
+      "Part of 156-year-old TATA Group — India's oldest & most respected conglomerate"
     ]
   },
   {
@@ -216,18 +217,18 @@ export const TIMELINE_DATA = [
     org: "University of Manchester",
     loc: "Manchester, UK",
     domain: "manchester.ac.uk",
-    tagline: "🏫 I don't even know how a classroom looks like",
+    tagline: "I don't even know how a classroom looks like",
     responsibilities: [
-      "📊 Grade: 78% (Merit)",
-      "🛠️ Skills: R · ML · Python · SQL · Power BI · Tableau · Simul8",
-      "💻 Entire course was online due to COVID"
+      "Grade: 78% (Distinction)",
+      "Skills: R · ML · Python · SQL · Power BI · Tableau · Simul8",
+      "Entire course was online due to COVID"
     ],
     facts: [
-      "🏆 QS World Ranking: #21 globally — Top 1% university worldwide",
-      "📊 MSc Analytics: Ranked #6 in UK for Business Analytics & Data Science",
-      "💻 Birthplace of the MODERN COMPUTER — Alan Turing built the first stored-program computer here in 1948",
-      "🏅 26 NOBEL PRIZE winners including Ernest Rutherford who split the atom",
-      "🌍 40,000+ students from 160+ countries — UK's largest single-site university"
+      "QS World Ranking: #34 globally — Top 1% university worldwide",
+      "📊 MSc Analytics: Ranked #4 in UK for Business Analytics & Data Science",
+      "Birthplace of the MODERN COMPUTER — Alan Turing built the first stored-program computer here in 1948",
+      "26 NOBEL PRIZE winners including Ernest Rutherford who split the atom",
+      "40,000+ students from 160+ countries — UK's largest single-site university"
     ]
   },
   {
@@ -237,18 +238,18 @@ export const TIMELINE_DATA = [
     org: "Vellore Institute of Technology",
     loc: "Vellore, India",
     domain: "vit.ac.in",
-    tagline: "🔧 Mech because papa forced me to",
+    tagline: "Mech because papa forced me to",
     responsibilities: [
-      "📊 Grade: 8.15 CGPA",
-      "🛠️ Skills: Excel · Team Leadership · SolidWorks · MATLAB",
-      "🏸 University Badminton Player & Health Club President"
+      "Grade: 8.15 CGPA",
+      "Skills: Excel · Team Leadership · SolidWorks · MATLAB",
+      "University Badminton Player & Health Club President"
     ],
     facts: [
-      "🏆 India's #1 Private Engineering University — NIRF Ranking 2024",
-      "🌍 50,000+ students from 65+ countries — largest private tech campus in India",
-      "🤖 Alumni created PyTorch (Soumith Chintala) — powering Tesla, Meta & OpenAI's GPT",
-      "📈 2.5 LAKH+ applicants compete for 8,000 seats — 3% acceptance rate",
-      "💼 1,200+ companies recruit on campus — highest packages of ₹2+ Crore"
+      "India's #1 Private Engineering University — NIRF Ranking 2024",
+      "50,000+ students from 65+ countries — largest private tech campus in India",
+      "Alumni created PyTorch (Soumith Chintala) — powering Tesla, Meta & OpenAI's GPT",
+      "2.5 LAKH+ applicants compete for 8,000 seats — 3% acceptance rate",
+      "1,200+ companies recruit on campus — highest packages of ₹2+ Crore"
     ]
   },
   {
@@ -258,39 +259,40 @@ export const TIMELINE_DATA = [
     org: "Sri Chaitanya College of Education",
     loc: "India",
     domain: "srichaitanya.net",
-    tagline: "😰 Horrible phase of my life",
+    tagline: "Horrible phase of my life",
     responsibilities: [
-      "📊 Grade: 97.5% — State Top 1%",
-      "💰 Merit Scholarship from Central & State Government",
-      "🎯 Competitive Exam Prep: JEE Mains + Advanced"
+      "Grade: 97.5% — State Top 1%",
+      "Merit Scholarship from Central & State Government",
+      "Competitive Exam Prep: JEE Mains + Advanced"
     ],
     facts: [
-      "🏆 India's LARGEST coaching network — 400+ branches in 10+ states",
-      "🎓 3 LAKH+ students enrolled annually — bigger than many universities",
-      "📈 Produced 50,000+ IIT selections in last 30 years — more than any institute in India",
-      "👑 JEE Advanced AIR-1 multiple times — including 2023 & 2024 toppers",
-      "💼 Revenue of ₹2,500+ Crore — one of India's biggest education companies"
+      "India's LARGEST coaching network — 400+ branches in 10+ states",
+      "3 LAKH+ students enrolled annually — bigger than many universities",
+      "Produced 50,000+ IIT selections in last 30 years — more than any institute in India",
+      "JEE Advanced AIR-1 multiple times — including 2023 & 2024 toppers",
+      "Revenue of ₹2,500+ Crore — one of India's biggest education companies"
     ]
   },
   {
     id: 8,
     date: "Apr 2000 - Apr 2012",
-    role: "🎓 10th - High School",
+    role: "10th - High School",
     org: "Nava Bharat Public School",
     loc: "Paloncha, India",
     domain: "",
-    tagline: "🌟 Best phase of my life",
+    logo: "./images/nbps.jpeg",
+    tagline: "Best phase of my life",
     responsibilities: [
-      "📊 Grade: 9.4 CGPA — School Topper",
-      "🎖️ School Captain (Head Boy)",
-      "🏆 District-level Quiz & Sports Champion"
+      "Grade: 9.4 CGPA — School Topper",
+      "School Captain (Head Boy)",
+      "District-level Quiz & Sports Champion"
     ],
     facts: [
-      "🏫 Premier CBSE school of Paloncha — serving 2,000+ students since 1985",
-      "🎖️ I was School Captain (Head Boy) leading 1,500+ students",
-      "🏆 Won 15+ inter-school competitions in Quiz, Debates & Athletics",
-      "📚 12 years of education — from Nursery to 10th in the same school",
-      "💫 Made lifelong friends — still connected with 50+ batchmates after 12 years"
+      "Established in 1978, CBSE-affiliated school in Nava Nagar, Paloncha",
+      "10-acre campus with 46 classrooms, library with 4,600+ books",
+      "1,500+ students from LKG to 10th grade",
+      "50+ computers and modern facilities for students",
+      "Managed by Nava Bharat Rural Development Society"
     ]
   }
 ];
@@ -360,7 +362,7 @@ export const TRANSLATIONS = {
 
 // ===== COMPLETE HOROSCOPE DATA =====
 export const HOROSCOPE_PROFILE = {
-  name: "Hemanth Kumar Bommena",
+  name: "Bommena Hemanth",
   dob: "** May 1997 (Ask Me 😉)",
   time: "04:05 AM",
   place: "V. Venkatayapalem, Khammam District, Telangana, India",
@@ -435,7 +437,7 @@ export const MARRIAGE_DATA = {
     traits: [
       "🧘 Spiritual and calm nature",
       "💝 Loyal and emotionally mature",
-      "📚 Well-educated, possibly abroad",
+      "Well-educated, possibly abroad",
       "🎨 Artistic or creative interests",
       "🌙 Compassionate and nurturing",
       "⚖️ Balanced and responsible"
@@ -512,7 +514,7 @@ export const MARRIAGE_DATA_TE = {
     traits: [
       "🧘 ఆధ్యాత్మిక మరియు ప్రశాంత స్వభావం",
       "💝 విశ్వసనీయ మరియు భావోద్వేగంగా పరిణతి చెందిన",
-      "📚 బాగా చదువుకున్న, విదేశీ అనుభవం",
+      "బాగా చదువుకున్న, విదేశీ అనుభవం",
       "🎨 కళాత్మక లేదా సృజనాత్మక ఆసక్తులు",
       "🌙 దయగల మరియు పోషించే స్వభావం",
       "⚖️ సమతుల్య మరియు బాధ్యతగల"

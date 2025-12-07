@@ -22,10 +22,10 @@ import {
   Maximize2,
   ChevronLeft,
   ChevronRight,
-  X
-} from 'lucide-react';
+  X,
+  ArrowUp, Calculator, Clock, Pizza, Scale, Gem, Plane, ChefHat, Cpu, Users} from 'lucide-react';
 
-import { CompatibilityTab } from './components';
+import { CompatibilityTab , NetworkBackground } from './components';
 import { TRANSLATIONS, ASTRO_DATA, ASTRO_DATA_TE, PLACEHOLDER_GALLERY, MARRIAGE_DATA, HOROSCOPE_PROFILE, MARRIAGE_DATA_TE, HOROSCOPE_PROFILE_TE } from './constants';
 
 // --- Marriage Tab Component ---
@@ -238,7 +238,7 @@ function MarriageTab({ lang = 'en' }) {
 }
 
 // --- Horoscope Section ---
-export function HoroscopeSection() {
+export function HoroscopeSection({ scrollToTop }) {
   const [lang, setLang] = useState('en');
   const [activeTab, setActiveTab] = useState(0);
   const t = TRANSLATIONS[lang];
@@ -248,18 +248,27 @@ export function HoroscopeSection() {
 
   return (
     <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-hidden">
+      <NetworkBackground />
       <div className="absolute inset-0 z-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cross-stripes.png')] pointer-events-none" />
-      <div className="relative z-10 flex flex-col md:flex-row justify-between items-center mb-8 border-b border-[#D4AF37]/20 pb-6">
-        <div className="text-center md:text-left mb-4 md:mb-0">
-          <h2 className="text-3xl sm:text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-2">{t.title}</h2>
-          <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-xs font-bold">{t.subtitle}</p>
+      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-6 lg:-mx-12 mb-4">
+        <div>
+          <h2 className="text-3xl font-serif text-white tracking-wide">
+            {t.title}
+          </h2>
+          <p className="text-[#D4AF37] uppercase tracking-[0.2em] text-xs font-bold mt-1">{t.subtitle}</p>
         </div>
-        <button
-          onClick={handleLangToggle}
-          className="flex items-center gap-2 px-4 py-2 border border-[#D4AF37]/50 rounded-full hover:bg-[#D4AF37] hover:text-black transition-all text-[#D4AF37] text-sm font-bold"
-        >
-          <Languages size={16} /> {lang === 'en' ? 'EN | తెలుగు' : 'TE | English'}
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleLangToggle}
+            className="flex items-center gap-2 px-3 py-2 border border-[#D4AF37]/50 rounded-full hover:bg-[#D4AF37] hover:text-black transition-all text-[#D4AF37] text-xs font-bold"
+          >
+            <Languages size={14} /> {lang === 'en' ? 'తెలుగు' : 'EN'}
+          </button>
+          <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20">
+            <span>Back to Top</span>
+            <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
+          </button>
+        </div>
       </div>
 
       <div className="relative z-10 flex-grow bg-[#0c0c0c] border border-[#D4AF37]/30 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
@@ -371,16 +380,23 @@ export function HoroscopeSection() {
 }
 
 // --- About Me Section ---
-export function AboutMeSection() {
+export function AboutMeSection({ scrollToTop }) {
   return (
     <div className="relative w-full min-h-screen bg-[#050505] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-y-auto snap-start font-sans">
+      <NetworkBackground />
       <div className="absolute inset-0 z-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none" />
 
-      <div className="relative z-10 mb-10 text-center shrink-0">
-        <h2 className="text-3xl sm:text-3xl sm:text-4xl md:text-6xl font-serif text-white mb-3 tracking-tight animate-fadeInDown animate-fadeInDown">
-          Life <span className="text-[#D4AF37]">Beyond</span> The Numbers
-        </h2>
-        <p className="text-gray-400 text-sm uppercase tracking-widest">Grounded • Grateful • Growing</p>
+      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-6 lg:-mx-12 mb-6">
+        <div>
+          <h2 className="text-3xl font-serif text-white tracking-wide">
+            More than a bit <span className="text-[#D4AF37] italic">about</span> Me..
+          </h2>
+          <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">Grounded • Grateful • Growing</p>
+        </div>
+        <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20">
+          <span>Back to Top</span>
+          <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
+        </button>
       </div>
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1400px] mx-auto w-full pb-20">
@@ -388,31 +404,31 @@ export function AboutMeSection() {
         {/* 1. BIO (Wide) */}
         <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-[#D4AF37]/30 rounded-3xl p-6 hover:border-[#D4AF37] active:scale-[0.98] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#D4AF37]/10 group">
           <h3 className="text-xl font-serif text-[#D4AF37] mb-4 flex items-center gap-2">
-            <User className="w-6 h-6" /> Outside 9-5 I DO
+            <User className="w-6 h-6" /> When Not Working
           </h3>
           <ul className="space-y-3 text-gray-300 text-base">
             <li className="flex items-start gap-3">
-              <span className="text-[#D4AF37] mt-1">➢</span>
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
               <span>Walk 10 km daily (and pet <strong>'kukka bangaralu'</strong> on the way).</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="text-[#D4AF37] mt-1">➢</span>
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
               <span>Play badminton (I was great when my knees were younger).</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="text-[#D4AF37] mt-1">➢</span>
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
               <span>Give unsolicited advice (<strong>'Uchitha salahalu'</strong>, literally) to young folks who reach out to me on LinkedIn.</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="text-[#D4AF37] mt-1">➢</span>
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
               <span>Get my hands dirty with new AI tools out there.</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="text-[#D4AF37] mt-1">➢</span>
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
               <span>Full-time job: Annoying my little sister.</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="text-[#D4AF37] mt-1">➢</span>
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] mt-2 flex-shrink-0"></span>
               <span>Exploring new tech gadgets.</span>
             </li>
           </ul>
@@ -434,16 +450,16 @@ export function AboutMeSection() {
           </h3>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between items-center p-2 bg-white/5 rounded-lg">
-              <span className="flex items-center gap-2 text-gray-300"><Wine size={16} className="text-red-400" /> Alcohol</span>
-              <span className="text-gray-500 text-xs text-right max-w-[120px] leading-tight">I don't.. but you can (just don't get wasted)</span>
+              <span className="flex items-center gap-2 text-gray-300"><Feather size={16} className="text-orange-400" /> Diet</span>
+              <span className="text-gray-500 text-xs text-right max-w-[120px] leading-tight">Non-Veg, open to vegetarians</span>
             </div>
             <div className="flex justify-between items-center p-2 bg-white/5 rounded-lg">
-              <span className="flex items-center gap-2 text-gray-300"><Leaf size={16} className="text-green-400" /> Greens</span>
-              <span className="text-gray-500 text-xs">Less (You can)</span>
+              <span className="flex items-center gap-2 text-gray-300"><Wine size={16} className="text-red-400" /> Alcohol</span>
+              <span className="text-gray-500 text-xs text-right max-w-[120px] leading-tight">I don't.. but you can (don't get wasted)</span>
             </div>
             <div className="flex justify-between items-center p-2 bg-white/5 rounded-lg border border-red-500/20">
               <span className="flex items-center gap-2 text-gray-300"><Wind size={16} className="text-gray-400" /> Smoke</span>
-              <span className="text-red-400 font-bold text-xs">No Please.</span>
+              <span className="text-red-400 font-bold text-xs">No Please</span>
             </div>
           </div>
         </div>
@@ -472,7 +488,7 @@ export function AboutMeSection() {
           <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4AF37] blur-[80px] opacity-10 pointer-events-none" />
 
           <h3 className="text-2xl font-serif text-[#D4AF37] mb-4 flex items-center gap-2">
-            <Search className="w-6 h-6" /> The Search
+            <Search className="w-6 h-6" /> About You
           </h3>
 
           <div className="flex-grow grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -483,7 +499,7 @@ export function AboutMeSection() {
               <ul className="space-y-2 text-sm text-gray-300 pl-3 border-l-2 border-green-500/20">
                 <li>• Academically Inclined</li>
                 <li>• Low Digital Footprint</li>
-                <li>• Growth Mindset / High EQ</li>
+                <li>• Growth Mindset & High EQ</li>
                 <li>• Knows their finances</li>
               </ul>
             </div>
@@ -520,13 +536,13 @@ export function AboutMeSection() {
           </h4>
           <ul className="space-y-3">
             <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded">
-              <span className="font-bold text-green-500">01</span> Sharing memes faster than the flu spreads.
+              <span className="w-2 h-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></span><span>Sharing memes faster than the flu spreads.</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded">
-              <span className="font-bold text-green-500">02</span> Planning travel (Solo traveled 10+ European countries).
+              <span className="w-2 h-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></span><span>Planning travel (Solo traveled 10+ European countries).</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded">
-              <span className="font-bold text-green-500">03</span> Mahadev's grace, solid friendships, and a wonderful family.
+              <span className="w-2 h-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></span><span>Mahadev's grace, solid friendships, and a wonderful family.</span>
             </li>
           </ul>
         </div>
@@ -538,13 +554,13 @@ export function AboutMeSection() {
           </h4>
           <ul className="space-y-3">
             <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded">
-              <span className="font-bold text-red-500">01</span> Potential to bring Kitchen to ashes.
+              <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 flex-shrink-0"></span><span>Potential to bring Kitchen to ashes.</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded">
-              <span className="font-bold text-red-500">02</span> Keep asking for a dog, baby cow, or an elephant (Please…).
+              <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 flex-shrink-0"></span><span>Keep asking for a dog, baby cow, or an elephant (Please…).</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded">
-              <span className="font-bold text-red-500">03</span> Self esteem could use a little work.
+              <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 flex-shrink-0"></span><span>Self esteem could use a little work.</span>
             </li>
           </ul>
         </div>
@@ -568,11 +584,12 @@ export function AboutMeSection() {
 }
 
 // --- Family Section ---
-export function FamilySection({ profile }) {
+export function FamilySection({ profile, scrollToTop }) {
   const [fullscreenImage, setFullscreenImage] = useState(null);
 
   return (
     <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-6 lg:p-12 overflow-hidden snap-start font-sans">
+      <NetworkBackground />
       {/* Background texture */}
       <div className="absolute inset-0 z-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] pointer-events-none" />
       
@@ -580,11 +597,17 @@ export function FamilySection({ profile }) {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
       
-      <div className="relative z-10 mb-12 text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-6xl font-serif text-white mb-3 tracking-tight animate-fadeInDown">
-          The <span className="text-[#D4AF37]">Inner</span> Circle
-        </h2>
-        <p className="text-gray-400 text-sm uppercase tracking-widest">Grateful • Fun • Everything</p>
+      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-6 lg:-mx-12 mb-8">
+        <div>
+          <h2 className="text-3xl font-serif text-white tracking-wide">
+            The <span className="text-[#D4AF37] italic">Inner</span> Circle
+          </h2>
+          <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">Grateful • Fun • Everything</p>
+        </div>
+        <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20">
+          <span>Back to Top</span>
+          <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
+        </button>
       </div>
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto w-full flex-grow items-center">
@@ -613,19 +636,19 @@ export function FamilySection({ profile }) {
             </div>
             <div className="space-y-3 flex-grow">
               <div className="flex items-start gap-3 group/item">
-                <span className="text-[#D4AF37] mt-0.5">⚙️</span>
+                <Cpu size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Mechanical Engineer & Head of Ops at NBEIL</p>
               </div>
               <div className="flex items-start gap-3 group/item">
-                <span className="text-[#D4AF37] mt-0.5">🔢</span>
+                <Calculator size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Good with numbers & kind to people</p>
               </div>
               <div className="flex items-start gap-3 group/item">
-                <span className="text-[#D4AF37] mt-0.5">⏰</span>
+                <Clock size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Extremely disciplined</p>
               </div>
               <div className="flex items-start gap-3 group/item">
-                <span className="text-[#D4AF37] mt-0.5">🍕</span>
+                <Pizza size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Will secretly feed you junk food</p>
               </div>
             </div>
@@ -653,15 +676,15 @@ export function FamilySection({ profile }) {
             <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider mt-1 mb-5">Savithri (Home Minister)</p>
             <div className="space-y-3 flex-grow text-left">
               <div className="flex items-start gap-3">
-                <span className="text-[#D4AF37] mt-0.5">👑</span>
+                <Crown size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Laxmi of our house, elegant and intelligent</p>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-[#D4AF37] mt-0.5">🦍</span>
+                <Users size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">She said: "Apes together strong."</p>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-[#D4AF37] mt-0.5">⚖️</span>
+                <Scale size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">The ultimate decision maker</p>
               </div>
             </div>
@@ -692,15 +715,15 @@ export function FamilySection({ profile }) {
             </div>
             <div className="space-y-3 flex-grow">
               <div className="flex items-start gap-3">
-                <span className="text-[#D4AF37] mt-0.5">💎</span>
+                <Gem size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Little Laxmi (In our house and the next)</p>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-[#D4AF37] mt-0.5">🇺🇸</span>
+                <Plane size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Reason I moved to US. Dallas grad.</p>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-[#D4AF37] mt-0.5">🍳</span>
+                <ChefHat size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Minimalist, creative, and a good cook</p>
               </div>
             </div>
@@ -735,7 +758,7 @@ export function FamilySection({ profile }) {
 }
 
 // --- Gallery Section ---
-export function GallerySection({ profile }) {
+export function GallerySection({ profile, scrollToTop }) {
   const [fullscreenIndex, setFullscreenIndex] = useState(null);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -755,6 +778,7 @@ export function GallerySection({ profile }) {
 
   return (
     <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-6 lg:p-12 overflow-hidden snap-start font-sans">
+      <NetworkBackground />
       {/* Background texture */}
       <div className="absolute inset-0 z-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diamond-upholstery.png')] pointer-events-none" />
       
@@ -762,11 +786,17 @@ export function GallerySection({ profile }) {
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       
-      <div className="relative z-10 mb-10 text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-6xl font-serif text-white mb-3 tracking-tight animate-fadeInDown">
-          Life in <span className="text-[#D4AF37]">Frames</span>
-        </h2>
-        <p className="text-gray-400 text-sm uppercase tracking-widest">Memories • Travels • Life</p>
+      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-6 lg:-mx-12 mb-6">
+        <div>
+          <h2 className="text-3xl font-serif text-white tracking-wide">
+            Life in <span className="text-[#D4AF37] italic">Frames</span>
+          </h2>
+          <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">Memories • Travels • Life</p>
+        </div>
+        <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20">
+          <span>Back to Top</span>
+          <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
+        </button>
       </div>
 
       <div className="relative z-10 flex-grow overflow-y-auto pb-12 max-w-[1600px] mx-auto w-full">
@@ -860,6 +890,151 @@ export function GallerySection({ profile }) {
             onClick={(e) => {
               e.stopPropagation();
               if (fullscreenIndex < finalImages.length - 1) setFullscreenIndex(fullscreenIndex + 1);
+            }}
+          >
+            <ChevronRight size={28} />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// --- Family Gallery Section ---
+const FAMILY_GALLERY_IMAGES = [
+  '/marryme/images/family/family1.jpg',
+  '/marryme/images/family/family2.jpg',
+  '/marryme/images/family/family3.jpg',
+  '/marryme/images/family/family4.jpg',
+  '/marryme/images/family/family5.jpg',
+  '/marryme/images/family/family6.jpg',
+  '/marryme/images/family/IMG_3929.jpg',
+  '/marryme/images/family/IMG_8151.jpg',
+  '/marryme/images/family/IMG_8852.jpg',
+];
+
+export function FamilyGallerySection({ scrollToTop }) {
+  const [fullscreenIndex, setFullscreenIndex] = useState(null);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  
+  const minSwipeDistance = 50;
+  const images = FAMILY_GALLERY_IMAGES;
+
+  return (
+    <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-6 lg:p-12 overflow-hidden snap-start font-sans">
+      <NetworkBackground />
+      {/* Background texture */}
+      <div className="absolute inset-0 z-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diamond-upholstery.png')] pointer-events-none" />
+      
+      {/* Ambient glow effects */}
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
+      
+      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-6 lg:-mx-12 mb-6">
+        <div>
+          <h2 className="text-3xl font-serif text-white tracking-wide">
+            Family <span className="text-[#D4AF37] italic">Moments</span>
+          </h2>
+          <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">Together • Always • Forever</p>
+        </div>
+        <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20">
+          <span>Back to Top</span>
+          <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
+        </button>
+      </div>
+
+      <div className="relative z-10 flex-grow overflow-y-auto pb-12 max-w-[1600px] mx-auto w-full">
+        <div className="columns-2 sm:columns-2 lg:columns-3 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
+          {images.map((img, index) => (
+            <div
+              key={index}
+              className="relative group break-inside-avoid rounded-2xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 active:scale-[0.98]"
+              onClick={() => setFullscreenIndex(index)}
+            >
+              <img
+                src={img}
+                alt={`Family ${index + 1}`}
+                className="w-full h-auto object-cover transition-all duration-700 opacity-85 group-hover:opacity-100 group-hover:scale-110"
+              />
+              
+              {/* Hover overlay with zoom icon */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                <div className="p-4 bg-black/40 backdrop-blur-sm rounded-full border border-[#D4AF37]/30 transform scale-75 group-hover:scale-100 transition-transform duration-500">
+                  <Maximize2 className="text-[#D4AF37] w-6 h-6" />
+                </div>
+              </div>
+              
+              {/* Golden glow on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#D4AF37]/5 pointer-events-none" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Fullscreen Image Modal with Navigation */}
+      {fullscreenIndex !== null && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setFullscreenIndex(null);
+          }}
+          onTouchStart={(e) => {
+            setTouchEnd(null);
+            setTouchStart(e.targetTouches[0].clientX);
+          }}
+          onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
+          onTouchEnd={() => {
+            if (!touchStart || !touchEnd) return;
+            const distance = touchStart - touchEnd;
+            const isLeftSwipe = distance > minSwipeDistance;
+            const isRightSwipe = distance < -minSwipeDistance;
+            if (isLeftSwipe && fullscreenIndex < images.length - 1) {
+              setFullscreenIndex(fullscreenIndex + 1);
+            }
+            if (isRightSwipe && fullscreenIndex > 0) {
+              setFullscreenIndex(fullscreenIndex - 1);
+            }
+          }}
+        >
+          {/* Left Arrow */}
+          <button 
+            className={`absolute left-4 md:left-8 z-10 p-3 md:p-4 bg-black/60 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
+            }}
+          >
+            <ChevronLeft size={28} />
+          </button>
+
+          <div className="relative max-w-6xl max-h-[90vh] animate-zoomIn">
+            <img 
+              src={images[fullscreenIndex]} 
+              alt="Fullscreen" 
+              className="max-w-full max-h-[80vh] sm:max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl shadow-[#D4AF37]/30"
+            />
+            
+            {/* Close button */}
+            <button 
+              className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110"
+              onClick={() => setFullscreenIndex(null)}
+            >
+              <X size={24} />
+            </button>
+
+            {/* Image counter */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black/60 backdrop-blur rounded-full text-white/80 text-sm border border-white/10">
+              {fullscreenIndex + 1} / {images.length}
+            </div>
+          </div>
+
+          {/* Right Arrow */}
+          <button 
+            className={`absolute right-4 md:right-8 z-10 p-3 md:p-4 bg-black/60 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === images.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (fullscreenIndex < images.length - 1) setFullscreenIndex(fullscreenIndex + 1);
             }}
           >
             <ChevronRight size={28} />

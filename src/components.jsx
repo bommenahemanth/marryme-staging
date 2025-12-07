@@ -62,12 +62,12 @@ function DetailItem({ icon: Icon, label, value, subValue }) {
   return (
     <div className="flex items-start gap-3">
       <div className="mt-1 flex-shrink-0">
-        <Icon className="w-4 h-4 text-[#D4AF37]" />
+        <Icon className="w-4 h-4 text-white/80" />
       </div>
       <div>
-        <h3 className="text-white font-bold text-base leading-tight">{value}</h3>
-        {subValue && <p className="text-gray-400 text-xs font-light">{subValue}</p>}
-        {label && !subValue && <p className="text-gray-400 text-xs font-light">{label}</p>}
+        <h3 className="text-white font-medium text-xs leading-tight">{value}</h3>
+        {subValue && <p className="text-[#D4AF37]/80 text-xs font-light">{subValue}</p>}
+        {label && !subValue && <p className="text-[#D4AF37]/80 text-xs font-light">{label}</p>}
       </div>
     </div>
   );
@@ -150,13 +150,13 @@ function NetworkBackground() {
     window.addEventListener('resize', resize);
 
     const points = [];
-    const numPoints = 60;
+    const numPoints = 120;
     for (let i = 0; i < numPoints; i++) {
       points.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8
       });
     }
 
@@ -225,8 +225,8 @@ function NetworkBackground() {
 
 function FactsModal({ item, onClose }) {
   return (
-    <div className="fixed inset-0 z-[150] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in zoom-in duration-300">
-      <div className="bg-[#0f110f] w-full max-w-md rounded-2xl border border-[#D4AF37]/50 shadow-[0_0_50px_rgba(212,175,55,0.2)] p-8 relative overflow-hidden">
+    <div onClick={onClose} className="fixed inset-0 z-[150] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in zoom-in duration-300 cursor-pointer">
+      <div onClick={(e) => e.stopPropagation()} className="bg-[#0f110f] w-full max-w-md rounded-2xl border border-[#D4AF37]/50 shadow-[0_0_50px_rgba(212,175,55,0.2)] p-8 relative overflow-hidden cursor-default">
         <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37] blur-[100px] opacity-10 pointer-events-none" />
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
           <X size={24} />
@@ -234,7 +234,7 @@ function FactsModal({ item, onClose }) {
         <div className="text-center mb-8">
           <div className="w-20 h-20 rounded-full bg-black border-2 border-[#D4AF37] p-4 flex items-center justify-center shadow-lg mx-auto mb-4">
             <img
-              src={`https://logo.clearbit.com/${item.domain}`}
+              src={item.logo || `https://logo.clearbit.com/${item.domain}`}
               alt="logo"
               className="w-full h-full object-contain"
               onError={(e) => { e.target.src = 'https://via.placeholder.com/50/000000/FFFFFF?text=' + item.org[0] }}
@@ -406,7 +406,7 @@ const CompatibilityTab = ({ t }) => {
                 {result.verdictTitle}
               </div>
             </div>
-            <p className="text-gray-400 text-sm text-center max-w-lg">{result.verdictDesc}</p>
+            <p className="text-gray-400 text-sm font-sans text-center max-w-lg">{result.verdictDesc}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -426,7 +426,7 @@ const CompatibilityTab = ({ t }) => {
                       style={{ width: `${(item.score / item.total) * 100}%` }}
                     />
                   </div>
-                  <p className="text-xs text-gray-400 leading-relaxed mb-2">{item.desc}</p>
+                  <p className="text-xs text-gray-400 font-sans leading-relaxed mb-2">{item.desc}</p>
                 </div>
               </div>
             ))}

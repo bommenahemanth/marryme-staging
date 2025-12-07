@@ -44,7 +44,8 @@ import {
   HoroscopeSection,
   AboutMeSection,
   FamilySection,
-  GallerySection
+  GallerySection,
+  FamilyGallerySection
 } from './sections';
 
 export default function ShaadiLanding() {
@@ -65,6 +66,7 @@ export default function ShaadiLanding() {
   const aboutSectionRef = useRef(null);
   const familySectionRef = useRef(null);
   const gallerySectionRef = useRef(null);
+  const familyGallerySectionRef = useRef(null);
 
   const handleGalleryReplace = async (e, indexStr) => {
     if (!e.target.files || e.target.files.length === 0 || indexStr === undefined) return;
@@ -140,12 +142,12 @@ export default function ShaadiLanding() {
     <div className="h-screen w-full overflow-y-scroll bg-black text-white font-sans selection:bg-[#D4AF37] selection:text-black scroll-smooth snap-y snap-proximity md:snap-mandatory">
 
       {/* ==================== PAGE 1: PROFILE ==================== */}
-      <div ref={profileSectionRef} className="relative w-full h-screen flex flex-col overflow-hidden snap-start">
+      <div ref={profileSectionRef} className="relative w-full min-h-screen md:h-screen flex flex-col overflow-visible md:overflow-hidden snap-start">
         <div
           className="absolute inset-0 z-0 bg-cover bg-no-repeat transition-all duration-700"
           style={{
             backgroundImage: `url('${profile.photoBase64 || "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2187&auto=format&fit=crop"}')`,
-            backgroundPosition: 'center 25%'
+            backgroundPosition: '60% 25%'
           }}
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black via-black/80 to-transparent/30" />
@@ -153,32 +155,15 @@ export default function ShaadiLanding() {
 
         <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center">
 
-          {/* TOP LEFT: SOCIAL CONNECT */}
-          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex flex-col gap-2 z-30">
-            <p className="text-[#D4AF37] text-[10px] font-bold uppercase tracking-widest opacity-80 pl-1">Connect</p>
-            <div className="flex gap-3">
-              <a href="https://www.linkedin.com/in/bommena-hemanth-2a2834118/" target="_blank" rel="noopener noreferrer" className="p-3 sm:p-2.5 bg-blue-600/20 border border-blue-500/40 rounded-full text-blue-400 hover:bg-blue-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
-                <Linkedin size={16} />
-              </a>
-              <a href="https://www.instagram.com/bommenahemanth/" target="_blank" rel="noopener noreferrer" className="p-3 sm:p-2.5 bg-pink-600/20 border border-pink-500/40 rounded-full text-pink-400 hover:bg-pink-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
-                <Instagram size={16} />
-              </a>
-              <a href="https://wa.me/918124269822?text=Hey%20Hemanth!%20%F0%9F%91%8B%0A%0AJust%20saw%20your%20profile%20and%20loved%20it!%20%E2%9C%A8%0AWould%20love%20to%20connect%20and%20get%20to%20know%20you%20better.%20%F0%9F%98%8A" target="_blank" rel="noopener noreferrer" className="p-3 sm:p-2.5 bg-green-600/20 border border-green-500/40 rounded-full text-green-400 hover:bg-green-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
-                <MessageCircle size={16} />
-              </a>
-              <a href="mailto:bommenahemanth@gmail.com?subject=Hey%20Hemanth!%20Loved%20your%20profile%20%E2%9C%A8&body=Hi%20Hemanth!%20%F0%9F%91%8B%0A%0AI%20just%20saw%20your%20profile%20and%20really%20liked%20it!%0AWould%20love%20to%20connect%20and%20chat.%20%F0%9F%98%8A%0A%0ALooking%20forward%20to%20hearing%20from%20you!" className="p-3 sm:p-2.5 bg-red-600/20 border border-red-500/40 rounded-full text-red-400 hover:bg-red-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
-                <Mail size={16} />
-              </a>
-            </div>
-          </div>
+
 
           
           {/* CENTER: PROFILE CONTENT */}
-          <div className="flex flex-col justify-center max-w-2xl mt-8 mx-auto px-4 sm:px-0 animate-fadeInUp">
+          <div className="flex flex-col justify-center max-w-2xl mx-auto md:mx-0 md:ml-[10%] px-4 sm:px-0 animate-fadeInUp">
             <div className="mb-6 group relative">
               <h1 className="text-4xl sm:text-4xl sm:text-5xl lg:text-7xl font-serif tracking-tight leading-none mb-2">
                 <span className="block text-white font-medium">{profile.firstName}</span>
-                <span className="block font-bold bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent drop-shadow-sm">
+                <span className="block font-bold bg-gradient-to-l from-[#FFD700] via-[#FFF8DC] to-[#DAA520] bg-clip-text text-transparent drop-shadow-sm">
                   {profile.lastName}
                 </span>
               </h1>
@@ -191,9 +176,25 @@ export default function ShaadiLanding() {
               </button>
             </div>
 
+            {/* Social Connect - below name */}
+            <div className="flex items-center gap-3 mb-6">
+              <a href="https://www.linkedin.com/in/bommena-hemanth-2a2834118/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center bg-blue-600/20 border border-blue-500/40 rounded-full text-blue-400 hover:bg-blue-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
+                <Linkedin size={18} />
+              </a>
+              <a href="https://www.instagram.com/bommenahemanth/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center bg-pink-600/20 border border-pink-500/40 rounded-full text-pink-400 hover:bg-pink-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
+                <Instagram size={18} />
+              </a>
+              <a href="https://wa.me/918124269822?text=Hey%20Hemanth!%20%F0%9F%91%8B%0A%0AJust%20saw%20your%20profile%20and%20loved%20it!%20%E2%9C%A8%0AWould%20love%20to%20connect%20and%20get%20to%20know%20you%20better.%20%F0%9F%98%8A" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center bg-green-600/20 border border-green-500/40 rounded-full text-green-400 hover:bg-green-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
+                <MessageCircle size={18} />
+              </a>
+              <a href="mailto:bommenahemanth@gmail.com?subject=Hey%20Hemanth!%20Loved%20your%20profile%20%E2%9C%A8&body=Hi%20Hemanth!%20%F0%9F%91%8B%0A%0AI%20just%20saw%20your%20profile%20and%20really%20liked%20it!%0AWould%20love%20to%20connect%20and%20chat.%20%F0%9F%98%8A%0A%0ALooking%20forward%20to%20hearing%20from%20you!" className="w-10 h-10 flex items-center justify-center bg-red-600/20 border border-red-500/40 rounded-full text-red-400 hover:bg-red-600 hover:text-white transition-all hover:-translate-y-1 backdrop-blur-md">
+                <Mail size={18} />
+              </a>
+            </div>
+
             <div className="flex items-center gap-4 mb-10">
               <div className="w-0.5 h-10 bg-gradient-to-b from-[#BF953F] to-[#B38728]" />
-              <p className="text-lg lg:text-xl font-light text-gray-300 italic shadow-black drop-shadow-md">
+              <p className="text-lg lg:text-xl font-light text-gray-300 italic shadow-black drop-shadow-md whitespace-pre-line">
                 {profile.quote}
               </p>
             </div>
@@ -201,18 +202,19 @@ export default function ShaadiLanding() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mb-8">
               <DetailItem icon={Calendar} value={profile.age} label="Age" />
               <DetailItem icon={Ruler} value={profile.height} label="Height" />
-              <DetailItem icon={User} value={profile.caste} label="Caste" />
+              <DetailItem icon={User} value={profile.caste} label="Caste (reach out only if no concern)" />
               <DetailItem icon={MapPin} value={profile.raisedIn} label="Raised in" />
               <DetailItem icon={Navigation} value={profile.currentLocation} label="Current Location" />
               <DetailItem icon={Plane} value={profile.movedToUs} subValue="Moved to US" />
               <DetailItem icon={Briefcase} value={profile.company} subValue={profile.jobTitle} />
+              <DetailItem icon={Globe} value={profile.visaStatus} label="Visa Status" />
               <DetailItem icon={GraduationCap} value={profile.educationDegree} subValue={profile.educationUni} />
               <DetailItem icon={Languages} value={profile.languages} label="Languages" />
-              <DetailItem icon={Globe} value={profile.visaStatus} label="Visa Status" />
             </div>
 
             {/* BOTTOM CENTER: READ STORY BUTTON */}
-            <div className="flex flex-col gap-6 items-center mt-6">
+            <div className="flex flex-col gap-3 items-center mt-6 pb-8">
+              <p className="text-gray-400/70 text-xs italic">Open in desktop for better experience</p>
               <button
                 onClick={scrollToJourney}
                 className="relative group overflow-hidden bg-gradient-to-r from-[#BF953F] to-[#B38728] text-black font-bold py-3 px-10 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.7)] transition-all duration-300 w-fit animate-pulse-slow"
@@ -257,7 +259,7 @@ export default function ShaadiLanding() {
         <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md">
           <div>
             <h3 className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#AA771C] bg-clip-text text-transparent text-xs font-serif italic tracking-widest mb-1">
-              Professional Saga
+              &nbsp;
             </h3>
             <h2 className="text-3xl font-serif text-white tracking-wide">
               The <span className="text-[#D4AF37] italic">Journey</span> So Far
@@ -271,12 +273,12 @@ export default function ShaadiLanding() {
 
         <div className="text-center my-8 relative z-20 px-4">
           <p className="text-gray-300 max-w-2xl mx-auto font-serif text-base sm:text-xl leading-relaxed">
-            Ex-<span className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent font-bold">McKinsey</span> Supply Chain Strategy Consultant with <span className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent font-bold">5+ years</span> experience in India, UK, US in the <span className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent font-bold">Retail</span> industry.
+            Ex-<span className="bg-gradient-to-l from-[#FFD700] via-[#FFF8DC] to-[#DAA520] bg-clip-text text-transparent font-bold">McKinsey</span> Supply Chain Strategy Consultant with <span className="bg-gradient-to-l from-[#FFD700] via-[#FFF8DC] to-[#DAA520] bg-clip-text text-transparent font-bold">5+ years</span> experience in India, UK, US in the <span className="bg-gradient-to-l from-[#FFD700] via-[#FFF8DC] to-[#DAA520] bg-clip-text text-transparent font-bold">Retail</span> industry.
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto px-4 pb-32 relative z-10 w-full">
-          <div className="absolute left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 hidden md:block bg-white/10" />
+          <div className="absolute left-1/2 top-0 w-[2px] h-[1850px] -translate-x-1/2 bg-white/10" />
 
           <div className="space-y-8 animate-in slide-in-from-bottom-20 duration-1000">
             {TIMELINE_DATA.map((item, idx) => {
@@ -303,7 +305,7 @@ export default function ShaadiLanding() {
                           <h3 className="text-lg font-serif text-white mb-0.5 leading-tight">{item.role}</h3>
                           <div className="flex items-center gap-1.5 mb-2">
                             <Briefcase size={11} className="text-gray-500" />
-                            <span className="text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent">
+                            <span className="text-sm font-bold uppercase tracking-wider bg-gradient-to-l from-[#FFD700] via-[#FFF8DC] to-[#DAA520] bg-clip-text text-transparent">
                               {item.org}
                             </span>
                           </div>
@@ -342,18 +344,18 @@ export default function ShaadiLanding() {
 
                   <div
                     onClick={() => setSelectedFactItem(item)}
-                    className="relative flex-shrink-0 z-10 hidden md:block cursor-pointer group"
+                    className="relative flex-shrink-0 z-10 cursor-pointer group"
                   >
-                    <div className="w-14 h-14 rounded-full bg-black border-[3px] border-[#D4AF37] p-2 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-transform group-hover:scale-110">
+                    <div className="w-14 h-14 rounded-full bg-black border-[3px] border-[#D4AF37] p-2 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-transform group-hover:scale-110 animate-pulse hover:animate-none">
                       <img
-                        src={`https://logo.clearbit.com/${item.domain}`}
+                        src={item.logo || `https://logo.clearbit.com/${item.domain}`}
                         alt="logo"
                         className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
                         onError={(e) => { e.target.src = 'https://via.placeholder.com/50/000000/FFFFFF?text=' + item.org[0] }}
                       />
                     </div>
                     <div className={`absolute -top-7 left-1/2 -translate-x-1/2 bg-[#D4AF37] text-black text-[9px] px-2 py-0.5 rounded whitespace-nowrap font-bold pointer-events-none font-serif transition-opacity ${idx === 0 ? 'opacity-100 animate-bounce' : 'opacity-0 group-hover:opacity-100'}`}>
-                      👆 Click Me!
+                      Click Logo
                     </div>
                   </div>
                   <div className="flex-1 hidden md:block" />
@@ -364,7 +366,7 @@ export default function ShaadiLanding() {
 
           <div className="mt-16 border-t border-[#D4AF37]/20 pt-12">
             <h3 className="text-center text-2xl font-serif text-white mb-8">
-              Arsenal & <span className="text-[#D4AF37] italic">Accolades</span>
+              Skills & <span className="text-[#D4AF37] italic">Certifications</span>
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-4 hover:border-[#D4AF37]/50 transition-colors">
@@ -397,27 +399,32 @@ export default function ShaadiLanding() {
             </div>
           </div>
         </div>
-        <div className="h-24" />
+        <div className="h-1" />
       </div>
 
       {/* ==================== PAGE 3: HOROSCOPE ==================== */}
       <div ref={horoscopeSectionRef} className="relative w-full min-h-screen snap-start">
-        <HoroscopeSection />
+        <HoroscopeSection scrollToTop={scrollToTop} />
       </div>
 
       {/* ==================== PAGE 4: ABOUT ME ==================== */}
       <div ref={aboutSectionRef} className="relative w-full min-h-screen snap-start">
-        <AboutMeSection />
+        <AboutMeSection scrollToTop={scrollToTop} />
       </div>
 
       {/* ==================== PAGE 5: FAMILY ==================== */}
       <div ref={familySectionRef} className="relative w-full min-h-screen snap-start">
-        <FamilySection profile={profile} />
+        <FamilySection profile={profile} scrollToTop={scrollToTop} />
       </div>
 
       {/* ==================== PAGE 6: GALLERY ==================== */}
       <div ref={gallerySectionRef} className="relative w-full min-h-screen snap-start">
-        <GallerySection profile={{...profile, galleryImages}} />
+        <GallerySection profile={{...profile, galleryImages}} scrollToTop={scrollToTop} />
+      </div>
+
+      {/* ==================== PAGE 7: FAMILY GALLERY ==================== */}
+      <div ref={familyGallerySectionRef} className="relative w-full min-h-screen snap-start">
+        <FamilyGallerySection scrollToTop={scrollToTop} />
       </div>
 
       <ProfileEditModal
