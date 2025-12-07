@@ -23,7 +23,7 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  ArrowUp, Calculator, Clock, Pizza, Scale, Gem, Plane, ChefHat, Cpu, Users} from 'lucide-react';
+  ArrowUp, Calculator, Clock, Pizza, Scale, Gem, Plane, ChefHat, Cpu, Users, Instagram, MessageCircle} from 'lucide-react';
 
 import { CompatibilityTab , NetworkBackground } from './components';
 import { TRANSLATIONS, ASTRO_DATA, ASTRO_DATA_TE, PLACEHOLDER_GALLERY, MARRIAGE_DATA, HOROSCOPE_PROFILE, MARRIAGE_DATA_TE, HOROSCOPE_PROFILE_TE } from './constants';
@@ -249,7 +249,6 @@ export function HoroscopeSection({ scrollToTop }) {
   return (
     <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-hidden">
       <NetworkBackground />
-      <div className="absolute inset-0 z-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cross-stripes.png')] pointer-events-none" />
       <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-6 lg:-mx-12 mb-4">
         <div>
           <h2 className="text-3xl font-serif text-white tracking-wide">
@@ -384,7 +383,6 @@ export function AboutMeSection({ scrollToTop }) {
   return (
     <div className="relative w-full min-h-screen bg-[#050505] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-y-auto snap-start font-sans">
       <NetworkBackground />
-      <div className="absolute inset-0 z-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none" />
 
       <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-6 lg:-mx-12 mb-6">
         <div>
@@ -590,9 +588,6 @@ export function FamilySection({ profile, scrollToTop }) {
   return (
     <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-6 lg:p-12 overflow-hidden snap-start font-sans">
       <NetworkBackground />
-      {/* Background texture */}
-      <div className="absolute inset-0 z-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] pointer-events-none" />
-      
       {/* Ambient glow effects */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
@@ -779,9 +774,6 @@ export function GallerySection({ profile, scrollToTop }) {
   return (
     <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-6 lg:p-12 overflow-hidden snap-start font-sans">
       <NetworkBackground />
-      {/* Background texture */}
-      <div className="absolute inset-0 z-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diamond-upholstery.png')] pointer-events-none" />
-      
       {/* Ambient glow effects */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
@@ -797,6 +789,26 @@ export function GallerySection({ profile, scrollToTop }) {
           <span>Back to Top</span>
           <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
         </button>
+      </div>
+
+      {/* Photo Disclaimer */}
+      <div className="relative z-10 max-w-[1600px] mx-auto w-full mb-6 px-2">
+        <div className="bg-black/40 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-gray-300 text-sm text-center sm:text-left">
+            <span className="text-[#D4AF37]">📸 Heads up!</span> I've lost some weight, so I might look different across photos. 
+            <br className="sm:hidden" />
+            Also, all fake candids — I don't usually look at cameras 😅
+          </p>
+          <a 
+            href="https://www.instagram.com/bommenahemanth/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:scale-105 transition-transform whitespace-nowrap"
+          >
+            <Instagram className="w-4 h-4" />
+            Latest on Instagram
+          </a>
+        </div>
       </div>
 
       <div className="relative z-10 flex-grow overflow-y-auto pb-12 max-w-[1600px] mx-auto w-full">
@@ -907,7 +919,6 @@ const FAMILY_GALLERY_IMAGES = [
   '/marryme/images/family/family3.jpg',
   '/marryme/images/family/family4.jpg',
   '/marryme/images/family/family5.jpg',
-  '/marryme/images/family/family6.jpg',
   '/marryme/images/family/IMG_3929.jpg',
   '/marryme/images/family/IMG_8151.jpg',
   '/marryme/images/family/IMG_8852.jpg',
@@ -924,9 +935,6 @@ export function FamilyGallerySection({ scrollToTop }) {
   return (
     <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-6 lg:p-12 overflow-hidden snap-start font-sans">
       <NetworkBackground />
-      {/* Background texture */}
-      <div className="absolute inset-0 z-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diamond-upholstery.png')] pointer-events-none" />
-      
       {/* Ambient glow effects */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
@@ -942,6 +950,26 @@ export function FamilyGallerySection({ scrollToTop }) {
           <span>Back to Top</span>
           <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
         </button>
+      </div>
+
+      {/* Photo Disclaimer */}
+      <div className="relative z-10 max-w-[1600px] mx-auto w-full mb-6 px-2">
+        <div className="bg-black/40 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-gray-300 text-sm text-center sm:text-left">
+            <span className="text-[#D4AF37]">📸 Heads up!</span> I've lost some weight, so I might look different across photos. 
+            <br className="sm:hidden" />
+            Also, all fake candids — I don't usually look at cameras 😅
+          </p>
+          <a 
+            href="https://www.instagram.com/bommenahemanth/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:scale-105 transition-transform whitespace-nowrap"
+          >
+            <Instagram className="w-4 h-4" />
+            Latest on Instagram
+          </a>
+        </div>
       </div>
 
       <div className="relative z-10 flex-grow overflow-y-auto pb-12 max-w-[1600px] mx-auto w-full">
@@ -1041,6 +1069,143 @@ export function FamilyGallerySection({ scrollToTop }) {
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+// --- Contact / CTA Section ---
+export function ContactSection({ scrollToTop }) {
+  const whatsappMessage = encodeURIComponent(
+    `Namaste Srinivas Garu 🙏\n\nWe came across Hemanth's profile and found it very interesting.\n\nWe would like to take this conversation forward.\n\nWarm regards`
+  );
+  
+  const fatherWhatsApp = `https://wa.me/919000196092?text=${whatsappMessage}`;
+  const hemanthInstagram = "https://www.instagram.com/bommenahemanth/";
+  const hemanthLinkedIn = "https://www.linkedin.com/in/bommena-hemanth-2a2834118/";
+  
+  return (
+    <div className="relative w-full min-h-screen bg-[#080808] flex flex-col items-center justify-center p-6 lg:p-12 overflow-hidden snap-start font-sans">
+      <NetworkBackground />
+      
+      {/* Ambient glow effects */}
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
+      
+      {/* Back to Top header */}
+      <div className="absolute top-0 left-0 right-0 z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent backdrop-blur-md">
+        <div>
+          <h2 className="text-3xl font-serif text-white tracking-wide">
+            Let's <span className="text-[#D4AF37] italic">Connect</span>
+          </h2>
+          <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">The Next Step</p>
+        </div>
+        <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20">
+          <span>Back to Top</span>
+          <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
+        </button>
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 max-w-2xl mx-auto text-center space-y-8">
+        
+        {/* Made it so far message */}
+        <div className="space-y-4">
+          <h3 className="text-4xl sm:text-5xl font-serif">
+            <span className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent">Made it this far?</span> <span className="text-[#D4AF37]">✨</span>
+          </h3>
+          <p className="text-gray-300 text-lg">
+            If you liked my profile and want to take things forward, feel free to reach out!
+          </p>
+        </div>
+
+        {/* Social Buttons */}
+        <div className="space-y-4">
+          <p className="text-gray-400 text-sm uppercase tracking-wider">Connect with Hemanth</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a 
+              href={hemanthInstagram}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+            >
+              <Instagram className="w-4 h-4" />
+              Instagram
+            </a>
+            <a 
+              href={hemanthLinkedIn}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#0A66C2] text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a 
+              href="https://www.facebook.com/bommenahemanth"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#1877F2] text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </a>
+            <a 
+              href="https://wa.me/918124269822?text=Hey%20Hemanth!%20%F0%9F%91%8B%20Saw%20your%20profile%20and%20would%20love%20to%20connect!"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#25D366] text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a 
+              href="tel:+14699967434"
+              className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+              title="Call US Number"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              Call (US)
+            </a>
+            <a 
+              href="facetime-audio:bommenahemanth@gmail.com"
+              className="flex items-center gap-2 bg-gray-700 text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform text-sm"
+              title="FaceTime Audio"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+              FaceTime
+            </a>
+          </div>
+        </div>
+
+        {/* Talk to Father */}
+        <div className="pt-6 border-t border-white/10 space-y-3">
+          <p className="text-gray-400 text-sm">
+            Want to speak with family? Connect with my father directly
+          </p>
+          <a 
+            href={fatherWhatsApp}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform shadow-lg shadow-[#25D366]/20"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Message Father on WhatsApp
+          </a>
+        </div>
+
+        {/* Farewell section */}
+        <div className="pt-8 mt-4">
+          <div className="bg-gradient-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20 rounded-2xl p-6 space-y-3">
+            <p className="text-gray-300 text-lg font-light">
+              Didn't quite click? <span className="text-[#D4AF37]">No worries!</span> ✨
+            </p>
+            <p className="text-gray-400 text-base font-light italic">
+              Wishing you all the best in your search.<br/>
+              May you find your perfect match soon! 💫
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
