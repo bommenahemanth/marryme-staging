@@ -688,7 +688,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
               Instagram
             </a>
           </div>
-          <p className="text-gray-400 text-xs mb-4 text-center"><span className="text-[#D4AF37]">Heads up!</span> I've lost some weight, so I might look different across photos. Also, all fake candids!</p>
+          <p className="text-gray-400 text-xs mb-4 text-center"><span className="text-[#D4AF37]">Heads up!</span> I've lost some weight, so I might look different across photos. Also, all fake candids! Check out my Instagram for latest pics.</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 gallery-stagger">
             {images.map((img, index) => (
               <div
@@ -1152,7 +1152,7 @@ export function GallerySection({ profile, scrollToTop }) {
           <p className="text-gray-300 text-sm text-center sm:text-left">
             <span className="text-[#D4AF37]">Heads up!</span> I've lost some weight, so I might look different across photos.
             <br className="sm:hidden" />
-            Also, all fake candids, I don't usually look at cameras
+            Also, all fake candids! Check out my Instagram for latest pics.
           </p>
           <a 
             href="https://www.instagram.com/bommenahemanth/" 

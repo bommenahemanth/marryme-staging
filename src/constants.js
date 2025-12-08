@@ -91,7 +91,7 @@ export const DEFAULT_PROFILE = {
   company: "Walmart, Ex-McKinsey",
   educationDegree: "MSc Business Analytics, 2021",
   educationUni: "#34 QS Uni of Manchester (Ivy League Level), UK",
-  languages: "Telugu, English, Bhayya thoda pyaz dhalo",
+  languages: "Telugu, English, Bhaiya thoda pyaaz daalo",
   visaStatus: "H1B - i140 Started",
   photoBase64: "./images/mallorca.jpg",
   dadPhoto: "./images/father.jpg",

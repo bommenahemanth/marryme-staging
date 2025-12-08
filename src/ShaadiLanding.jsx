@@ -303,7 +303,7 @@ export default function ShaadiLanding() {
       </div>
 
       {/* ==================== PAGE 1: PROFILE ==================== */}
-      <div ref={profileSectionRef} data-section="profile" className="relative w-full min-h-screen md:h-screen flex flex-col overflow-visible md:overflow-hidden snap-start">
+      <div ref={profileSectionRef} data-section="profile" className="relative w-full min-h-[100dvh] flex flex-col overflow-visible snap-start">
         <div
           className="absolute inset-0 z-0 bg-cover bg-no-repeat transition-all duration-700"
           style={{
@@ -314,15 +314,15 @@ export default function ShaadiLanding() {
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black via-black/80 to-transparent/30" />
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-black/50" />
 
-        <div className="relative z-20 w-full px-6 md:px-8 lg:px-12 h-full flex flex-col justify-center">
+        <div className="relative z-20 w-full px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-12 flex-1 flex flex-col justify-center">
 
 
 
           
           {/* CENTER: PROFILE CONTENT */}
-          <div className="flex flex-col justify-center max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto md:mx-0 px-4 sm:px-0 animate-fadeInUp">
-            <div className="mb-6 group relative">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif tracking-tight leading-none mb-2 whitespace-nowrap">
+          <div className="flex flex-col justify-center max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto md:mx-0 animate-fadeInUp">
+            <div className="mb-4 sm:mb-6 group relative">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif tracking-tight leading-tight mb-2">
                 <TypeWriter 
                   text={`${profile.firstName} ${profile.lastName}`}
                   speed={100}
@@ -527,9 +527,14 @@ export default function ShaadiLanding() {
                     <div className="w-14 h-14 rounded-full bg-black border-[3px] border-[#D4AF37] p-2 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-transform group-hover:scale-110 animate-pulse hover:animate-none">
                       <img
                         src={item.logo || `https://logo.clearbit.com/${item.domain}`}
-                        alt="logo"
+                        alt={item.org}
                         className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-                        onError={(e) => { e.target.src = 'https://via.placeholder.com/50/000000/FFFFFF?text=' + item.org[0] }}
+                        loading="lazy"
+                        onError={(e) => { 
+                          e.target.onerror = null;
+                          e.target.style.display = 'none';
+                          e.target.parentElement.innerHTML = `<span class="text-[#D4AF37] font-bold text-lg">${item.org[0]}</span>`;
+                        }}
                       />
                     </div>
                     <div className={`absolute -top-7 left-1/2 -translate-x-1/2 bg-[#D4AF37] text-black text-[9px] px-2 py-0.5 rounded whitespace-nowrap font-bold pointer-events-none font-serif transition-opacity ${idx === 0 ? 'opacity-100 animate-bounce' : 'opacity-0 group-hover:opacity-100'}`}>
