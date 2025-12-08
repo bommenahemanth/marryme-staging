@@ -2,21 +2,11 @@
 
 // Your actual photos - renamed for URL compatibility
 export const PLACEHOLDER_GALLERY = [
-  "./images/1.jpg",
-  "./images/photo1.jpg",
-  "./images/photo2.jpg",
-  "./images/photo3.jpg",
-  "./images/photo4.jpg",
-  "./images/photo5.jpg",
-  "./images/photo6.jpg",
-  "./images/photo7.jpg",
-  "./images/photo8.jpg",
-  "./images/photo9.jpg",
-  "./images/photo10.jpg",
-  "./images/photo11.jpg",
-  "./images/photo12.jpg",
-  "./images/photo13.jpg",
-  "./images/photo14.jpg"
+  "./images/gallery-3.jpg",
+  "./images/gallery-5.jpg",
+  "./images/gallery-4.jpg",
+  "./images/gallery-2.jpg",
+  "./images/gallery-1.jpg"
 ];
 
 export const ALL_CITIES = [
@@ -257,7 +247,7 @@ export const TRANSLATIONS = {
   en: {
     title: "Vedic Horoscope",
     subtitle: "Jataka Chakra Analysis",
-    tabs: ["Birth Chart", "Planets", "Marriage", "Compatibility"],
+    tabs: ["Birth Chart", "Marriage", "Compatibility"],
     basicDetails: "Basic Details",
     birthChart: "Birth Chart",
     planets: "Planets",
@@ -287,7 +277,7 @@ export const TRANSLATIONS = {
   te: {
     title: "వేద జ్యోతిష్యం",
     subtitle: "జాతక చక్ర విశ్లేషణ",
-    tabs: ["జాతక చక్రం", "గ్రహాలు", "వివాహం", "పొంతన"],
+    tabs: ["జాతక చక్రం", "వివాహం", "పొంతన"],
     basicDetails: "ప్రాథమిక వివరాలు",
     birthChart: "జాతక చక్రం",
     planets: "గ్రహాలు",
@@ -315,6 +305,71 @@ export const TRANSLATIONS = {
     analyze: "పొంతన విశ్లేషించండి"
   }
 };
+
+// Zodiac signs mapping for Rasi chart
+export const ZODIAC_SIGNS = {
+  en: {
+    pisces: "Pisces", aries: "Aries", taurus: "Taurus", gemini: "Gemini",
+    cancer: "Cancer", leo: "Leo", virgo: "Virgo", libra: "Libra",
+    scorpio: "Scorpio", sagittarius: "Sagittarius", capricorn: "Capricorn", aquarius: "Aquarius"
+  },
+  te: {
+    pisces: "మీనం", aries: "మేషం", taurus: "వృషభం", gemini: "మిథునం",
+    cancer: "కర్కాటకం", leo: "సింహం", virgo: "కన్య", libra: "తుల",
+    scorpio: "వృశ్చికం", sagittarius: "ధనస్సు", capricorn: "మకరం", aquarius: "కుంభం"
+  }
+};
+
+// Planet names for chart
+export const PLANET_NAMES = {
+  en: {
+    sun: "Sun", moon: "Moon", mars: "Mars", mercury: "Mercury",
+    jupiter: "Jupiter", venus: "Venus", saturn: "Saturn", rahu: "Rahu", ketu: "Ketu",
+    asc: "ASC", ex: "Ex", n: "N"
+  },
+  te: {
+    sun: "సూర్య", moon: "చంద్ర", mars: "కుజ", mercury: "బుధ",
+    jupiter: "గురు", venus: "శుక్ర", saturn: "శని", rahu: "రాహు", ketu: "కేతు",
+    asc: "లగ్నం", ex: "ఉచ్చ", n: "నీచ"
+  }
+};
+
+// Rasi chart data with positions
+export const RASI_CHART_DATA = [
+  { sign: "pisces", planets: ["venus", "ketu"], venusExalted: true },
+  { sign: "aries", planets: ["sun"], sunExalted: true },
+  { sign: "taurus", planets: ["mercury"] },
+  { sign: "gemini", planets: [] },
+  { sign: "aquarius", planets: ["saturn"] },
+  { sign: "cancer", planets: ["asc", "moon"], isLagna: true },
+  { sign: "capricorn", planets: ["jupiter"], jupiterDebilitated: true },
+  { sign: "leo", planets: [] },
+  { sign: "sagittarius", planets: [] },
+  { sign: "scorpio", planets: [] },
+  { sign: "libra", planets: [] },
+  { sign: "virgo", planets: ["mars", "rahu"] }
+];
+
+// Chart key highlights for simple explanation
+export const CHART_HIGHLIGHTS = {
+  en: [
+    { icon: "sun", title: "Sun in Aries (Exalted)", desc: "Strong leadership, ambition, career authority", color: "yellow" },
+    { icon: "moon", title: "Moon in Cancer (Own Sign)", desc: "Emotional intelligence, intuition, nurturing nature", color: "blue" },
+    { icon: "venus", title: "Venus in Pisces (Exalted)", desc: "Deeply romantic, idealistic, spiritual partner", color: "pink" },
+    { icon: "jupiter", title: "Jupiter in Capricorn", desc: "Mature spouse potential, delayed but lasting marriage", color: "orange" },
+    { icon: "saturn", title: "Saturn in Aquarius (Own Sign)", desc: "Transformation, long-term stability", color: "purple" },
+    { icon: "mars", title: "Mars in Virgo", desc: "Analytical, hardworking, strategic approach", color: "red" }
+  ],
+  te: [
+    { icon: "sun", title: "సూర్యుడు మేషంలో (ఉచ్చ)", desc: "బలమైన నాయకత్వం, ఆశయం, వృత్తి అధికారం", color: "yellow" },
+    { icon: "moon", title: "చంద్రుడు కర్కాటకంలో (స్వగృహం)", desc: "భావోద్వేగ మేధస్సు, అంతర్దృష్టి, పోషక స్వభావం", color: "blue" },
+    { icon: "venus", title: "శుక్రుడు మీనంలో (ఉచ్చ)", desc: "లోతైన ప్రేమ, ఆదర్శవాద, ఆధ్యాత్మిక భాగస్వామి", color: "pink" },
+    { icon: "jupiter", title: "గురువు మకరంలో", desc: "పరిణత భాగస్వామి, ఆలస్యమైన కానీ శాశ్వత వివాహం", color: "orange" },
+    { icon: "saturn", title: "శని కుంభంలో (స్వగృహం)", desc: "పరివర్తన, దీర్ఘకాలిక స్థిరత్వం", color: "purple" },
+    { icon: "mars", title: "కుజుడు కన్యలో", desc: "విశ్లేషణాత్మక, కష్టపడే, వ్యూహాత్మక విధానం", color: "red" }
+  ]
+};
+
 
 // ===== COMPLETE HOROSCOPE DATA =====
 export const HOROSCOPE_PROFILE = {
@@ -349,15 +404,15 @@ export const ASTRO_DATA = {
     manglik: "Mild (Neutralized by Venus)"
   },
   planets: [
-    { name: "Sun ☀️", sign: "Aries ♈", house: 10, degree: "28°", nature: "Exalted", effect: "Strong leadership, ambition, career authority" },
+    { name: "Sun ☀️", sign: "Aries", house: 10, degree: "28°", nature: "Exalted", effect: "Strong leadership, ambition, career authority" },
     { name: "Moon 🌙", sign: "Cancer ♋", house: 1, degree: "9°", nature: "Own Sign", effect: "Emotional intelligence, intuition, nurturing" },
-    { name: "Mars ♂️", sign: "Virgo ♍", house: 3, degree: "12°", nature: "Neutral", effect: "Analytical, hardworking, strategic, courageous" },
-    { name: "Mercury ☿", sign: "Taurus ♉", house: 11, degree: "4°", nature: "Benefic", effect: "Practical communication, business mindset" },
+    { name: "Mars ♂️", sign: "Virgo", house: 3, degree: "12°", nature: "Neutral", effect: "Analytical, hardworking, strategic, courageous" },
+    { name: "Mercury ☿", sign: "Taurus", house: 11, degree: "4°", nature: "Benefic", effect: "Practical communication, business mindset" },
     { name: "Jupiter ♃", sign: "Capricorn ♑", house: 7, degree: "6°", nature: "Debilitated", effect: "Mature spouse, delayed but lasting marriage" },
-    { name: "Venus ♀️", sign: "Pisces ♓", house: 9, degree: "26°", nature: "Exalted ✨", effect: "Deeply romantic, idealistic, spiritual partner" },
+    { name: "Venus ♀️", sign: "Pisces", house: 9, degree: "26°", nature: "Exalted ✨", effect: "Deeply romantic, idealistic, spiritual partner" },
     { name: "Saturn ♄", sign: "Aquarius ♒", house: 8, degree: "8°", nature: "Own Sign", effect: "Transformation, delays but long-term stability" },
-    { name: "Rahu ☊", sign: "Virgo ♍", house: 3, degree: "24°", nature: "Shadow", effect: "Ambition, communication skill, technical aptitude" },
-    { name: "Ketu ☋", sign: "Pisces ♓", house: 9, degree: "24°", nature: "Shadow", effect: "Spiritual, philosophical, past-life wisdom" }
+    { name: "Rahu ☊", sign: "Virgo", house: 3, degree: "24°", nature: "Shadow", effect: "Ambition, communication skill, technical aptitude" },
+    { name: "Ketu ☋", sign: "Pisces", house: 9, degree: "24°", nature: "Shadow", effect: "Spiritual, philosophical, past-life wisdom" }
   ],
   houses: [
     { id: 1, sign: "Cancer", theme: "Self & Personality", planet: "Moon (Own Sign)", meaning: "Emotional, intuitive, protective, family-centered" },
@@ -391,18 +446,18 @@ export const MARRIAGE_DATA = {
   partnerTraits: {
     title: "Expected Partner Traits",
     traits: [
-      "🧘 Spiritual and calm nature",
-      "💝 Loyal and emotionally mature",
+      "Spiritual and calm nature",
+      "Loyal and emotionally mature",
       "Well-educated, possibly abroad",
-      "🎨 Artistic or creative interests",
-      "🌙 Compassionate and nurturing",
-      "⚖️ Balanced and responsible"
+      "Artistic or creative interests",
+      "Compassionate and nurturing",
+      "Balanced and responsible"
     ]
   },
   compatibleSigns: {
     title: "Compatible Moon Signs",
-    best: ["Pisces ♓", "Taurus ♉", "Virgo ♍", "Scorpio ♏"],
-    avoid: ["Aries ♈", "Leo ♌", "Sagittarius ♐"],
+    best: ["Pisces", "Taurus", "Virgo", "Scorpio"],
+    avoid: ["Aries", "Leo", "Sagittarius"],
     reason: "Water/Earth signs match Cancer's emotional nature; Fire signs may be too intense"
   },
   navamsa: {

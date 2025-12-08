@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Camera,
   ChevronDown,
@@ -46,8 +46,7 @@ import {
   HoroscopeSection,
   AboutMeSection,
   FamilySection,
-  GallerySection,
-  FamilyGallerySection,
+
   ContactSection
 } from './sections';
 
@@ -68,8 +67,6 @@ export default function ShaadiLanding() {
   const horoscopeSectionRef = useRef(null);
   const aboutSectionRef = useRef(null);
   const familySectionRef = useRef(null);
-  const gallerySectionRef = useRef(null);
-  const familyGallerySectionRef = useRef(null);
 
   const handleGalleryReplace = async (e, indexStr) => {
     if (!e.target.files || e.target.files.length === 0 || indexStr === undefined) return;
@@ -131,6 +128,53 @@ export default function ShaadiLanding() {
     profileSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Scroll progress and section navigation
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState(0);
+  const containerRef = useRef(null);
+  
+  const sections = [
+    { id: 'profile', label: 'Profile' },
+    { id: 'journey', label: 'Journey' },
+    { id: 'horoscope', label: 'Horoscope' },
+    { id: 'about', label: 'About' },
+    { id: 'family', label: 'Family' },
+    { id: 'contact', label: 'Connect' }
+  ];
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight - container.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      setScrollProgress(progress);
+
+      // Determine active section
+      const sectionElements = container.querySelectorAll('[data-section]');
+      sectionElements.forEach((el, idx) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+          setActiveSection(idx);
+        }
+      });
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (idx) => {
+    const container = containerRef.current;
+    if (!container) return;
+    const sectionElements = container.querySelectorAll('[data-section]');
+    if (sectionElements[idx]) {
+      sectionElements[idx].scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   if (loading) {
     return (
       <div className="h-screen w-full bg-black flex items-center justify-center">
@@ -142,10 +186,59 @@ export default function ShaadiLanding() {
   }
 
   return (
-    <div className="h-screen w-full overflow-y-scroll bg-black text-white font-sans selection:bg-[#D4AF37] selection:text-black scroll-smooth snap-y snap-proximity md:snap-mandatory">
+    <div ref={containerRef} className="h-screen w-full overflow-y-scroll bg-black text-white font-sans selection:bg-[#D4AF37] selection:text-black scroll-smooth snap-y snap-proximity md:snap-mandatory">
+      
+      {/* Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-black/50 z-[100]">
+        <div 
+          className="h-full bg-gradient-to-r from-[#D4AF37] via-[#FCF6BA] to-[#D4AF37] transition-all duration-150"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
+      {/* Section Dots Navigation - Hidden on mobile */}
+      <nav className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col gap-3">
+        {sections.map((section, idx) => (
+          <button
+            key={section.id}
+            onClick={() => scrollToSection(idx)}
+            className="group relative flex items-center justify-end"
+            aria-label={`Go to ${section.label}`}
+          >
+            <span className={`absolute right-6 px-2 py-1 rounded text-xs font-medium whitespace-nowrap transition-all duration-200 ${
+              activeSection === idx 
+                ? 'opacity-100 bg-[#D4AF37] text-black' 
+                : 'opacity-0 group-hover:opacity-100 bg-white/10 text-white'
+            }`}>
+              {section.label}
+            </span>
+            <span className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
+              activeSection === idx 
+                ? 'bg-[#D4AF37] border-[#D4AF37] scale-125' 
+                : 'bg-transparent border-white/40 hover:border-[#D4AF37] hover:scale-110'
+            }`} />
+          </button>
+        ))}
+      </nav>
+
+      {/* Mobile Scroll Progress Dots - Only visible on mobile */}
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[100] flex md:hidden gap-2 bg-black/60 backdrop-blur-sm px-3 py-2 rounded-full border border-white/10">
+        {sections.map((section, idx) => (
+          <button
+            key={section.id}
+            onClick={() => scrollToSection(idx)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              activeSection === idx 
+                ? 'bg-[#D4AF37] w-4' 
+                : 'bg-white/30'
+            }`}
+            aria-label={`Go to ${section.label}`}
+          />
+        ))}
+      </div>
 
       {/* ==================== PAGE 1: PROFILE ==================== */}
-      <div ref={profileSectionRef} className="relative w-full min-h-screen md:h-screen flex flex-col overflow-visible md:overflow-hidden snap-start">
+      <div ref={profileSectionRef} data-section="profile" className="relative w-full min-h-screen md:h-screen flex flex-col overflow-visible md:overflow-hidden snap-start">
         <div
           className="absolute inset-0 z-0 bg-cover bg-no-repeat transition-all duration-700"
           style={{
@@ -274,7 +367,7 @@ export default function ShaadiLanding() {
       )}
 
       {/* ==================== PAGE 2: JOURNEY (VERTICAL) ==================== */}
-      <div ref={journeySectionRef} className="relative w-full flex flex-col bg-black snap-start overflow-y-auto">
+      <div ref={journeySectionRef} data-section="journey" className="relative w-full flex flex-col bg-black snap-start overflow-y-auto">
         <NetworkBackground />
 
         <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md">
@@ -390,32 +483,22 @@ export default function ShaadiLanding() {
       </div>
 
       {/* ==================== PAGE 3: HOROSCOPE ==================== */}
-      <div ref={horoscopeSectionRef} className="relative w-full min-h-screen snap-start">
+      <div ref={horoscopeSectionRef} data-section="horoscope" className="relative w-full min-h-screen snap-start">
         <HoroscopeSection scrollToTop={scrollToTop} />
       </div>
 
       {/* ==================== PAGE 4: ABOUT ME ==================== */}
-      <div ref={aboutSectionRef} className="relative w-full min-h-screen snap-start">
-        <AboutMeSection scrollToTop={scrollToTop} />
+      <div ref={aboutSectionRef} data-section="about" className="relative w-full min-h-screen snap-start">
+        <AboutMeSection scrollToTop={scrollToTop} galleryImages={galleryImages} />
       </div>
 
       {/* ==================== PAGE 5: FAMILY ==================== */}
-      <div ref={familySectionRef} className="relative w-full min-h-screen snap-start">
+      <div ref={familySectionRef} data-section="family" className="relative w-full snap-start">
         <FamilySection profile={profile} scrollToTop={scrollToTop} />
       </div>
 
-      {/* ==================== PAGE 6: GALLERY ==================== */}
-      <div ref={gallerySectionRef} className="relative w-full min-h-screen snap-start">
-        <GallerySection profile={{...profile, galleryImages}} scrollToTop={scrollToTop} />
-      </div>
-
-      {/* ==================== PAGE 7: FAMILY GALLERY ==================== */}
-      <div ref={familyGallerySectionRef} className="relative w-full min-h-screen snap-start">
-        <FamilyGallerySection scrollToTop={scrollToTop} />
-      </div>
-
-      {/* ==================== PAGE 8: CONTACT / CTA ==================== */}
-      <div className="relative w-full min-h-screen snap-start">
+      {/* ==================== PAGE 7: CONTACT / CTA ==================== */}
+      <div data-section="contact" className="relative w-full min-h-screen snap-start">
         <ContactSection scrollToTop={scrollToTop} />
       </div>
 

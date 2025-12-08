@@ -258,7 +258,7 @@ function FactsModal({ item, onClose }) {
   );
 }
 
-const CompatibilityTab = ({ t }) => {
+const CompatibilityTab = ({ t, lang = "en" }) => {
   const [partnerDetails, setPartnerDetails] = useState({ name: '', date: '', time: '', city: '' });
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState(null);
@@ -286,7 +286,7 @@ const CompatibilityTab = ({ t }) => {
     if (!partnerDetails.name || !partnerDetails.date || !partnerDetails.city) return;
     setAnalyzing(true);
 
-    const analysis = generateDetailedAnalysis(partnerDetails.date, partnerDetails.city, partnerDetails.name);
+    const analysis = generateDetailedAnalysis(partnerDetails.date, partnerDetails.city, partnerDetails.name, lang);
 
     setTimeout(() => {
       setResult({
@@ -314,22 +314,22 @@ const CompatibilityTab = ({ t }) => {
           </h4>
           <div className="space-y-4">
             <div>
-              <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Name</label>
+              <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Full Name</label>
               <input
                 type="text"
                 className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] outline-none transition-colors"
-                placeholder="Partner's Name"
+                placeholder="Partner's Full Name"
                 value={partnerDetails.name}
                 onChange={e => setPartnerDetails({ ...partnerDetails, name: e.target.value })}
               />
             </div>
             <div className="relative">
-              <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">City</label>
+              <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Place of Birth</label>
               <div className="relative">
                 <input
                   type="text"
                   className="w-full bg-black border border-white/20 rounded-lg p-3 pl-10 text-white focus:border-[#D4AF37] outline-none transition-colors"
-                  placeholder="Start typing..."
+                  placeholder="Enter birth place..."
                   value={partnerDetails.city}
                   onChange={handleCityChange}
                 />
@@ -337,9 +337,9 @@ const CompatibilityTab = ({ t }) => {
               </div>
               {showSuggestions && citySuggestions.length > 0 && (
                 <ul className="absolute z-50 w-full bg-[#1a1a1a] border border-white/10 rounded-lg mt-1 max-h-40 overflow-y-auto shadow-xl">
-                  {citySuggestions.map(city => (
+                  {citySuggestions.map((city, idx) => (
                     <li
-                      key={city}
+                      key={`${city}-${idx}`}
                       onClick={() => selectCity(city)}
                       className="px-4 py-2 text-sm text-gray-300 hover:bg-[#D4AF37] hover:text-black cursor-pointer"
                     >
@@ -351,21 +351,23 @@ const CompatibilityTab = ({ t }) => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Date</label>
+                <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Date of Birth</label>
                 <input
                   type="date"
-                  className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] outline-none transition-colors text-xs"
+                  className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] outline-none transition-colors cursor-pointer [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-50 [&::-webkit-calendar-picker-indicator]:hover:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   value={partnerDetails.date}
                   onChange={e => setPartnerDetails({ ...partnerDetails, date: e.target.value })}
+                  onClick={e => e.target.showPicker && e.target.showPicker()}
                 />
               </div>
               <div>
-                <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Time</label>
+                <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Time of Birth</label>
                 <input
                   type="time"
-                  className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] outline-none transition-colors text-xs"
+                  className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] outline-none transition-colors cursor-pointer [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-50 [&::-webkit-calendar-picker-indicator]:hover:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   value={partnerDetails.time}
                   onChange={e => setPartnerDetails({ ...partnerDetails, time: e.target.value })}
+                  onClick={e => e.target.showPicker && e.target.showPicker()}
                 />
               </div>
             </div>
@@ -399,7 +401,7 @@ const CompatibilityTab = ({ t }) => {
               <div className="w-40 h-40 rounded-full border-[6px] border-[#D4AF37] flex items-center justify-center bg-black shadow-[0_0_60px_rgba(212,175,55,0.4)]">
                 <div className="text-center">
                   <span className="block text-5xl font-serif font-bold text-white">{result.score}</span>
-                  <span className="block text-xs text-gray-500 uppercase tracking-widest mt-1 font-bold">/ 36 Gunas</span>
+                  <span className="block text-xs text-gray-500 uppercase tracking-widest mt-1 font-bold">/ 36 {result.gunas || 'Gunas'}</span>
                 </div>
               </div>
               <div className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full text-sm font-bold shadow-xl whitespace-nowrap border ${result.score > 18 ? 'bg-green-900/90 border-green-500 text-green-100' : 'bg-red-900/90 border-red-500 text-red-100'}`}>
@@ -433,9 +435,9 @@ const CompatibilityTab = ({ t }) => {
           </div>
 
           <div className="text-center border-t border-white/10 pt-6">
-            <p className="text-gray-500 text-xs italic mb-4">Note: This is a simulated Vedic analysis based on birth details. For marriage decisions, consultation with a real astrologer is recommended.</p>
+            <p className="text-gray-500 text-xs italic mb-4">{result.note}</p>
             <button onClick={() => setResult(null)} className="px-6 py-2 bg-white/5 hover:bg-white/10 text-white rounded-full text-sm border border-white/10 transition-colors">
-              Analyze New Match
+              {result.analyzeNew}
             </button>
           </div>
         </div>

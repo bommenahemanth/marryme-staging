@@ -473,3 +473,241 @@ img {
 button:focus:not(:focus-visible) {
   outline: none;
 }
+
+/* ===== SCROLL-TRIGGERED ANIMATIONS ===== */
+
+/* Base state for animated elements - hidden initially */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide from left */
+.animate-slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-slide-left.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide from right */
+.animate-slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-slide-right.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale up effect */
+.animate-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animate-scale.animate-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered children animation */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.stagger-children.animate-in > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+.stagger-children.animate-in > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
+.stagger-children.animate-in > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
+.stagger-children.animate-in > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
+.stagger-children.animate-in > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
+.stagger-children.animate-in > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+.stagger-children.animate-in > *:nth-child(7) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
+.stagger-children.animate-in > *:nth-child(8) { transition-delay: 560ms; opacity: 1; transform: translateY(0); }
+
+/* ===== HOVER MICRO-INTERACTIONS ===== */
+
+/* Card hover lift effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.15);
+}
+
+/* Card hover glow */
+.hover-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+/* Button hover scale */
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Icon hover rotate */
+.hover-rotate {
+  transition: transform 0.3s ease;
+}
+
+.hover-rotate:hover {
+  transform: rotate(5deg);
+}
+
+/* Subtle pulse on hover */
+.hover-pulse:hover {
+  animation: subtlePulse 1s ease infinite;
+}
+
+@keyframes subtlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Text shimmer effect on hover */
+.hover-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.hover-shimmer:hover::after {
+  left: 100%;
+}
+
+/* Tag/chip hover effect */
+.hover-tag {
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-tag:hover {
+  background-color: rgba(212, 175, 55, 0.2) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Image hover zoom */
+.hover-zoom {
+  overflow: hidden;
+}
+
+.hover-zoom img {
+  transition: transform 0.4s ease;
+}
+
+.hover-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* Timeline item hover */
+.hover-timeline {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.hover-timeline:hover {
+  transform: translateX(8px);
+  background-color: rgba(212, 175, 55, 0.08);
+}
+
+/* ===== MOBILE OPTIMIZATIONS FOR ANIMATIONS ===== */
+
+@media (max-width: 768px) {
+  /* Reduce animation intensity on mobile */
+  .animate-on-scroll {
+    transform: translateY(20px);
+  }
+  
+  .animate-slide-left,
+  .animate-slide-right {
+    transform: translateY(20px);
+  }
+  
+  /* Disable hover effects on touch devices */
+  .hover-lift:hover,
+  .hover-glow:hover,
+  .hover-scale:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Keep tap feedback */
+  .hover-lift:active,
+  .hover-scale:active {
+    transform: scale(0.98);
+  }
+  
+  .hover-tag:hover {
+    transform: none;
+  }
+  
+  .hover-tag:active {
+    transform: scale(0.95);
+  }
+  
+  /* Reduce motion for performance */
+  .stagger-children > * {
+    transition-duration: 0.3s;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .animate-slide-left,
+  .animate-slide-right,
+  .animate-scale,
+  .stagger-children > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  
+  .hover-lift,
+  .hover-glow,
+  .hover-scale,
+  .hover-rotate,
+  .hover-tag,
+  .hover-timeline {
+    transition: none;
+  }
+  
+  .hover-pulse:hover {
+    animation: none;
+  }
+}

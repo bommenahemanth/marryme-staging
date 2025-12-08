@@ -23,214 +23,206 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  ArrowUp, Calculator, Clock, Pizza, Scale, Gem, Plane, ChefHat, Cpu, Users, Instagram, MessageCircle, Triangle, BarChart3, Diamond, Dog, Flame, GraduationCap, Map, Megaphone, MonitorSmartphone, Share2, TrendingUp, Wallet, WifiOff, Backpack, Tractor, Apple, PawPrint, Mountain, Waves, Compass, Book, Baby, HeartHandshake, Shield, Smartphone, Smile, Tv, Footprints, Activity, Lightbulb, Bot, Mail, CreditCard, Target, Carrot, Music, Coffee} from 'lucide-react';
+  ArrowUp, Calculator, Clock, Pizza, Scale, Gem, Plane, ChefHat, Cpu, Users, Instagram, MessageCircle, Triangle, BarChart3, Diamond, Dog, Flame, GraduationCap, Map, Megaphone, MonitorSmartphone, Share2, TrendingUp, Wallet, WifiOff, Backpack, Tractor, Apple, PawPrint, Mountain, Waves, Compass, Book, Baby, HeartHandshake, Shield, Smartphone, Smile, Tv, Footprints, Activity, Lightbulb, Bot, Mail, CreditCard, Target, Carrot, Music, Coffee, Calendar} from 'lucide-react';
 
 import { CompatibilityTab , NetworkBackground } from './components';
-import { TRANSLATIONS, ASTRO_DATA, ASTRO_DATA_TE, PLACEHOLDER_GALLERY, MARRIAGE_DATA, HOROSCOPE_PROFILE, MARRIAGE_DATA_TE, HOROSCOPE_PROFILE_TE } from './constants';
+import { TRANSLATIONS, ASTRO_DATA, ASTRO_DATA_TE, PLACEHOLDER_GALLERY, MARRIAGE_DATA, HOROSCOPE_PROFILE, MARRIAGE_DATA_TE, HOROSCOPE_PROFILE_TE, ZODIAC_SIGNS, PLANET_NAMES, CHART_HIGHLIGHTS } from './constants';
 
 // --- Marriage Tab Component ---
 function MarriageTab({ lang = 'en' }) {
-  // Select data based on language
   const marriageData = lang === 'te' ? MARRIAGE_DATA_TE : MARRIAGE_DATA;
   const profile = lang === 'te' ? HOROSCOPE_PROFILE_TE : HOROSCOPE_PROFILE;
   const labels = lang === 'te' ? MARRIAGE_DATA_TE : {
-    birthDetails: "Birth Details",
-    name: "Name",
-    dob: "Date of Birth",
-    time: "Time",
-    place: "Place",
-    rashiNakshatra: "Rashi / Nakshatra",
-    gotra: "Gotra",
-    lagna: "Lagna (Ascendant)",
-    moonPhase: "Moon Phase",
-    lifePathNumber: "Life Path Number",
-    bestMatch: "Best Match",
-    avoid: "Avoid"
+    birthDetails: "Birth Details", name: "Name", dob: "Date of Birth", time: "Time", place: "Place",
+    rashiNakshatra: "Rashi / Nakshatra", gotra: "Gotra", lagna: "Lagna (Ascendant)", moonPhase: "Moon Phase",
+    lifePathNumber: "Life Path Number", bestMatch: "Best Match", avoid: "Avoid"
   };
 
   return (
-    <div className="space-y-8 overflow-y-auto max-h-[70vh] pr-2">
-      {/* Birth Details Card */}
-      <div className="bg-gradient-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/30 rounded-2xl p-6">
-        <h3 className="text-2xl font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
-          🕉️ {labels.birthDetails}
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="bg-black/30 p-3 rounded-lg">
-            <span className="text-gray-500 text-xs uppercase">{labels.name}</span>
-            <p className="text-white font-medium">{profile.name}</p>
-          </div>
-          <div className="bg-black/30 p-3 rounded-lg">
-            <span className="text-gray-500 text-xs uppercase">{labels.dob}</span>
-            <p className="text-white font-medium">{profile.dob}</p>
-          </div>
-          <div className="bg-black/30 p-3 rounded-lg">
-            <span className="text-gray-500 text-xs uppercase">{labels.time}</span>
-            <p className="text-white font-medium">{profile.time}</p>
-          </div>
-          <div className="bg-black/30 p-3 rounded-lg">
-            <span className="text-gray-500 text-xs uppercase">{labels.place}</span>
-            <p className="text-white font-medium text-sm">{profile.place}</p>
-          </div>
-          <div className="bg-black/30 p-3 rounded-lg">
-            <span className="text-gray-500 text-xs uppercase">{labels.rashiNakshatra}</span>
-            <p className="text-white font-medium">{profile.rashi} / {profile.nakshatra}</p>
-          </div>
-          <div className="bg-black/30 p-3 rounded-lg">
-            <span className="text-gray-500 text-xs uppercase">{labels.gotra}</span>
-            <p className="text-white font-medium">{profile.gotra}</p>
-          </div>
-          <div className="bg-black/30 p-3 rounded-lg">
-            <span className="text-gray-500 text-xs uppercase">{labels.lagna}</span>
-            <p className="text-white font-medium">{profile.lagna}</p>
-          </div>
-          <div className="bg-black/30 p-3 rounded-lg">
-            <span className="text-gray-500 text-xs uppercase">{labels.moonPhase}</span>
-            <p className="text-white font-medium">{profile.moonPhase}</p>
-          </div>
-          <div className="bg-black/30 p-3 rounded-lg">
-            <span className="text-gray-500 text-xs uppercase">{labels.lifePathNumber}</span>
-            <p className="text-white font-medium">{profile.lifePathNumber} — {profile.lifePathMeaning}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Marriage Indicators */}
-      <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-2xl p-6">
-        <h3 className="text-2xl font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
-          💍 {marriageData.summary.title}
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {marriageData.summary.items.map((item, idx) => (
-            <div key={idx} className="bg-black/40 p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/30 transition-all">
-              <div className="flex justify-between items-start mb-2">
-                <span className="text-[#D4AF37] font-bold">{item.label}</span>
-                <span className="text-white text-sm text-right">{item.value}</span>
-              </div>
-              <p className="text-gray-400 text-sm">{item.meaning}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Partner Traits & Compatible Signs */}
+    <div className="space-y-6">
+      {/* Row 1: Birth Details + Marriage Indicators */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Partner Traits */}
-        <div className="bg-[#050505] border border-pink-500/20 rounded-2xl p-6">
-          <h3 className="text-xl font-serif text-pink-400 mb-4 flex items-center gap-2">
-            💝 {marriageData.partnerTraits.title}
+        {/* Birth Details */}
+        <div className="bg-gradient-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/30 rounded-xl p-5">
+          <h3 className="text-lg font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
+            <Sparkles size={18} /> {labels.birthDetails}
           </h3>
-          <ul className="space-y-3">
-            {marriageData.partnerTraits.traits.map((trait, idx) => (
-              <li key={idx} className="text-gray-300 text-base flex items-center gap-2 bg-black/30 p-3 rounded-lg">
-                {trait}
-              </li>
+          <div className="grid grid-cols-3 gap-3">
+            <div className="bg-black/30 p-3 rounded-lg">
+              <span className="text-gray-500 text-xs uppercase block">{labels.name}</span>
+              <p className="text-white text-sm font-medium">{profile.name}</p>
+            </div>
+            <div className="bg-black/30 p-3 rounded-lg">
+              <span className="text-gray-500 text-xs uppercase block">{labels.dob}</span>
+              <p className="text-white text-sm font-medium">{profile.dob}</p>
+            </div>
+            <div className="bg-black/30 p-3 rounded-lg">
+              <span className="text-gray-500 text-xs uppercase block">{labels.time}</span>
+              <p className="text-white text-sm font-medium">{profile.time}</p>
+            </div>
+            <div className="bg-black/30 p-3 rounded-lg col-span-2">
+              <span className="text-gray-500 text-xs uppercase block">{labels.place}</span>
+              <p className="text-white text-xs font-medium">{profile.place}</p>
+            </div>
+            <div className="bg-black/30 p-3 rounded-lg">
+              <span className="text-gray-500 text-xs uppercase block">{labels.rashiNakshatra}</span>
+              <p className="text-white text-xs font-medium">{profile.rashi} / {profile.nakshatra}</p>
+            </div>
+            <div className="bg-black/30 p-3 rounded-lg">
+              <span className="text-gray-500 text-xs uppercase block">{labels.gotra}</span>
+              <p className="text-white text-sm font-medium">{profile.gotra}</p>
+            </div>
+            <div className="bg-black/30 p-3 rounded-lg">
+              <span className="text-gray-500 text-xs uppercase block">{labels.lagna}</span>
+              <p className="text-white text-xs font-medium">{profile.lagna}</p>
+            </div>
+            <div className="bg-black/30 p-3 rounded-lg">
+              <span className="text-gray-500 text-xs uppercase block">{labels.moonPhase}</span>
+              <p className="text-white text-xs font-medium">{profile.moonPhase}</p>
+            </div>
+            <div className="bg-black/30 p-3 rounded-lg col-span-3">
+              <span className="text-gray-500 text-xs uppercase block">{labels.lifePathNumber}</span>
+              <p className="text-white text-sm font-medium">{profile.lifePathNumber} — {profile.lifePathMeaning}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Marriage Indicators */}
+        <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5 flex flex-col h-full">
+          <h3 className="text-lg font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
+            <Heart size={18} /> {marriageData.summary.title}
+          </h3>
+          <div className="grid grid-cols-2 gap-4 flex-1">
+            {marriageData.summary.items.map((item, idx) => (
+              <div key={idx} className="bg-black/40 p-4 rounded-lg border border-white/5 flex flex-col justify-center">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-[#D4AF37] font-bold text-sm">{item.label}</span>
+                  <span className="text-white text-xs text-right">{item.value}</span>
+                </div>
+                <p className="text-gray-400 text-sm">{item.meaning}</p>
+              </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Row 2: Navamsa + Partner Traits + Compatible Signs */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Navamsa D9 */}
+        <div className="bg-gradient-to-r from-purple-900/20 to-[#050505] border border-purple-500/20 rounded-xl p-5 flex flex-col">
+          <h3 className="text-base font-serif text-purple-400 mb-4 flex items-center gap-3">
+            <Compass size={16} /> {marriageData.navamsa.title}
+          </h3>
+          <div className="grid grid-cols-2 gap-3 mb-4 flex-1">
+            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center">
+              <span className="text-gray-500 text-xs uppercase block mb-1">Lagna</span>
+              <span className="text-white text-base font-bold">{marriageData.navamsa.lagna}</span>
+            </div>
+            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center">
+              <span className="text-gray-500 text-xs uppercase block mb-1">Venus</span>
+              <span className="text-green-400 text-sm font-bold">{marriageData.navamsa.venus}</span>
+            </div>
+            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center">
+              <span className="text-gray-500 text-xs uppercase block mb-1">Jupiter</span>
+              <span className="text-white text-sm font-bold">{marriageData.navamsa.jupiter}</span>
+            </div>
+            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center">
+              <span className="text-gray-500 text-xs uppercase block mb-1">Moon</span>
+              <span className="text-white text-sm font-bold">{marriageData.navamsa.moon}</span>
+            </div>
+          </div>
+          <p className="text-gray-300 text-sm italic bg-black/30 p-4 rounded-lg">{marriageData.navamsa.interpretation}</p>
+        </div>
+
+        {/* Partner Traits */}
+        <div className="bg-[#050505] border border-pink-500/20 rounded-xl p-5 flex flex-col">
+          <h3 className="text-base font-serif text-pink-400 mb-4 flex items-center gap-3">
+            <Heart size={16} /> {marriageData.partnerTraits.title}
+          </h3>
+          <ul className="space-y-2 flex-1 flex flex-col justify-between">
+            {marriageData.partnerTraits.traits.map((trait, idx) => {
+              const icons = [
+                <Sparkles key="s" size={14} className="text-pink-400 flex-shrink-0" />,
+                <Heart key="h" size={14} className="text-pink-400 flex-shrink-0" />,
+                <GraduationCap key="g" size={14} className="text-pink-400 flex-shrink-0" />,
+                <Gem key="ge" size={14} className="text-pink-400 flex-shrink-0" />,
+                <HeartHandshake key="hh" size={14} className="text-pink-400 flex-shrink-0" />,
+                <Scale key="sc" size={14} className="text-pink-400 flex-shrink-0" />
+              ];
+              return (
+                <li key={idx} className="text-gray-300 text-sm flex items-center gap-3 bg-black/30 p-3 rounded-lg">
+                  {icons[idx]} {trait}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
         {/* Compatible Signs */}
-        <div className="bg-[#050505] border border-green-500/20 rounded-2xl p-6">
-          <h3 className="text-xl font-serif text-green-400 mb-4 flex items-center gap-2">
-            ⭐ {marriageData.compatibleSigns.title}
+        <div className="bg-[#050505] border border-green-500/20 rounded-xl p-5 flex flex-col">
+          <h3 className="text-base font-serif text-green-400 mb-4 flex items-center gap-3">
+            <Star size={16} /> {marriageData.compatibleSigns.title}
           </h3>
-          <div className="mb-4">
-            <p className="text-gray-500 text-xs uppercase mb-2">{labels.bestMatch}</p>
-            <div className="flex flex-wrap gap-2">
-              {marriageData.compatibleSigns.best.map((sign, idx) => (
-                <span key={idx} className="bg-green-900/30 text-green-400 px-3 py-1 rounded-full text-sm border border-green-500/30">
-                  {sign}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="mb-4">
-            <p className="text-gray-500 text-xs uppercase mb-2">{labels.avoid}</p>
-            <div className="flex flex-wrap gap-2">
-              {marriageData.compatibleSigns.avoid.map((sign, idx) => (
-                <span key={idx} className="bg-red-900/30 text-red-400 px-3 py-1 rounded-full text-sm border border-red-500/30">
-                  {sign}
-                </span>
-              ))}
-            </div>
-          </div>
-          <p className="text-gray-400 text-sm italic">{marriageData.compatibleSigns.reason}</p>
-        </div>
-      </div>
-
-      {/* Navamsa D9 Highlights */}
-      <div className="bg-gradient-to-r from-purple-900/20 to-[#050505] border border-purple-500/20 rounded-2xl p-6">
-        <h3 className="text-xl font-serif text-purple-400 mb-4 flex items-center gap-2">
-          🔮 {marriageData.navamsa.title}
-        </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-          <div className="bg-black/40 p-3 rounded-lg text-center">
-            <span className="text-gray-500 text-xs uppercase block">{labels.lagna}</span>
-            <span className="text-white font-bold">{marriageData.navamsa.lagna}</span>
-          </div>
-          <div className="bg-black/40 p-3 rounded-lg text-center">
-            <span className="text-gray-500 text-xs uppercase block">Venus ♀️</span>
-            <span className="text-green-400 font-bold text-sm">{marriageData.navamsa.venus}</span>
-          </div>
-          <div className="bg-black/40 p-3 rounded-lg text-center">
-            <span className="text-gray-500 text-xs uppercase block">Jupiter ♃</span>
-            <span className="text-white font-bold text-sm">{marriageData.navamsa.jupiter}</span>
-          </div>
-          <div className="bg-black/40 p-3 rounded-lg text-center">
-            <span className="text-gray-500 text-xs uppercase block">Moon 🌙</span>
-            <span className="text-white font-bold text-sm">{marriageData.navamsa.moon}</span>
-          </div>
-        </div>
-        <p className="text-gray-300 text-sm italic bg-black/30 p-3 rounded-lg">✨ {marriageData.navamsa.interpretation}</p>
-      </div>
-
-      {/* Dasha Timeline */}
-      <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-2xl p-6">
-        <h3 className="text-xl font-serif text-[#D4AF37] mb-4 flex items-center gap-2">
-          📅 {marriageData.dashaTimeline.title}
-        </h3>
-        <div className="space-y-3 mb-4">
-          {marriageData.dashaTimeline.periods.map((period, idx) => (
-            <div 
-              key={idx} 
-              className={`flex items-center justify-between p-3 rounded-lg transition-all ${
-                period.highlight 
-                  ? 'bg-[#D4AF37]/20 border border-[#D4AF37]/50' 
-                  : 'bg-black/30 hover:bg-black/50'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <span className={`font-bold ${period.highlight ? 'text-[#D4AF37]' : 'text-white'}`}>
-                  {period.planet}
-                </span>
-                <span className="text-gray-500">|</span>
-                <span className="text-gray-400 text-sm">{period.period}</span>
+          <div className="flex-1 flex flex-col justify-center space-y-4">
+            <div className="bg-black/30 p-4 rounded-lg">
+              <p className="text-gray-500 text-xs uppercase mb-2">{labels.bestMatch}</p>
+              <div className="flex flex-wrap gap-2">
+                {marriageData.compatibleSigns.best.map((sign, idx) => (
+                  <span key={idx} className="bg-green-900/40 text-green-400 px-3 py-1.5 rounded-full text-sm font-medium border border-green-500/30">{sign}</span>
+                ))}
               </div>
-              <span className={`text-sm ${period.highlight ? 'text-[#D4AF37] font-bold' : 'text-gray-400'}`}>
-                {period.note}
-              </span>
             </div>
-          ))}
-        </div>
-        <div className="bg-green-900/20 border border-green-500/30 p-4 rounded-xl">
-          <p className="text-green-400 font-bold text-center">
-            🎯 {lang === 'te' ? 'వివాహ సమయం' : 'Marriage Window'}: {marriageData.dashaTimeline.marriageWindow}
-          </p>
+            <div className="bg-black/30 p-4 rounded-lg">
+              <p className="text-gray-500 text-xs uppercase mb-2">{labels.avoid}</p>
+              <div className="flex flex-wrap gap-2">
+                {marriageData.compatibleSigns.avoid.map((sign, idx) => (
+                  <span key={idx} className="bg-red-900/40 text-red-400 px-3 py-1.5 rounded-full text-sm font-medium border border-red-500/30">{sign}</span>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Personality Profile */}
-      <div className="bg-[#050505] border border-blue-500/20 rounded-2xl p-6">
-        <h3 className="text-xl font-serif text-blue-400 mb-4 flex items-center gap-2">
-          🧠 {marriageData.personality.title}
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {marriageData.personality.traits.map((trait, idx) => (
-            <div key={idx} className="bg-black/40 p-4 rounded-xl">
-              <span className="text-blue-400 font-bold text-sm uppercase">{trait.domain}</span>
-              <p className="text-gray-300 mt-1">{trait.keywords}</p>
-            </div>
-          ))}
+      {/* Row 3: Dasha Timeline + Personality */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Dasha Timeline */}
+        <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5 flex flex-col h-full">
+          <h3 className="text-base font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
+            <Calendar size={16} /> {marriageData.dashaTimeline.title}
+          </h3>
+          <div className="space-y-2 mb-4 flex-1">
+            {marriageData.dashaTimeline.periods.map((period, idx) => (
+              <div key={idx} className={`flex items-center justify-between p-3 rounded-lg text-xs ${period.highlight ? 'bg-[#D4AF37]/20 border border-[#D4AF37]/50' : 'bg-black/30'}`}>
+                <div className="flex items-center gap-3">
+                  <span className={`font-bold ${period.highlight ? 'text-[#D4AF37]' : 'text-white'}`}>{period.planet}</span>
+                  <span className="text-gray-500">|</span>
+                  <span className="text-gray-400">{period.period}</span>
+                </div>
+                <span className={`${period.highlight ? 'text-[#D4AF37] font-bold' : 'text-gray-400'}`}>{period.note}</span>
+              </div>
+            ))}
+          </div>
+          <div className="bg-green-900/20 border border-green-500/30 p-3 rounded-lg">
+            <p className="text-green-400 font-bold text-center text-sm flex items-center justify-center gap-3">
+              <Target size={14} /> {lang === 'te' ? 'వివాహ సమయం' : 'Marriage Window'}: {marriageData.dashaTimeline.marriageWindow}
+            </p>
+          </div>
+        </div>
+
+        {/* Personality Profile */}
+        <div className="bg-[#050505] border border-blue-500/20 rounded-xl p-5 flex flex-col h-full">
+          <h3 className="text-base font-serif text-blue-400 mb-4 flex items-center gap-3">
+            <Sparkles size={16} /> {marriageData.personality.title}
+          </h3>
+          <div className="grid grid-cols-2 gap-4 flex-1">
+            {marriageData.personality.traits.map((trait, idx) => (
+              <div key={idx} className="bg-black/40 p-4 rounded-lg flex flex-col justify-center">
+                <span className="text-blue-400 font-bold text-sm uppercase">{trait.domain}</span>
+                <p className="text-gray-300 text-sm mt-1">{trait.keywords}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -249,7 +241,7 @@ export function HoroscopeSection({ scrollToTop }) {
   return (
     <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-hidden">
       <NetworkBackground />
-      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-6 lg:-mx-12 mb-4">
+      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-4 lg:-mx-6 mb-3">
         <div>
           <h2 className="text-3xl font-serif text-white tracking-wide">
             {t.title}
@@ -288,90 +280,160 @@ export function HoroscopeSection({ scrollToTop }) {
 
         <div className="p-6 md:p-10 overflow-y-auto flex-grow">
           {activeTab === 0 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 h-full items-center">
-              <div className="h-full flex flex-col justify-center">
-                <h3 className="text-xl font-serif text-[#D4AF37] mb-6 border-l-4 border-[#D4AF37] pl-3">{t.basicDetails}</h3>
-                <div className="space-y-4">
-                  {Object.entries(astroData.basicDetails).map(([key, val]) => (
-                    <div key={key} className="flex justify-between items-center border-b border-white/5 pb-3">
-                      <span className="text-gray-400 text-sm uppercase tracking-wider">{t[key.toLowerCase()] || key}</span>
-                      <span className="text-white font-medium text-right">{val}</span>
+            <div className="space-y-6">
+              {/* Row 1: Basic Details + Rasi Chart */}
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                {/* Basic Details - 2 cols */}
+                <div className="lg:col-span-2 bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5">
+                  <h3 className="text-lg font-serif text-[#D4AF37] mb-4 border-l-4 border-[#D4AF37] pl-3">{t.basicDetails}</h3>
+                  <div className="space-y-3">
+                    {Object.entries(astroData.basicDetails).map(([key, val]) => (
+                      <div key={key} className="flex justify-between items-center bg-black/30 p-3 rounded-lg">
+                        <span className="text-gray-400 text-sm uppercase tracking-wider">{t[key.toLowerCase()] || key}</span>
+                        <span className="text-white font-medium text-right text-sm">{val}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 p-4 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-xl">
+                    <h4 className="text-[#D4AF37] font-bold mb-2">{t.navamsa}</h4>
+                    <p className="text-gray-300 text-sm leading-relaxed">{t.navamsaDesc}</p>
+                  </div>
+                </div>
+
+                {/* Rasi Chart - 3 cols */}
+                <div className="lg:col-span-3 bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5">
+                  <div className="text-center mb-4">
+                    <h3 className="text-xl font-serif text-[#D4AF37]">{t.chartTitle}</h3>
+                    <p className="text-gray-500 text-xs uppercase tracking-widest">{t.chartSubtitle}</p>
+                  </div>
+                  
+                  <div className="w-full max-w-[480px] mx-auto aspect-square grid grid-cols-4 grid-rows-4 border-2 border-[#D4AF37] bg-[#0a0a0a]">
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].pisces}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center">{PLANET_NAMES[lang].venus} ({PLANET_NAMES[lang].ex}), {PLANET_NAMES[lang].ketu}</span>
                     </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 p-4 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-xl">
-                  <h4 className="text-[#D4AF37] font-bold mb-2">{t.navamsa}</h4>
-                  <p className="text-gray-300 text-sm leading-relaxed">{t.navamsaDesc}</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center justify-center h-full">
-                <div className="text-center mb-4">
-                  <h3 className="text-2xl font-serif text-[#D4AF37]">{t.chartTitle}</h3>
-                  <p className="text-gray-500 text-xs uppercase tracking-widest">{t.chartSubtitle}</p>
-                </div>
-
-                <div className="w-full max-w-[400px] aspect-square grid grid-cols-4 grid-rows-4 border-2 border-[#D4AF37] bg-[#050505]">
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Pisces</span><span className="text-[#D4AF37] text-xs font-bold text-center">Venus (Ex), Ketu</span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Aries</span><span className="text-[#D4AF37] text-xs font-bold text-center">Sun (Ex)</span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Taurus</span><span className="text-[#D4AF37] text-xs font-bold text-center">Mercury</span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Gemini</span><span className="text-[#D4AF37] text-xs font-bold text-center"></span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Aquarius</span><span className="text-[#D4AF37] text-xs font-bold text-center">Saturn</span></div>
-                  <div className="col-span-2 row-span-2 border border-[#D4AF37]/30 flex items-center justify-center bg-[#D4AF37]/5">
-                    <div className="text-center">
-                      <div className="text-4xl mb-2">🕉️</div>
-                      <span className="text-[#D4AF37] font-serif text-xl">Rasi D1</span>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].aries}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center">{PLANET_NAMES[lang].sun} ({PLANET_NAMES[lang].ex})</span>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].taurus}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center">{PLANET_NAMES[lang].mercury}</span>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].gemini}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center"></span>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].aquarius}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center">{PLANET_NAMES[lang].saturn}</span>
+                    </div>
+                    <div className="col-span-2 row-span-2 border border-[#D4AF37]/30 flex items-center justify-center bg-[#D4AF37]/5">
+                      <div className="text-center">
+                        <div className="text-3xl mb-2 text-[#D4AF37]">ॐ</div>
+                        <span className="text-[#D4AF37] font-serif text-lg">{lang === 'te' ? 'రాశి D1' : 'Rasi D1'}</span>
+                      </div>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between bg-[#D4AF37]/15">
+                      <span className="text-[10px] text-[#D4AF37]">{ZODIAC_SIGNS[lang].cancer}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center">{PLANET_NAMES[lang].asc}, {PLANET_NAMES[lang].moon}</span>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].capricorn}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center">{PLANET_NAMES[lang].jupiter} ({PLANET_NAMES[lang].n})</span>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].leo}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center"></span>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].sagittarius}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center"></span>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].scorpio}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center"></span>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].libra}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center"></span>
+                    </div>
+                    <div className="border border-[#D4AF37]/30 p-2 flex flex-col justify-between">
+                      <span className="text-[10px] text-gray-500">{ZODIAC_SIGNS[lang].virgo}</span>
+                      <span className="text-[#D4AF37] text-xs font-bold text-center">{PLANET_NAMES[lang].mars}, {PLANET_NAMES[lang].rahu}</span>
                     </div>
                   </div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between bg-[#D4AF37]/10"><span className="text-[8px] text-gray-500">Cancer</span><span className="text-[#D4AF37] text-xs font-bold text-center">ASC, Moon</span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Capricorn</span><span className="text-[#D4AF37] text-xs font-bold text-center">Jupiter (N)</span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Leo</span><span className="text-[#D4AF37] text-xs font-bold text-center"></span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Sagittarius</span><span className="text-[#D4AF37] text-xs font-bold text-center"></span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Scorpio</span><span className="text-[#D4AF37] text-xs font-bold text-center"></span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Libra</span><span className="text-[#D4AF37] text-xs font-bold text-center"></span></div>
-                  <div className="border border-[#D4AF37]/30 p-1 flex flex-col justify-between"><span className="text-[8px] text-gray-500">Virgo</span><span className="text-[#D4AF37] text-xs font-bold text-center">Mars, Rahu</span></div>
+                </div>
+              </div>
+
+              {/* Row 2: Key Planetary Highlights */}
+              <div className="bg-gradient-to-r from-purple-900/10 to-[#050505] border border-purple-500/20 rounded-xl p-5">
+                <h3 className="text-lg font-serif text-purple-400 mb-4 flex items-center gap-2">
+                  <Star size={18} /> {lang === 'te' ? 'గ్రహ స్థాన ముఖ్యాంశాలు' : 'Key Planetary Highlights'}
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {CHART_HIGHLIGHTS[lang].map((item, idx) => (
+                    <div key={idx} className={`bg-black/40 p-4 rounded-lg border-l-4 ${
+                      item.color === 'yellow' ? 'border-yellow-500' :
+                      item.color === 'blue' ? 'border-blue-500' :
+                      item.color === 'pink' ? 'border-pink-500' :
+                      item.color === 'orange' ? 'border-orange-500' :
+                      item.color === 'purple' ? 'border-purple-500' :
+                      'border-red-500'
+                    }`}>
+                      <h4 className={`font-bold text-sm mb-1 ${
+                        item.color === 'yellow' ? 'text-yellow-400' :
+                        item.color === 'blue' ? 'text-blue-400' :
+                        item.color === 'pink' ? 'text-pink-400' :
+                        item.color === 'orange' ? 'text-orange-400' :
+                        item.color === 'purple' ? 'text-purple-400' :
+                        'text-red-400'
+                      }`}>{item.title}</h4>
+                      <p className="text-gray-300 text-sm">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Row 3: Planets Table */}
+              <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5">
+                <h3 className="text-lg font-serif text-[#D4AF37] mb-4 border-l-4 border-[#D4AF37] pl-3">{lang === 'te' ? 'గ్రహ స్థానాలు' : 'Planetary Positions'}</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-[#D4AF37]/30 text-[#D4AF37] text-xs uppercase tracking-wider">
+                        <th className="py-3 font-bold">{t.planet}</th>
+                        <th className="py-3 font-bold">{t.sign}</th>
+                        <th className="py-3 font-bold">{t.degree}</th>
+                        <th className="py-3 font-bold">{t.house}</th>
+                        <th className="py-3 font-bold">{t.nature}</th>
+                        <th className="py-3 font-bold hidden md:table-cell">{lang === 'te' ? 'ప్రభావం' : 'Effect'}</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-gray-300 text-sm">
+                      {astroData.planets.map((p, i) => (
+                        <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                          <td className="py-3 font-medium text-white">{p.name}</td>
+                          <td className="py-3">{p.sign}</td>
+                          <td className="py-3 font-mono text-[#D4AF37]">{p.degree}</td>
+                          <td className="py-3">{p.house}</td>
+                          <td className="py-3">
+                            <span className={`px-2 py-1 rounded text-xs ${p.nature.includes('Exalted') || p.nature.includes('ఉచ్చ') ? 'bg-green-900/50 text-green-400 border border-green-500/30' : p.nature.includes('Debilitated') || p.nature.includes('నీచ') ? 'bg-red-900/50 text-red-400 border border-red-500/30' : 'bg-gray-800 text-gray-400'}`}>
+                              {p.nature}
+                            </span>
+                          </td>
+                          <td className="py-3 text-gray-400 text-xs hidden md:table-cell">{p.effect}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           )}
+          {activeTab === 1 && <MarriageTab lang={lang} />}
 
-          {activeTab === 1 && (
-            <div className="overflow-x-auto h-full">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-[#D4AF37]/30 text-[#D4AF37] text-xs uppercase tracking-wider">
-                    <th className="py-4 font-bold">{t.planet}</th>
-                    <th className="py-4 font-bold">{t.sign}</th>
-                    <th className="py-4 font-bold">{t.degree}</th>
-                    <th className="py-4 font-bold">{t.house}</th>
-                    <th className="py-4 font-bold">{t.nature}</th>
-                    <th className="py-4 font-bold hidden md:table-cell">Effect</th>
-                  </tr>
-                </thead>
-                <tbody className="text-gray-300 text-sm">
-                  {astroData.planets.map((p, i) => (
-                    <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                      <td className="py-4 font-medium text-white">{p.name}</td>
-                      <td className="py-4">{p.sign}</td>
-                      <td className="py-4 font-mono text-[#D4AF37]">{p.degree}</td>
-                      <td className="py-4">{p.house}</td>
-                      <td className="py-4">
-                        <span className={`px-2 py-1 rounded text-xs ${p.nature.includes('Exalted') ? 'bg-green-900/50 text-green-400 border border-green-500/30' : p.nature.includes('Debilitated') ? 'bg-red-900/50 text-red-400 border border-red-500/30' : 'bg-gray-800 text-gray-400'}`}>
-                          {p.nature}
-                        </span>
-                      </td>
-                      <td className="py-4 text-gray-400 text-xs hidden md:table-cell">{p.effect}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-
-          {activeTab === 2 && <MarriageTab lang={lang} />}
-
-          {activeTab === 3 && <CompatibilityTab t={t} />}
+          {activeTab === 2 && <CompatibilityTab t={t} lang={lang} />}
         </div>
       </div>
     </div>
@@ -379,12 +441,14 @@ export function HoroscopeSection({ scrollToTop }) {
 }
 
 // --- About Me Section ---
-export function AboutMeSection({ scrollToTop }) {
+export function AboutMeSection({ scrollToTop, galleryImages }) {
+  const [fullscreenIndex, setFullscreenIndex] = useState(null);
+  const images = galleryImages && galleryImages.length > 0 ? galleryImages : PLACEHOLDER_GALLERY;
   return (
     <div className="relative w-full min-h-screen bg-[#050505] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-y-auto snap-start font-sans">
       <NetworkBackground />
 
-      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-6 lg:-mx-12 mb-6">
+      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-6 lg:-mx-12 mb-4">
         <div>
           <h2 className="text-3xl font-serif text-white tracking-wide">
             More than a bit <span className="text-[#D4AF37] italic">about</span> Me..
@@ -400,51 +464,45 @@ export function AboutMeSection({ scrollToTop }) {
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1400px] mx-auto w-full pb-20">
 
         {/* 1. BIO (Wide) */}
-        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-[#D4AF37]/30 rounded-3xl p-6 hover:border-[#D4AF37] active:scale-[0.98] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#D4AF37]/10 group">
-          <h3 className="text-xl font-serif text-[#D4AF37] mb-4 flex items-center gap-2">
-            <User className="w-6 h-6" /> When Not Working
-          </h3>
-          <ul className="space-y-3 text-gray-300 text-base">
-            <li className="flex items-start gap-3">
-              <Activity className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
-              <span>Play badminton (I was great when my knees were younger).</span>
+        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-[#D4AF37]/30 rounded-3xl p-6 hover:border-[#D4AF37]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#D4AF37]/10 group">
+          <h4 className="text-[#D4AF37] font-bold text-lg mb-4 flex items-center gap-2 uppercase tracking-wider">
+            <User className="w-5 h-5" /> When Not Working
+          </h4>
+          <ul className="space-y-3">
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+              <Activity size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Play badminton (I was great when my knees were younger).</span>
             </li>
-            <li className="flex items-start gap-3">
-              <Lightbulb className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
-              <span>Give unsolicited advice (<strong>'Uchitha salahalu'</strong>, literally) to young folks who reach out to me on LinkedIn.</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+              <Lightbulb size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Give unsolicited advice (<strong>'Uchitha salahalu'</strong>, literally) to young folks who reach out to me on LinkedIn.</span>
             </li>
-            <li className="flex items-start gap-3">
-              <Smartphone className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
-              <span>Exploring new tech gadgets.</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+              <Smartphone size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Exploring new tech gadgets.</span>
             </li>
-            <li className="flex items-start gap-3">
-              <Footprints className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
-              <span>Walk 10 km daily (and pet <strong>'kukka bangaralu'</strong> on the way).</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+              <Footprints size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Walk 10 km daily (and pet <strong>'kukka bangaralu'</strong> on the way).</span>
             </li>
-            <li className="flex items-start gap-3">
-              <Bot className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
-              <span>Get my hands dirty with new AI tools out there.</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+              <Bot size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Get my hands dirty with new AI tools out there.</span>
             </li>
-            <li className="flex items-start gap-3">
-              <Smile className="text-[#D4AF37] mt-0.5 flex-shrink-0 w-5 h-5" />
-              <span>Annoying my little sister.</span>
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+              <Smile size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Annoying my little sister.</span>
             </li>
           </ul>
         </div>
 
         {/* 2. FAITH & CORE */}
-        <div className="col-span-1 bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 hover:border-white/30 transition-all hover:-translate-y-1 flex flex-col justify-center text-center">
-          <Sparkles className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
-          <h3 className="text-lg font-bold text-white mb-2">Faith</h3>
+        <div className="col-span-1 bg-[#0a0a0f] border border-cyan-500/30 rounded-3xl p-6 hover:border-cyan-500/60 transition-all hover:-translate-y-1 flex flex-col justify-center text-center">
+          <Sparkles className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
+          <h3 className="text-lg font-bold text-cyan-400 mb-3">Faith</h3>
           <p className="text-sm text-gray-400 italic">
-            "Grounded in faith. I believe in a Creator and a force beyond human comprehension. You can choose otherwise — just respect the boundaries."
+            Grounded in faith. I believe in a Creator and a force beyond human comprehension. You can choose otherwise, just respect the boundaries.
           </p>
         </div>
 
         {/* 3. LIFESTYLE */}
-        <div className="col-span-1 bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 hover:border-white/30 transition-all hover:-translate-y-1 flex flex-col justify-center">
-          <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2 uppercase tracking-wider justify-center">
-            <Leaf className="w-5 h-5 text-green-400" /> Lifestyle
+        <div className="col-span-1 bg-[#0f0a05] border border-orange-500/30 rounded-3xl p-6 hover:border-orange-500/60 transition-all hover:-translate-y-1 flex flex-col justify-center">
+          <h3 className="text-lg font-bold text-orange-400 mb-4 flex items-center gap-2 uppercase tracking-wider justify-center">
+            <Leaf className="w-5 h-5 text-orange-400" /> Lifestyle
           </h3>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between items-center p-2 bg-white/5 rounded-lg">
@@ -463,12 +521,12 @@ export function AboutMeSection({ scrollToTop }) {
         </div>
 
         {/* 3.5 CAUSES */}
-        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-emerald-500/20 rounded-3xl p-6 hover:border-emerald-500/50 transition-all hover:-translate-y-1">
-          <h3 className="text-xl font-serif text-emerald-400 mb-4 flex items-center gap-2">
+        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-violet-500/30 rounded-3xl p-6 hover:border-violet-500/60 transition-all hover:-translate-y-1">
+          <h3 className="text-xl font-serif text-violet-400 mb-4 flex items-center gap-3">
             <Heart className="w-6 h-6" /> Causes I Believe In
           </h3>
           <p className="text-gray-400 text-sm mb-4 italic">A promise to myself — monthly donations until my last breath.</p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {[
               {icon: Mountain, text: "Elephant Habitat Protection"},
               {icon: Dog, text: "Street Dog Vaccination"},
@@ -476,8 +534,8 @@ export function AboutMeSection({ scrollToTop }) {
               {icon: Compass, text: "Coral Reef Restoration"},
               {icon: Sparkles, text: "Bee Breeding & Protection"}
             ].map((item, i) => (
-              <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 rounded-lg text-sm text-emerald-200 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors cursor-default">
-                <item.icon size={14} className="text-emerald-400" /> {item.text}
+              <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-500/10 rounded-lg text-sm text-violet-200 border border-violet-500/20 hover:bg-violet-500/20 transition-colors cursor-default">
+                <item.icon size={14} className="text-violet-400" /> {item.text}
               </span>
             ))}
           </div>
@@ -485,10 +543,10 @@ export function AboutMeSection({ scrollToTop }) {
 
         {/* 4. LOVES (Wide) */}
         <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-pink-500/20 rounded-3xl p-6 hover:border-pink-500/50 transition-all hover:-translate-y-1">
-          <h3 className="text-xl font-serif text-pink-400 mb-4 flex items-center gap-2">
+          <h3 className="text-xl font-serif text-pink-400 mb-4 flex items-center gap-3">
             <Heart className="w-6 h-6" /> Adorations
           </h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {[
               {icon: Smartphone, text: "Tech Gadgets"}, {icon: Bot, text: "AI Tools"}, {icon: Plane, text: "Drones"},
               {icon: Tv, text: "Naruto"}, {icon: Smile, text: "Memes"}, {icon: Shield, text: "Henry Cavill Superman"},
@@ -556,78 +614,180 @@ export function AboutMeSection({ scrollToTop }) {
         <div className="col-span-1 md:col-span-2 lg:col-span-4 bg-gradient-to-br from-[#1a1a1a] to-black border border-[#D4AF37]/40 rounded-3xl p-6 relative overflow-hidden group flex flex-col">
           <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4AF37] blur-[80px] opacity-10 pointer-events-none" />
 
-          <h3 className="text-2xl font-serif text-[#D4AF37] mb-4 flex items-center gap-2">
+          <h3 className="text-2xl font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
             <Search className="w-6 h-6" /> About You
           </h3>
 
           <div className="flex-grow grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
-              <h4 className="text-green-400 font-bold text-sm mb-2 uppercase tracking-wider flex items-center gap-2">
+              <h4 className="text-green-400 font-bold text-sm mb-2 uppercase tracking-wider flex items-center gap-3">
                 <CheckCircle2 size={16} /> Big Yes To
               </h4>
               <ul className="space-y-2 text-sm text-gray-300 pl-3 border-l-2 border-green-500/20">
-                <li className="flex items-center gap-2"><GraduationCap size={14} className="text-green-400" /> Academically Inclined</li>
-                <li className="flex items-center gap-2"><Heart size={14} className="text-green-400" /> Humble, Empathetic & Kind</li>
-                <li className="flex items-center gap-2"><TrendingUp size={14} className="text-green-400" /> Growth Mindset & High EQ</li>
-                <li className="flex items-center gap-2"><Wallet size={14} className="text-green-400" /> Teaches me finances</li>
+                <li className="flex items-center gap-3"><GraduationCap size={14} className="text-green-400" /> Academically Inclined</li>
+                <li className="flex items-center gap-3"><Heart size={14} className="text-green-400" /> Humble, Empathetic & Kind</li>
+                <li className="flex items-center gap-3"><TrendingUp size={14} className="text-green-400" /> Growth Mindset & High EQ</li>
+                <li className="flex items-center gap-3"><Wallet size={14} className="text-green-400" /> Teaches me finances</li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-red-400 font-bold text-sm mb-2 uppercase tracking-wider flex items-center gap-2">
+              <h4 className="text-red-400 font-bold text-sm mb-2 uppercase tracking-wider flex items-center gap-3">
                 <XCircle size={16} /> Please No
               </h4>
               <ul className="space-y-2 text-sm text-gray-300 pl-3 border-l-2 border-red-500/20">
-                <li className="flex items-center gap-2"><MonitorSmartphone size={14} className="text-red-400" /> Influencer energy</li>
-                <li className="flex items-center gap-2"><Diamond size={14} className="text-red-400" /> Materialism - Values > Valuables</li>
-                <li className="flex items-center gap-2"><Megaphone size={14} className="text-red-400" /> Married to their job</li>
-                <li className="flex items-center gap-2"><BarChart3 size={14} className="text-red-400" /> Constant Comparisons</li>
+                <li className="flex items-center gap-3"><MonitorSmartphone size={14} className="text-red-400" /> Influencer energy</li>
+                <li className="flex items-center gap-3"><Diamond size={14} className="text-red-400" /> Materialism - Values &gt; Valuables</li>
+                <li className="flex items-center gap-3"><Megaphone size={14} className="text-red-400" /> Married to their job</li>
+                <li className="flex items-center gap-3"><BarChart3 size={14} className="text-red-400" /> Constant Comparisons</li>
               </ul>
             </div>
 
             <div className="sm:col-span-2">
-              <h4 className="text-yellow-400 font-bold text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
+              <h4 className="text-yellow-400 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wider">
                 <Star size={16} /> Bonus Points If...
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {["Naruto Fan", "Great Meme Game", "Anime girl", "Lets me buy tech gadgets", "Dog Lover", "Spiritual", "Dress modern yet elegant", "Puts on Bindi & Kajal occasionally", "Welcome home a Pocket Pom", "Teaches me cooking", "Hits gym and drags me too", "Gets ready quick", "Hiker", "Gets me Boba"].map((b, i) => (
                   <span key={i} className="text-xs bg-yellow-400/10 text-yellow-200 px-2 py-1 rounded border border-yellow-400/20">{b}</span>
                 ))}
               </div>
             </div>
+
+            {/* Quote inside About You */}
+            <div className="sm:col-span-2 lg:col-span-4 mt-4 pt-4 border-t border-white/10 text-center">
+              <p className="text-gray-300 text-sm italic mb-2 leading-relaxed">
+                "I understand everyone has their flaws, but ideally I hope for a partner with high EQ, someone who can point out my mistakes and help me grow into a better version of myself each day. I see feedback as a gift, and I'm willing to work on myself."
+              </p>
+              <span className="text-[#D4AF37] font-serif text-sm font-bold">
+                "Gayyali danivi ina parledu if you tick the above boxes."
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* 8. CLOSING QUOTE */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-4 text-center py-8 border-t border-white/10 mt-4">
-          <MessageSquare className="w-8 h-8 text-[#D4AF37] mx-auto mb-4 opacity-50" />
-          <p className="text-gray-300 text-lg italic mb-6 max-w-3xl mx-auto leading-relaxed">
-            "I understand everyone has their flaws, but ideally I hope for a partner with high EQ, someone who can point out my mistakes and help me grow into a better version of myself each day. I see feedback as a gift, and I'm willing to work on myself."
-          </p>
-          <div className="inline-block px-6 py-3 bg-[#D4AF37]/10 rounded-full border border-[#D4AF37]/30">
-            <p className="text-[#D4AF37] font-serif text-xl font-bold animate-pulse">
-              "Gayyali danivi ina parledu if you tick the above boxes."
-            </p>
+        {/* 8. LIFE IN FRAMES - Photo Gallery */}
+        <div className="col-span-1 md:col-span-2 lg:col-span-4">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-xl font-serif text-white">Life in <span className="text-[#D4AF37] italic">Frames</span></h3>
+              <p className="text-gray-400 text-xs uppercase tracking-wider">Memories • Travels • Life</p>
+            </div>
+            <a 
+              href="https://www.instagram.com/bommenahemanth/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-4 py-2 rounded-full text-xs font-medium hover:scale-105 transition-transform"
+            >
+              <Instagram className="w-3 h-3" />
+              Instagram
+            </a>
+          </div>
+          <p className="text-gray-400 text-xs mb-4 text-center"><span className="text-[#D4AF37]">Heads up!</span> I've lost some weight, so I might look different across photos. Also, all fake candids!</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {images.map((img, index) => (
+              <div
+                key={index}
+                className="relative group rounded-xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#D4AF37]/20 active:scale-[0.98]"
+                onClick={() => setFullscreenIndex(index)}
+              >
+                <img
+                  src={img}
+                  alt={`Gallery ${index + 1}`}
+                  className="w-full aspect-square object-cover object-top transition-all duration-500 opacity-85 group-hover:opacity-100 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Maximize2 className="text-[#D4AF37] w-5 h-5" />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
       </div>
+
+      {/* Fullscreen Image Modal */}
+      {fullscreenIndex !== null && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setFullscreenIndex(null);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') setFullscreenIndex(null);
+            if (e.key === 'ArrowLeft' && fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
+            if (e.key === 'ArrowRight' && fullscreenIndex < images.length - 1) setFullscreenIndex(fullscreenIndex + 1);
+          }}
+          tabIndex={0}
+          ref={(el) => el && el.focus()}
+        >
+          {/* Left Arrow */}
+          <button
+            className={`absolute left-[5%] sm:left-[10%] md:left-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
+            }}
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          <div className="relative max-w-5xl max-h-[90vh] animate-zoomIn">
+            <img 
+              src={images[fullscreenIndex]} 
+              alt="Fullscreen" 
+              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl shadow-[#D4AF37]/20"
+            />
+            <button 
+              className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all border border-white/20"
+              onClick={() => setFullscreenIndex(null)}
+            >
+              <X size={24} />
+            </button>
+            {/* Image counter */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black/60 backdrop-blur rounded-full text-white/80 text-sm border border-white/10">
+              {fullscreenIndex + 1} / {images.length}
+            </div>
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            className={`absolute right-[5%] sm:right-[10%] md:right-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === images.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (fullscreenIndex < images.length - 1) setFullscreenIndex(fullscreenIndex + 1);
+            }}
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
 // --- Family Section ---
+// Family gallery images (excluding photos 2, 7, 8 as requested)
+const FAMILY_PHOTOS = [
+  'images/family/family1.jpg',
+  'images/family/family3.jpg',
+  'images/family/family4.jpg',
+  'images/family/family5.jpg',
+  'images/family/IMG_3929.jpg',
+].map(img => import.meta.env.BASE_URL + img);
+
 export function FamilySection({ profile, scrollToTop }) {
   const [fullscreenImage, setFullscreenImage] = useState(null);
+  const [fullscreenGalleryIndex, setFullscreenGalleryIndex] = useState(null);
 
   return (
-    <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-6 lg:p-12 overflow-hidden snap-start font-sans">
+    <div className="relative w-full bg-[#080808] flex flex-col py-4 px-4 lg:py-6 lg:px-8 overflow-hidden snap-start font-sans">
       <NetworkBackground />
       {/* Ambient glow effects */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
       
-      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-6 lg:-mx-12 mb-8">
+      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 lg:-mx-6 mb-3">
         <div>
           <h2 className="text-3xl font-serif text-white tracking-wide">
             The <span className="text-[#D4AF37] italic">Inner</span> Circle
@@ -643,18 +803,18 @@ export function FamilySection({ profile, scrollToTop }) {
 
       {/* Family Summary - The Bommena Squad */}
       <div className="relative z-10 max-w-5xl mx-auto w-full mb-6 px-4">
-        <div className="bg-gradient-to-br from-[#D4AF37]/10 via-[#0c0c0c]/80 to-[#D4AF37]/5 border border-[#D4AF37]/30 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="bg-gradient-to-br from-[#D4AF37]/10 via-[#0c0c0c]/80 to-[#D4AF37]/5 border border-[#D4AF37]/30 rounded-2xl p-4 backdrop-blur-sm">
           <p className="text-center text-gray-300 text-sm leading-relaxed">We are a close knit family of four, bound by respect, love, and an unshakable bond that only grows stronger with time. When you become part of this family, you will not just gain a husband but a whole tribe that stands by you. Your father in law will always take your side in our tiny fights, your mother in law will pass down her wisdom, drape you in beautiful sarees, and love you like her own daughter. And Meghana already dreams of spoiling you and your kids with endless love and gifts. This is home.</p>
         </div>
       </div>
 
 
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto w-full flex-grow items-center">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto w-full items-start">
 
         {/* DAD CARD */}
         <div className="bg-[#0c0c0c]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-3xl overflow-hidden group hover:border-[#D4AF37]/60 transition-all duration-500 hover:-translate-y-3 active:scale-[0.98] active:scale-[0.98] hover:shadow-2xl hover:shadow-[#D4AF37]/20 flex flex-col h-full">
           <div 
-            className="h-64 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
+            className="h-52 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
             onClick={() => setFullscreenImage(profile.dadPhoto)}
           >
             {profile.dadPhoto && (
@@ -663,8 +823,8 @@ export function FamilySection({ profile, scrollToTop }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#D4AF37]/5" />
           </div>
-          <div className="p-6 flex-grow flex flex-col bg-gradient-to-b from-[#0c0c0c] to-[#080808]">
-            <div className="flex justify-between items-start mb-5">
+          <div className="p-4 flex-grow flex flex-col bg-gradient-to-b from-[#0c0c0c] to-[#080808]">
+            <div className="flex justify-between items-start mb-3">
               <div>
                 <h3 className="text-2xl font-serif text-white font-bold tracking-tight">Father</h3>
                 <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider mt-1">Srinivas Rao</p>
@@ -673,7 +833,7 @@ export function FamilySection({ profile, scrollToTop }) {
                 <Wrench className="text-[#D4AF37]" size={20} />
               </div>
             </div>
-            <div className="space-y-3 flex-grow">
+            <div className="space-y-2 flex-grow">
               <div className="flex items-start gap-3 group/item">
                 <Cpu size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Mechanical Engineer & Head of Ops at NBEIL</p>
@@ -700,12 +860,8 @@ export function FamilySection({ profile, scrollToTop }) {
 
         {/* MOM CARD - Center, Elevated */}
         <div className="bg-[#0c0c0c]/80 backdrop-blur-sm border-2 border-[#D4AF37]/50 rounded-3xl overflow-hidden group hover:border-[#D4AF37] hover:shadow-[0_0_60px_rgba(212,175,55,0.3)] transition-all duration-500 hover:-translate-y-5 flex flex-col h-full relative z-20 scale-105">
-          {/* Crown badge */}
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-black/70 p-3 rounded-full backdrop-blur-md border border-[#D4AF37]/50 group-hover:bg-[#D4AF37]/20 transition-colors duration-500">
-            <Crown className="text-[#D4AF37] fill-[#D4AF37]" size={24} />
-          </div>
           <div 
-            className="h-72 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
+            className="h-60 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
             onClick={() => setFullscreenImage(profile.momPhoto)}
           >
             {profile.momPhoto && (
@@ -714,10 +870,17 @@ export function FamilySection({ profile, scrollToTop }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#D4AF37]/10" />
           </div>
-          <div className="p-8 flex-grow flex flex-col text-center bg-gradient-to-b from-[#0c0c0c] to-[#080808]">
-            <h3 className="text-2xl font-serif text-white font-bold tracking-tight">Mother</h3>
-            <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider mt-1 mb-5">Savithri (Home Minister)</p>
-            <div className="space-y-3 flex-grow text-left">
+          <div className="p-4 flex-grow flex flex-col bg-gradient-to-b from-[#0c0c0c] to-[#080808]">
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <h3 className="text-2xl font-serif text-white font-bold tracking-tight">Mother</h3>
+                <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider mt-1">Savithri</p>
+              </div>
+              <div className="p-2 bg-[#D4AF37]/10 rounded-xl group-hover:bg-[#D4AF37]/20 transition-colors">
+                <Crown className="text-[#D4AF37]" size={20} />
+              </div>
+            </div>
+            <div className="space-y-2 flex-grow">
               <div className="flex items-start gap-3">
                 <Crown size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Laxmi of our house & proud homemaker</p>
@@ -745,7 +908,7 @@ export function FamilySection({ profile, scrollToTop }) {
         {/* SISTER CARD */}
         <div className="bg-[#0c0c0c]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-3xl overflow-hidden group hover:border-[#D4AF37]/60 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-[#D4AF37]/20 flex flex-col h-full">
           <div 
-            className="h-64 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
+            className="h-52 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
             onClick={() => setFullscreenImage(profile.sisPhoto)}
           >
             {profile.sisPhoto && (
@@ -754,8 +917,8 @@ export function FamilySection({ profile, scrollToTop }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#D4AF37]/5" />
           </div>
-          <div className="p-6 flex-grow flex flex-col bg-gradient-to-b from-[#0c0c0c] to-[#080808]">
-            <div className="flex justify-between items-start mb-5">
+          <div className="p-4 flex-grow flex flex-col bg-gradient-to-b from-[#0c0c0c] to-[#080808]">
+            <div className="flex justify-between items-start mb-3">
               <div>
                 <h3 className="text-2xl font-serif text-white font-bold tracking-tight">Sister</h3>
                 <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider mt-1">Meghana</p>
@@ -764,7 +927,7 @@ export function FamilySection({ profile, scrollToTop }) {
                 <Feather className="text-[#D4AF37]" size={20} />
               </div>
             </div>
-            <div className="space-y-3 flex-grow">
+            <div className="space-y-2 flex-grow">
               <div className="flex items-start gap-3">
                 <Gem size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm leading-relaxed">Potti Laxmi (of our house & the next)</p>
@@ -791,26 +954,105 @@ export function FamilySection({ profile, scrollToTop }) {
 
       </div>
 
+      {/* Family Gallery Grid */}
+      <div className="relative z-10 max-w-6xl mx-auto w-full mt-8 px-4 pb-4">
+        <h3 className="text-xl font-serif text-white text-center mb-4">
+          Family <span className="text-[#D4AF37] italic">Moments</span>
+        </h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {FAMILY_PHOTOS.map((img, index) => (
+            <div
+              key={index}
+              className="relative group rounded-xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#D4AF37]/20 active:scale-[0.98]"
+              onClick={() => setFullscreenGalleryIndex(index)}
+            >
+              <img
+                src={img}
+                alt={`Family ${index + 1}`}
+                className="w-full aspect-square object-cover object-top transition-all duration-500 opacity-85 group-hover:opacity-100 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+          ))}
+        </div>
+      </div>
+
 
       {/* Fullscreen Image Modal */}
       {fullscreenImage && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer animate-fadeIn"
           onClick={() => setFullscreenImage(null)}
         >
           <div className="relative max-w-5xl max-h-[90vh] animate-zoomIn">
-            <img 
-              src={fullscreenImage} 
-              alt="Fullscreen" 
+            <img
+              src={fullscreenImage}
+              alt="Fullscreen"
               className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl shadow-[#D4AF37]/20"
             />
-            <button 
+            <button
               className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all border border-white/20"
               onClick={() => setFullscreenImage(null)}
             >
               <X size={24} />
             </button>
           </div>
+        </div>
+      )}
+
+      {/* Fullscreen Gallery Modal with Navigation */}
+      {fullscreenGalleryIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setFullscreenGalleryIndex(null);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') setFullscreenGalleryIndex(null);
+            if (e.key === 'ArrowLeft' && fullscreenGalleryIndex > 0) setFullscreenGalleryIndex(fullscreenGalleryIndex - 1);
+            if (e.key === 'ArrowRight' && fullscreenGalleryIndex < FAMILY_PHOTOS.length - 1) setFullscreenGalleryIndex(fullscreenGalleryIndex + 1);
+          }}
+          tabIndex={0}
+          ref={(el) => el && el.focus()}
+        >
+          {/* Left Arrow - positioned closer to image */}
+          <button
+            className={`absolute left-[5%] sm:left-[10%] md:left-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenGalleryIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (fullscreenGalleryIndex > 0) setFullscreenGalleryIndex(fullscreenGalleryIndex - 1);
+            }}
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          <div className="relative max-w-6xl max-h-[90vh] animate-zoomIn">
+            <img
+              src={FAMILY_PHOTOS[fullscreenGalleryIndex]}
+              alt="Fullscreen"
+              className="max-w-full max-h-[80vh] sm:max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl shadow-[#D4AF37]/30"
+            />
+            <button
+              className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110"
+              onClick={() => setFullscreenGalleryIndex(null)}
+            >
+              <X size={24} />
+            </button>
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black/60 backdrop-blur rounded-full text-white/80 text-sm border border-white/10">
+              {fullscreenGalleryIndex + 1} / {FAMILY_PHOTOS.length}
+            </div>
+          </div>
+
+          {/* Right Arrow - positioned closer to image */}
+          <button
+            className={`absolute right-[5%] sm:right-[10%] md:right-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenGalleryIndex === FAMILY_PHOTOS.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (fullscreenGalleryIndex < FAMILY_PHOTOS.length - 1) setFullscreenGalleryIndex(fullscreenGalleryIndex + 1);
+            }}
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
       )}
     </div>
@@ -830,20 +1072,16 @@ export function GallerySection({ profile, scrollToTop }) {
     ? profile.galleryImages
     : PLACEHOLDER_GALLERY;
 
-  const displayImages = [...images];
-  while (displayImages.length < 15) {
-    displayImages.push(PLACEHOLDER_GALLERY[displayImages.length % PLACEHOLDER_GALLERY.length]);
-  }
-  const finalImages = displayImages.slice(0, 15);
+  const finalImages = images;
 
   return (
-    <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-6 lg:p-12 overflow-hidden snap-start font-sans">
+    <div className="relative w-full bg-[#080808] flex flex-col py-4 px-4 lg:py-6 lg:px-8 overflow-hidden snap-start font-sans">
       <NetworkBackground />
       {/* Ambient glow effects */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       
-      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-6 lg:-mx-12 mb-6">
+      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-6 lg:-mx-12 mb-4">
         <div>
           <h2 className="text-3xl font-serif text-white tracking-wide">
             Life in <span className="text-[#D4AF37] italic">Frames</span>
@@ -860,9 +1098,9 @@ export function GallerySection({ profile, scrollToTop }) {
       <div className="relative z-10 max-w-[1600px] mx-auto w-full mb-6 px-2">
         <div className="bg-black/40 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-300 text-sm text-center sm:text-left">
-            <span className="text-[#D4AF37]">📸 Heads up!</span> I've lost some weight, so I might look different across photos.
+            <span className="text-[#D4AF37]">Heads up!</span> I've lost some weight, so I might look different across photos.
             <br className="sm:hidden" />
-            Also, all fake candids — I don't usually look at cameras 😅
+            Also, all fake candids, I don't usually look at cameras
           </p>
           <a 
             href="https://www.instagram.com/bommenahemanth/" 
@@ -876,8 +1114,8 @@ export function GallerySection({ profile, scrollToTop }) {
         </div>
       </div>
 
-      <div className="relative z-10 flex-grow overflow-y-auto pb-12 max-w-[1600px] mx-auto w-full">
-        <div className="columns-2 sm:columns-2 lg:columns-3 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
+      <div className="relative z-10 pb-4 max-w-6xl mx-auto w-full">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {finalImages.map((img, index) => (
             <div
               key={index}
@@ -929,15 +1167,15 @@ export function GallerySection({ profile, scrollToTop }) {
             }
           }}
         >
-          {/* Left Arrow */}
+          {/* Left Arrow - positioned closer to image */}
           <button 
-            className={`absolute left-4 md:left-8 z-10 p-3 md:p-4 bg-black/60 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            className={`absolute left-[5%] sm:left-[10%] md:left-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
             onClick={(e) => {
               e.stopPropagation();
               if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
             }}
           >
-            <ChevronLeft size={28} />
+            <ChevronLeft size={24} />
           </button>
 
           <div className="relative max-w-6xl max-h-[90vh] animate-zoomIn">
@@ -961,155 +1199,15 @@ export function GallerySection({ profile, scrollToTop }) {
             </div>
           </div>
 
-          {/* Right Arrow */}
+          {/* Right Arrow - positioned closer to image */}
           <button 
-            className={`absolute right-4 md:right-8 z-10 p-3 md:p-4 bg-black/60 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === finalImages.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            className={`absolute right-[5%] sm:right-[10%] md:right-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === finalImages.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
             onClick={(e) => {
               e.stopPropagation();
               if (fullscreenIndex < finalImages.length - 1) setFullscreenIndex(fullscreenIndex + 1);
             }}
           >
-            <ChevronRight size={28} />
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// --- Family Gallery Section ---
-const FAMILY_GALLERY_IMAGES = [
-  'images/family/family1.jpg',
-  'images/family/family2.jpg',
-  'images/family/family3.jpg',
-  'images/family/family4.jpg',
-  'images/family/family5.jpg',
-  'images/family/IMG_3929.jpg',
-  'images/family/IMG_8151.jpg',
-  'images/family/IMG_8852.jpg',
-].map(img => import.meta.env.BASE_URL + img);
-
-export function FamilyGallerySection({ scrollToTop }) {
-  const [fullscreenIndex, setFullscreenIndex] = useState(null);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
-  
-  const minSwipeDistance = 50;
-  const images = FAMILY_GALLERY_IMAGES;
-
-  return (
-    <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-6 lg:p-12 overflow-hidden snap-start font-sans">
-      <NetworkBackground />
-      {/* Ambient glow effects */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
-      
-      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-6 lg:-mx-12 mb-6">
-        <div>
-          <h2 className="text-3xl font-serif text-white tracking-wide">
-            Family <span className="text-[#D4AF37] italic">Moments</span>
-          </h2>
-          <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">Together • Always • Forever</p>
-        </div>
-        <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20">
-          <span>Back to Top</span>
-          <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
-        </button>
-      </div>
-      <div className="relative z-10 flex-grow overflow-y-auto pb-12 max-w-[1600px] mx-auto w-full">
-        <div className="columns-2 sm:columns-2 lg:columns-3 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
-          {images.map((img, index) => (
-            <div
-              key={index}
-              className="relative group break-inside-avoid rounded-2xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 active:scale-[0.98]"
-              onClick={() => setFullscreenIndex(index)}
-            >
-              <img
-                src={img}
-                alt={`Family ${index + 1}`}
-                className="w-full h-auto object-cover transition-all duration-700 opacity-85 group-hover:opacity-100 group-hover:scale-110"
-              />
-              
-              {/* Hover overlay with zoom icon */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                <div className="p-4 bg-black/40 backdrop-blur-sm rounded-full border border-[#D4AF37]/30 transform scale-75 group-hover:scale-100 transition-transform duration-500">
-                  <Maximize2 className="text-[#D4AF37] w-6 h-6" />
-                </div>
-              </div>
-              
-              {/* Golden glow on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#D4AF37]/5 pointer-events-none" />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Fullscreen Image Modal with Navigation */}
-      {fullscreenIndex !== null && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setFullscreenIndex(null);
-          }}
-          onTouchStart={(e) => {
-            setTouchEnd(null);
-            setTouchStart(e.targetTouches[0].clientX);
-          }}
-          onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
-          onTouchEnd={() => {
-            if (!touchStart || !touchEnd) return;
-            const distance = touchStart - touchEnd;
-            const isLeftSwipe = distance > minSwipeDistance;
-            const isRightSwipe = distance < -minSwipeDistance;
-            if (isLeftSwipe && fullscreenIndex < images.length - 1) {
-              setFullscreenIndex(fullscreenIndex + 1);
-            }
-            if (isRightSwipe && fullscreenIndex > 0) {
-              setFullscreenIndex(fullscreenIndex - 1);
-            }
-          }}
-        >
-          {/* Left Arrow */}
-          <button 
-            className={`absolute left-4 md:left-8 z-10 p-3 md:p-4 bg-black/60 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
-            }}
-          >
-            <ChevronLeft size={28} />
-          </button>
-
-          <div className="relative max-w-6xl max-h-[90vh] animate-zoomIn">
-            <img 
-              src={images[fullscreenIndex]} 
-              alt="Fullscreen" 
-              className="max-w-full max-h-[80vh] sm:max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl shadow-[#D4AF37]/30"
-            />
-            
-            {/* Close button */}
-            <button 
-              className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110"
-              onClick={() => setFullscreenIndex(null)}
-            >
-              <X size={24} />
-            </button>
-
-            {/* Image counter */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black/60 backdrop-blur rounded-full text-white/80 text-sm border border-white/10">
-              {fullscreenIndex + 1} / {images.length}
-            </div>
-          </div>
-
-          {/* Right Arrow */}
-          <button 
-            className={`absolute right-4 md:right-8 z-10 p-3 md:p-4 bg-black/60 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === images.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (fullscreenIndex < images.length - 1) setFullscreenIndex(fullscreenIndex + 1);
-            }}
-          >
-            <ChevronRight size={28} />
+            <ChevronRight size={24} />
           </button>
         </div>
       )}
@@ -1136,7 +1234,7 @@ export function ContactSection({ scrollToTop }) {
       <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       
       {/* Back to Top header */}
-      <div className="absolute top-0 left-0 right-0 z-30 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent backdrop-blur-md">
+      <div className="absolute top-0 left-0 right-0 z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent backdrop-blur-md">
         <div>
           <h2 className="text-3xl font-serif text-white tracking-wide">
             Let's <span className="text-[#D4AF37] italic">Connect</span>
@@ -1256,6 +1354,24 @@ export function ContactSection({ scrollToTop }) {
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Message Father on WhatsApp
           </a>
+
+          {/* Share Profile Section */}
+          <div className="mt-8 pt-6 border-t border-white/10">
+            <p className="text-gray-400 text-sm mb-3">
+              Know someone who might be interested? Share this profile!
+            </p>
+            <a 
+              href="https://wa.me/?text=Hey!%20I%20found%20Hemanth's%20profile%20and%20thought%20you%20might%20be%20interested.%20Would%20you%20like%20to%20connect%20with%20him%3F%20%F0%9F%92%8D%0A%0ACheck%20out%20his%20profile%20here%3A%20https%3A%2F%2Fbommenahemanth.github.io%2Fmarryme"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+              </svg>
+              Share Profile on WhatsApp
+            </a>
+          </div>
         </div>
 
         {/* Farewell section */}
