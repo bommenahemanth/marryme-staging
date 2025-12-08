@@ -122,7 +122,7 @@ export const TIMELINE_DATA = [
     role: "Sr Manager - Inventory Analytics",
     org: "Walmart",
     loc: "Bentonville, AR (On-site)",
-    logo: "/marryme/images/logos/walmart.png",
+    logo: "/marryme/images/logos/walmart.svg",
     domain: "walmart.com",
     tagline: "Selling Veggies and billion other products",
     responsibilities: [
@@ -144,7 +144,7 @@ export const TIMELINE_DATA = [
     role: "Sr Supply Chain Consultant",
     org: "McKinsey & Company",
     loc: "Dallas, TX (Remote)",
-    logo: "/marryme/images/logos/mckinsey.png",
+    logo: "/marryme/images/logos/mckinsey.svg",
     domain: "mckinsey.com",
     tagline: "Sold pretty ppts",
     responsibilities: [
@@ -166,7 +166,7 @@ export const TIMELINE_DATA = [
     role: "Sr Data Analyst - Merch & Supply Chain",
     org: "THG",
     loc: "Manchester, UK",
-    logo: "/marryme/images/logos/thg.png",
+    logo: "/marryme/images/logos/thg.svg",
     domain: "thg.com",
     tagline: "Sold lipsticks and other make up stuff",
     responsibilities: [
@@ -188,7 +188,7 @@ export const TIMELINE_DATA = [
     role: "Data Analyst - Supply Chain",
     org: "Tata Consultancy Services",
     loc: "Hyderabad, India",
-    logo: "/marryme/images/logos/tcs.png",
+    logo: "/marryme/images/logos/tcs.svg",
     domain: "tcs.com",
     tagline: "Sold my time",
     responsibilities: [
@@ -210,7 +210,7 @@ export const TIMELINE_DATA = [
     role: "MSc Analytics - Operations Research",
     org: "University of Manchester",
     loc: "Manchester, UK",
-    logo: "/marryme/images/logos/manchester.png",
+    logo: "/marryme/images/logos/manchester.svg",
     domain: "manchester.ac.uk",
     tagline: "I don't even know how a classroom looks like",
     responsibilities: [
@@ -232,7 +232,7 @@ export const TIMELINE_DATA = [
     role: "Bachelor's - Mechanical Engineering",
     org: "Vellore Institute of Technology",
     loc: "Vellore, India",
-    logo: "/marryme/images/logos/vit.png",
+    logo: "/marryme/images/logos/vit.svg",
     domain: "vit.ac.in",
     tagline: "Mech because papa forced me to",
     responsibilities: [
