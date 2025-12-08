@@ -237,7 +237,7 @@ function FactsModal({ item, onClose }) {
               src={item.logo || `https://logo.clearbit.com/${item.domain}`}
               alt="logo"
               className="w-full h-full object-contain"
-              onError={(e) => { e.target.src = 'https://via.placeholder.com/50/000000/FFFFFF?text=' + item.org[0] }}
+              onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentElement.innerHTML = `<span class="text-[#D4AF37] font-bold text-2xl">${item.org[0]}</span>`; }}
             />
           </div>
           <h3 className="text-2xl font-serif bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent font-bold">

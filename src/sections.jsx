@@ -1457,15 +1457,12 @@ export function ContactSection({ scrollToTop }) {
 
         {/* Built with love footer */}
         <div className="pt-10 mt-6 border-t border-white/5">
-          <div className="text-center space-y-3">
-            <p className="text-gray-500 text-xs leading-relaxed max-w-lg mx-auto">
-              Built with Gemini 2.5 Pro for the skeleton, VS Code and GitHub Copilot powered by Claude Opus 4.5 for features, 
-              GitHub Pages for hosting, and two sleepless weekend nights to bring this to life.
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-gray-500 text-xs leading-relaxed">
+              Built with Gemini 2.5 Pro, VS Code + GitHub Copilot (Claude Opus 4.5), GitHub Pages & two sleepless weekends ☕
             </p>
-            <p className="text-gray-400 text-sm">
-              Feedback is a gift. I would love to improve this website and myself.
-              <br />
-              <span className="text-[#D4AF37]">Got thoughts? Text me.</span>
+            <p className="text-gray-400 text-sm mt-2">
+              Feedback is a gift — <span className="text-[#D4AF37]">Got thoughts? Text me.</span>
             </p>
           </div>
         </div>
