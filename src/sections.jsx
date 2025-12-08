@@ -1448,10 +1448,25 @@ export function ContactSection({ scrollToTop }) {
                   Didn't quite click? <span className="text-[#D4AF37] font-semibold">No worries!</span>
                 </p>
                 <p className="text-gray-400 text-sm">
-                  Wishing you all the best in your search. May you find your perfect match soon! ✨
+                  Wishing you all the best in your search. May you find your perfect match soon!
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Built with love footer */}
+        <div className="pt-10 mt-6 border-t border-white/5">
+          <div className="text-center space-y-3">
+            <p className="text-gray-500 text-xs leading-relaxed max-w-lg mx-auto">
+              Built with Gemini 2.5 Pro for the skeleton, VS Code and GitHub Copilot powered by Claude Opus 4.5 for features, 
+              GitHub Pages for hosting, and two sleepless weekend nights to bring this to life.
+            </p>
+            <p className="text-gray-400 text-sm">
+              Feedback is a gift. I would love to improve this website and myself.
+              <br />
+              <span className="text-[#D4AF37]">Got thoughts? Text me.</span>
+            </p>
           </div>
         </div>
       </div>
