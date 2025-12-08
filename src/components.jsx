@@ -60,14 +60,14 @@ import {
 
 function DetailItem({ icon: Icon, label, value, subValue }) {
   return (
-    <div className="flex items-start gap-3">
+    <div className="flex items-start gap-3 md:gap-4">
       <div className="mt-1 flex-shrink-0">
-        <Icon className="w-4 h-4 text-white/80" />
+        <Icon className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white/80" />
       </div>
       <div>
-        <h3 className="text-white font-medium text-xs leading-tight">{value}</h3>
-        {subValue && <p className="text-[#D4AF37]/80 text-xs font-light">{subValue}</p>}
-        {label && !subValue && <p className="text-[#D4AF37]/80 text-xs font-light">{label}</p>}
+        <h3 className="text-white font-medium text-xs md:text-sm lg:text-base leading-tight">{value}</h3>
+        {subValue && <p className="text-[#D4AF37]/80 text-xs md:text-sm lg:text-base font-light">{subValue}</p>}
+        {label && !subValue && <p className="text-[#D4AF37]/80 text-xs md:text-sm lg:text-base font-light">{label}</p>}
       </div>
     </div>
   );
@@ -447,3 +447,358 @@ const CompatibilityTab = ({ t, lang = "en" }) => {
 };
 
 export { DetailItem, ProfileEditModal, NetworkBackground, FactsModal, CompatibilityTab };
+
+// Twinkling Stars Background
+export function StarField({ count = 30 }) {
+  const stars = React.useMemo(() => {
+    return Array.from({ length: count }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 3}s`,
+      size: Math.random() * 2 + 1
+    }));
+  }, [count]);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {stars.map(star => (
+        <div
+          key={star.id}
+          className="twinkle-star"
+          style={{
+            left: star.left,
+            top: star.top,
+            animationDelay: star.animationDelay,
+            width: `${star.size}px`,
+            height: `${star.size}px`
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Scroll Reveal Hook - triggers visibility when element enters viewport
+export function useScrollReveal(threshold = 0.2) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [threshold]);
+
+  return [ref, isVisible];
+}
+
+// TypeWriter Effect Component - types out text character by character
+export function TypeWriter({ text, speed = 80, delay = 500, className = '', onComplete }) {
+  const [displayText, setDisplayText] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const timer = setTimeout(() => {
+      let index = 0;
+      const typeInterval = setInterval(() => {
+        if (index < text.length) {
+          setDisplayText(text.slice(0, index + 1));
+          index++;
+        } else {
+          clearInterval(typeInterval);
+          setIsComplete(true);
+          onComplete && onComplete();
+        }
+      }, speed);
+
+      return () => clearInterval(typeInterval);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [isVisible, text, speed, delay, onComplete]);
+
+  return (
+    <span ref={ref} className={className}>
+      {displayText}
+      {!isComplete && <span className="animate-pulse">|</span>}
+    </span>
+  );
+}
+
+// Animated Counter Component
+export function AnimatedCounter({ end, duration = 2000, prefix = '', suffix = '' }) {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const startTime = Date.now();
+    const endValue = parseInt(end, 10);
+
+    const updateCounter = () => {
+      const now = Date.now();
+      const progress = Math.min((now - startTime) / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentCount = Math.floor(easeOutQuart * endValue);
+      
+      setCount(currentCount);
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
+    };
+
+    requestAnimationFrame(updateCounter);
+  }, [isVisible, end, duration]);
+
+  return (
+    <span ref={ref} className="counter counter-animate">
+      {prefix}{count}{suffix}
+    </span>
+  );
+}
+
+// Text Reveal Component - reveals text when scrolled into view
+export function TextReveal({ children, className = '', stagger = false }) {
+  const [ref, isVisible] = useScrollReveal(0.3);
+
+  return (
+    <div
+      ref={ref}
+      className={`${stagger ? 'text-reveal-stagger' : 'text-reveal'} ${isVisible ? 'visible' : ''} ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+// Cursor Trail Effect (Desktop only)
+export function CursorTrail() {
+  const [trails, setTrails] = React.useState([]);
+  const trailRef = React.useRef([]);
+  
+  React.useEffect(() => {
+    // Only on desktop
+    if (window.matchMedia('(hover: none)').matches) return;
+    
+    const handleMouseMove = (e) => {
+      const newTrail = {
+        id: Date.now(),
+        x: e.clientX,
+        y: e.clientY
+      };
+      
+      trailRef.current = [...trailRef.current.slice(-8), newTrail];
+      setTrails([...trailRef.current]);
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Clean up old trails
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (trailRef.current.length > 0) {
+        trailRef.current = trailRef.current.slice(1);
+        setTrails([...trailRef.current]);
+      }
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <>
+      {trails.map((trail, idx) => (
+        <div
+          key={trail.id}
+          className="cursor-trail active"
+          style={{
+            left: trail.x - 4,
+            top: trail.y - 4,
+            opacity: (idx + 1) / trails.length * 0.5,
+            transform: `scale(${(idx + 1) / trails.length})`
+          }}
+        />
+      ))}
+    </>
+  );
+}
+
+// Section Divider Component
+export function SectionDivider({ variant = 'default' }) {
+  if (variant === 'diamond') {
+    return (
+      <div className="section-divider-diamond relative z-20 my-4">
+        <span></span>
+      </div>
+    );
+  }
+  
+  return (
+    <div className="section-divider relative z-20" />
+  );
+}
+
+// Lazy Loading Image with skeleton loading
+export function LazyImage({ src, alt, className = '', ...props }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { rootMargin: '100px' }
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => {
+      if (imgRef.current) {
+        observer.unobserve(imgRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div ref={imgRef} className={`relative overflow-hidden ${className}`} {...props}>
+      {/* Skeleton loader */}
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 animate-pulse">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skeleton-shimmer" />
+        </div>
+      )}
+      
+      {/* Actual image */}
+      {isInView && (
+        <img
+          src={src}
+          alt={alt}
+          className={`w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          onLoad={() => setIsLoaded(true)}
+          loading="lazy"
+        />
+      )}
+    </div>
+  );
+}
+
+// Quick Jump Navigation Menu
+export function QuickJumpMenu({ sections, currentSection, onNavigate }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 hidden md:block">
+      {/* Toggle button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-10 h-10 bg-black/70 backdrop-blur-md border border-[#D4AF37]/30 rounded-full flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all duration-300 mb-2"
+        aria-label="Quick navigation"
+      >
+        <span className="text-lg">☰</span>
+      </button>
+
+      {/* Navigation menu */}
+      <div 
+        className={`flex flex-col gap-2 transition-all duration-300 ${
+          isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
+        }`}
+      >
+        {sections.map((section, idx) => (
+          <button
+            key={section.id}
+            onClick={() => {
+              onNavigate(section.id);
+              setIsOpen(false);
+            }}
+            className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+              currentSection === section.id
+                ? 'bg-[#D4AF37] text-black scale-110'
+                : 'bg-black/70 backdrop-blur-md border border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37]/20'
+            }`}
+            title={section.label}
+          >
+            {section.icon || idx + 1}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}

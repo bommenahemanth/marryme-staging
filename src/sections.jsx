@@ -25,7 +25,7 @@ import {
   X,
   ArrowUp, Calculator, Clock, Pizza, Scale, Gem, Plane, ChefHat, Cpu, Users, Instagram, MessageCircle, Triangle, BarChart3, Diamond, Dog, Flame, GraduationCap, Map, Megaphone, MonitorSmartphone, Share2, TrendingUp, Wallet, WifiOff, Backpack, Tractor, Apple, PawPrint, Mountain, Waves, Compass, Book, Baby, HeartHandshake, Shield, Smartphone, Smile, Tv, Footprints, Activity, Lightbulb, Bot, Mail, CreditCard, Target, Carrot, Music, Coffee, Calendar} from 'lucide-react';
 
-import { CompatibilityTab , NetworkBackground } from './components';
+import { CompatibilityTab , NetworkBackground, StarField } from './components';
 import { TRANSLATIONS, ASTRO_DATA, ASTRO_DATA_TE, PLACEHOLDER_GALLERY, MARRIAGE_DATA, HOROSCOPE_PROFILE, MARRIAGE_DATA_TE, HOROSCOPE_PROFILE_TE, ZODIAC_SIGNS, PLANET_NAMES, CHART_HIGHLIGHTS } from './constants';
 
 // --- Marriage Tab Component ---
@@ -239,11 +239,12 @@ export function HoroscopeSection({ scrollToTop }) {
   const handleLangToggle = () => setLang(prev => prev === 'en' ? 'te' : 'en');
 
   return (
-    <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-hidden">
+    <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-visible">
       <NetworkBackground />
-      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-4 lg:-mx-6 mb-3">
+      <StarField count={25} />
+      <div className="sticky top-0 z-50 w-full px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center bg-black/95 backdrop-blur-xl border-b border-[#D4AF37]/20 mb-3">
         <div>
-          <h2 className="text-3xl font-serif text-white tracking-wide">
+          <h2 className="text-2xl sm:text-3xl font-serif text-white tracking-wide">
             {t.title}
           </h2>
           <p className="text-[#D4AF37] uppercase tracking-[0.2em] text-xs font-bold mt-1">{t.subtitle}</p>
@@ -262,7 +263,7 @@ export function HoroscopeSection({ scrollToTop }) {
         </div>
       </div>
 
-      <div className="relative z-10 flex-grow bg-[#0c0c0c] border border-[#D4AF37]/30 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
+      <div className="relative z-10 flex-grow bg-[#0c0c0c] border border-[#D4AF37]/30 rounded-3xl overflow-hidden shadow-2xl flex flex-col reveal-on-scroll">
         <div className="flex flex-wrap border-b border-[#D4AF37]/20 bg-black/40">
           {t.tabs.map((tab, idx) => (
             <button
@@ -442,15 +443,19 @@ export function HoroscopeSection({ scrollToTop }) {
 
 // --- About Me Section ---
 export function AboutMeSection({ scrollToTop, galleryImages }) {
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 50;
   const [fullscreenIndex, setFullscreenIndex] = useState(null);
   const images = galleryImages && galleryImages.length > 0 ? galleryImages : PLACEHOLDER_GALLERY;
   return (
-    <div className="relative w-full min-h-screen bg-[#050505] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-y-auto snap-start font-sans">
+    <div className="relative w-full min-h-screen bg-[#050505] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-visible snap-start font-sans">
       <NetworkBackground />
+      <StarField count={25} />
 
-      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 sm:-mx-6 lg:-mx-12 mb-4">
+      <div className="sticky top-0 z-50 w-full px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center bg-black/95 backdrop-blur-xl border-b border-[#D4AF37]/20 mb-4">
         <div>
-          <h2 className="text-3xl font-serif text-white tracking-wide">
+          <h2 className="text-2xl sm:text-3xl font-serif text-white tracking-wide">
             More than a bit <span className="text-[#D4AF37] italic">about</span> Me..
           </h2>
           <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">Grounded • Grateful • Growing</p>
@@ -461,7 +466,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
         </button>
       </div>
 
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1400px] mx-auto w-full pb-20">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1400px] mx-auto w-full pb-20 reveal-on-scroll">
 
         {/* 1. BIO (Wide) */}
         <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-[#D4AF37]/30 rounded-3xl p-6 hover:border-[#D4AF37]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#D4AF37]/10 group">
@@ -684,11 +689,11 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
             </a>
           </div>
           <p className="text-gray-400 text-xs mb-4 text-center"><span className="text-[#D4AF37]">Heads up!</span> I've lost some weight, so I might look different across photos. Also, all fake candids!</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 gallery-stagger">
             {images.map((img, index) => (
               <div
                 key={index}
-                className="relative group rounded-xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#D4AF37]/20 active:scale-[0.98]"
+                className="relative group rounded-xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#D4AF37]/20 active:scale-[0.98] gallery-item gallery-hover-zoom"
                 onClick={() => setFullscreenIndex(index)}
               >
                 <img
@@ -709,7 +714,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
       {/* Fullscreen Image Modal */}
       {fullscreenIndex !== null && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md lightbox-backdrop flex items-center justify-center p-4 animate-fadeIn"
           onClick={(e) => {
             if (e.target === e.currentTarget) setFullscreenIndex(null);
           }}
@@ -718,25 +723,33 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
             if (e.key === 'ArrowLeft' && fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
             if (e.key === 'ArrowRight' && fullscreenIndex < images.length - 1) setFullscreenIndex(fullscreenIndex + 1);
           }}
+          onTouchStart={(e) => {
+            setTouchEnd(null);
+            setTouchStart(e.targetTouches[0].clientX);
+          }}
+          onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
+          onTouchEnd={() => {
+            if (!touchStart || !touchEnd) return;
+            const distance = touchStart - touchEnd;
+            if (distance > minSwipeDistance && fullscreenIndex < images.length - 1) setFullscreenIndex(fullscreenIndex + 1);
+            if (distance < -minSwipeDistance && fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
+          }}
           tabIndex={0}
           ref={(el) => el && el.focus()}
         >
-          {/* Left Arrow */}
+          {/* Desktop: Side arrows, Mobile: Bottom arrows */}
           <button
-            className={`absolute left-[5%] sm:left-[10%] md:left-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
-            }}
+            className={`hidden md:block absolute left-[15%] top-1/2 -translate-y-1/2 z-10 p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => { e.stopPropagation(); if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1); }}
           >
             <ChevronLeft size={24} />
           </button>
 
-          <div className="relative max-w-5xl max-h-[90vh] animate-zoomIn">
+          <div className="relative max-w-5xl max-h-[80vh] md:max-h-[90vh] animate-lightbox">
             <img 
               src={images[fullscreenIndex]} 
               alt="Fullscreen" 
-              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl shadow-[#D4AF37]/20"
+              className="max-w-full max-h-[70vh] md:max-h-[90vh] object-contain rounded-2xl shadow-2xl shadow-[#D4AF37]/20"
             />
             <button 
               className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all border border-white/20"
@@ -750,16 +763,29 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
             </div>
           </div>
 
-          {/* Right Arrow */}
+          {/* Desktop: Side arrow */}
           <button
-            className={`absolute right-[5%] sm:right-[10%] md:right-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === images.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (fullscreenIndex < images.length - 1) setFullscreenIndex(fullscreenIndex + 1);
-            }}
+            className={`hidden md:block absolute right-[15%] top-1/2 -translate-y-1/2 z-10 p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === images.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => { e.stopPropagation(); if (fullscreenIndex < images.length - 1) setFullscreenIndex(fullscreenIndex + 1); }}
           >
             <ChevronRight size={24} />
           </button>
+
+          {/* Mobile: Bottom arrows */}
+          <div className="md:hidden fixed bottom-8 left-0 right-0 flex justify-center gap-16 z-20">
+            <button
+              className={`p-4 bg-black/70 backdrop-blur rounded-full border border-white/20 ${fullscreenIndex === 0 ? 'opacity-30' : 'opacity-100 active:bg-[#D4AF37] active:text-black'}`}
+              onClick={(e) => { e.stopPropagation(); if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1); }}
+            >
+              <ChevronLeft size={28} />
+            </button>
+            <button
+              className={`p-4 bg-black/70 backdrop-blur rounded-full border border-white/20 ${fullscreenIndex === images.length - 1 ? 'opacity-30' : 'opacity-100 active:bg-[#D4AF37] active:text-black'}`}
+              onClick={(e) => { e.stopPropagation(); if (fullscreenIndex < images.length - 1) setFullscreenIndex(fullscreenIndex + 1); }}
+            >
+              <ChevronRight size={28} />
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -779,17 +805,21 @@ const FAMILY_PHOTOS = [
 export function FamilySection({ profile, scrollToTop }) {
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const [fullscreenGalleryIndex, setFullscreenGalleryIndex] = useState(null);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 50;
 
   return (
-    <div className="relative w-full bg-[#080808] flex flex-col py-4 px-4 lg:py-6 lg:px-8 overflow-hidden snap-start font-sans">
+    <div className="relative w-full bg-[#080808] flex flex-col py-4 px-4 lg:py-6 lg:px-8 overflow-visible snap-start font-sans">
       <NetworkBackground />
+      <StarField count={25} />
       {/* Ambient glow effects */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
       
-      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-4 lg:-mx-6 mb-3">
+      <div className="sticky top-0 z-50 w-full px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center bg-black/95 backdrop-blur-xl border-b border-[#D4AF37]/20 mb-3">
         <div>
-          <h2 className="text-3xl font-serif text-white tracking-wide">
+          <h2 className="text-2xl sm:text-3xl font-serif text-white tracking-wide">
             The <span className="text-[#D4AF37] italic">Inner</span> Circle
           </h2>
           <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">Grateful • Fun • Everything</p>
@@ -802,14 +832,14 @@ export function FamilySection({ profile, scrollToTop }) {
 
 
       {/* Family Summary - The Bommena Squad */}
-      <div className="relative z-10 max-w-5xl mx-auto w-full mb-6 px-4">
+      <div className="relative z-10 max-w-5xl mx-auto w-full mb-6 px-4 reveal-on-scroll">
         <div className="bg-gradient-to-br from-[#D4AF37]/10 via-[#0c0c0c]/80 to-[#D4AF37]/5 border border-[#D4AF37]/30 rounded-2xl p-4 backdrop-blur-sm">
           <p className="text-center text-gray-300 text-sm leading-relaxed">We are a close knit family of four, bound by respect, love, and an unshakable bond that only grows stronger with time. When you become part of this family, you will not just gain a husband but a whole tribe that stands by you. Your father in law will always take your side in our tiny fights, your mother in law will pass down her wisdom, drape you in beautiful sarees, and love you like her own daughter. And Meghana already dreams of spoiling you and your kids with endless love and gifts. This is home.</p>
         </div>
       </div>
 
 
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto w-full items-start">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto w-full items-start reveal-on-scroll">
 
         {/* DAD CARD */}
         <div className="bg-[#0c0c0c]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-3xl overflow-hidden group hover:border-[#D4AF37]/60 transition-all duration-500 hover:-translate-y-3 active:scale-[0.98] active:scale-[0.98] hover:shadow-2xl hover:shadow-[#D4AF37]/20 flex flex-col h-full">
@@ -959,11 +989,11 @@ export function FamilySection({ profile, scrollToTop }) {
         <h3 className="text-xl font-serif text-white text-center mb-4">
           Family <span className="text-[#D4AF37] italic">Moments</span>
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 gallery-stagger">
           {FAMILY_PHOTOS.map((img, index) => (
             <div
               key={index}
-              className="relative group rounded-xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#D4AF37]/20 active:scale-[0.98]"
+              className="relative group rounded-xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#D4AF37]/20 active:scale-[0.98] gallery-item gallery-hover-zoom"
               onClick={() => setFullscreenGalleryIndex(index)}
             >
               <img
@@ -984,7 +1014,7 @@ export function FamilySection({ profile, scrollToTop }) {
           className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer animate-fadeIn"
           onClick={() => setFullscreenImage(null)}
         >
-          <div className="relative max-w-5xl max-h-[90vh] animate-zoomIn">
+          <div className="relative max-w-5xl max-h-[90vh] animate-lightbox">
             <img
               src={fullscreenImage}
               alt="Fullscreen"
@@ -1003,7 +1033,7 @@ export function FamilySection({ profile, scrollToTop }) {
       {/* Fullscreen Gallery Modal with Navigation */}
       {fullscreenGalleryIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md lightbox-backdrop flex items-center justify-center p-4 animate-fadeIn"
           onClick={(e) => {
             if (e.target === e.currentTarget) setFullscreenGalleryIndex(null);
           }}
@@ -1012,25 +1042,33 @@ export function FamilySection({ profile, scrollToTop }) {
             if (e.key === 'ArrowLeft' && fullscreenGalleryIndex > 0) setFullscreenGalleryIndex(fullscreenGalleryIndex - 1);
             if (e.key === 'ArrowRight' && fullscreenGalleryIndex < FAMILY_PHOTOS.length - 1) setFullscreenGalleryIndex(fullscreenGalleryIndex + 1);
           }}
+          onTouchStart={(e) => {
+            setTouchEnd(null);
+            setTouchStart(e.targetTouches[0].clientX);
+          }}
+          onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
+          onTouchEnd={() => {
+            if (!touchStart || !touchEnd) return;
+            const distance = touchStart - touchEnd;
+            if (distance > minSwipeDistance && fullscreenGalleryIndex < FAMILY_PHOTOS.length - 1) setFullscreenGalleryIndex(fullscreenGalleryIndex + 1);
+            if (distance < -minSwipeDistance && fullscreenGalleryIndex > 0) setFullscreenGalleryIndex(fullscreenGalleryIndex - 1);
+          }}
           tabIndex={0}
           ref={(el) => el && el.focus()}
         >
-          {/* Left Arrow - positioned closer to image */}
+          {/* Desktop: Side arrows */}
           <button
-            className={`absolute left-[5%] sm:left-[10%] md:left-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenGalleryIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (fullscreenGalleryIndex > 0) setFullscreenGalleryIndex(fullscreenGalleryIndex - 1);
-            }}
+            className={`hidden md:block absolute left-[15%] top-1/2 -translate-y-1/2 z-10 p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenGalleryIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => { e.stopPropagation(); if (fullscreenGalleryIndex > 0) setFullscreenGalleryIndex(fullscreenGalleryIndex - 1); }}
           >
             <ChevronLeft size={24} />
           </button>
 
-          <div className="relative max-w-6xl max-h-[90vh] animate-zoomIn">
+          <div className="relative max-w-6xl max-h-[80vh] md:max-h-[90vh] animate-lightbox">
             <img
               src={FAMILY_PHOTOS[fullscreenGalleryIndex]}
               alt="Fullscreen"
-              className="max-w-full max-h-[80vh] sm:max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl shadow-[#D4AF37]/30"
+              className="max-w-full max-h-[65vh] md:max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl shadow-[#D4AF37]/30"
             />
             <button
               className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110"
@@ -1043,16 +1081,29 @@ export function FamilySection({ profile, scrollToTop }) {
             </div>
           </div>
 
-          {/* Right Arrow - positioned closer to image */}
+          {/* Desktop: Side arrow */}
           <button
-            className={`absolute right-[5%] sm:right-[10%] md:right-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenGalleryIndex === FAMILY_PHOTOS.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (fullscreenGalleryIndex < FAMILY_PHOTOS.length - 1) setFullscreenGalleryIndex(fullscreenGalleryIndex + 1);
-            }}
+            className={`hidden md:block absolute right-[15%] top-1/2 -translate-y-1/2 z-10 p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenGalleryIndex === FAMILY_PHOTOS.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => { e.stopPropagation(); if (fullscreenGalleryIndex < FAMILY_PHOTOS.length - 1) setFullscreenGalleryIndex(fullscreenGalleryIndex + 1); }}
           >
             <ChevronRight size={24} />
           </button>
+
+          {/* Mobile: Bottom arrows */}
+          <div className="md:hidden fixed bottom-8 left-0 right-0 flex justify-center gap-16 z-20">
+            <button
+              className={`p-4 bg-black/70 backdrop-blur rounded-full border border-white/20 ${fullscreenGalleryIndex === 0 ? 'opacity-30' : 'opacity-100 active:bg-[#D4AF37] active:text-black'}`}
+              onClick={(e) => { e.stopPropagation(); if (fullscreenGalleryIndex > 0) setFullscreenGalleryIndex(fullscreenGalleryIndex - 1); }}
+            >
+              <ChevronLeft size={28} />
+            </button>
+            <button
+              className={`p-4 bg-black/70 backdrop-blur rounded-full border border-white/20 ${fullscreenGalleryIndex === FAMILY_PHOTOS.length - 1 ? 'opacity-30' : 'opacity-100 active:bg-[#D4AF37] active:text-black'}`}
+              onClick={(e) => { e.stopPropagation(); if (fullscreenGalleryIndex < FAMILY_PHOTOS.length - 1) setFullscreenGalleryIndex(fullscreenGalleryIndex + 1); }}
+            >
+              <ChevronRight size={28} />
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -1075,15 +1126,16 @@ export function GallerySection({ profile, scrollToTop }) {
   const finalImages = images;
 
   return (
-    <div className="relative w-full bg-[#080808] flex flex-col py-4 px-4 lg:py-6 lg:px-8 overflow-hidden snap-start font-sans">
+    <div className="relative w-full bg-[#080808] flex flex-col py-4 px-4 lg:py-6 lg:px-8 overflow-visible snap-start font-sans">
       <NetworkBackground />
+      <StarField count={25} />
       {/* Ambient glow effects */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       
-      <div className="z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent sticky top-0 backdrop-blur-md -mx-6 lg:-mx-12 mb-4">
+      <div className="sticky top-0 z-50 w-full px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center bg-black/95 backdrop-blur-xl border-b border-[#D4AF37]/20 mb-4">
         <div>
-          <h2 className="text-3xl font-serif text-white tracking-wide">
+          <h2 className="text-2xl sm:text-3xl font-serif text-white tracking-wide">
             Life in <span className="text-[#D4AF37] italic">Frames</span>
           </h2>
           <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">Memories • Travels • Life</p>
@@ -1114,12 +1166,12 @@ export function GallerySection({ profile, scrollToTop }) {
         </div>
       </div>
 
-      <div className="relative z-10 pb-4 max-w-6xl mx-auto w-full">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="relative z-10 pb-4 max-w-6xl mx-auto w-full reveal-on-scroll">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 gallery-stagger">
           {finalImages.map((img, index) => (
             <div
               key={index}
-              className="relative group break-inside-avoid rounded-2xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 active:scale-[0.98]"
+              className="relative group break-inside-avoid rounded-2xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 active:scale-[0.98] gallery-item gallery-hover-zoom"
               onClick={() => setFullscreenIndex(index)}
             >
               <img
@@ -1145,7 +1197,7 @@ export function GallerySection({ profile, scrollToTop }) {
       {/* Fullscreen Image Modal with Navigation */}
       {fullscreenIndex !== null && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md lightbox-backdrop flex items-center justify-center p-4 animate-fadeIn"
           onClick={(e) => {
             if (e.target === e.currentTarget) setFullscreenIndex(null);
           }}
@@ -1167,22 +1219,19 @@ export function GallerySection({ profile, scrollToTop }) {
             }
           }}
         >
-          {/* Left Arrow - positioned closer to image */}
+          {/* Desktop: Side arrows */}
           <button 
-            className={`absolute left-[5%] sm:left-[10%] md:left-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
-            }}
+            className={`hidden md:block absolute left-[15%] top-1/2 -translate-y-1/2 z-10 p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === 0 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => { e.stopPropagation(); if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1); }}
           >
             <ChevronLeft size={24} />
           </button>
 
-          <div className="relative max-w-6xl max-h-[90vh] animate-zoomIn">
+          <div className="relative max-w-6xl max-h-[80vh] md:max-h-[90vh] animate-lightbox">
             <img 
               src={finalImages[fullscreenIndex]} 
               alt="Fullscreen" 
-              className="max-w-full max-h-[80vh] sm:max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl shadow-[#D4AF37]/30"
+              className="max-w-full max-h-[65vh] md:max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl shadow-[#D4AF37]/30"
             />
             
             {/* Close button */}
@@ -1199,16 +1248,29 @@ export function GallerySection({ profile, scrollToTop }) {
             </div>
           </div>
 
-          {/* Right Arrow - positioned closer to image */}
+          {/* Desktop: Side arrow */}
           <button 
-            className={`absolute right-[5%] sm:right-[10%] md:right-[15%] top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === finalImages.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (fullscreenIndex < finalImages.length - 1) setFullscreenIndex(fullscreenIndex + 1);
-            }}
+            className={`hidden md:block absolute right-[15%] top-1/2 -translate-y-1/2 z-10 p-3 bg-black/70 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110 ${fullscreenIndex === finalImages.length - 1 ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+            onClick={(e) => { e.stopPropagation(); if (fullscreenIndex < finalImages.length - 1) setFullscreenIndex(fullscreenIndex + 1); }}
           >
             <ChevronRight size={24} />
           </button>
+
+          {/* Mobile: Bottom arrows */}
+          <div className="md:hidden fixed bottom-8 left-0 right-0 flex justify-center gap-16 z-20">
+            <button
+              className={`p-4 bg-black/70 backdrop-blur rounded-full border border-white/20 ${fullscreenIndex === 0 ? 'opacity-30' : 'opacity-100 active:bg-[#D4AF37] active:text-black'}`}
+              onClick={(e) => { e.stopPropagation(); if (fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1); }}
+            >
+              <ChevronLeft size={28} />
+            </button>
+            <button
+              className={`p-4 bg-black/70 backdrop-blur rounded-full border border-white/20 ${fullscreenIndex === finalImages.length - 1 ? 'opacity-30' : 'opacity-100 active:bg-[#D4AF37] active:text-black'}`}
+              onClick={(e) => { e.stopPropagation(); if (fullscreenIndex < finalImages.length - 1) setFullscreenIndex(fullscreenIndex + 1); }}
+            >
+              <ChevronRight size={28} />
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -1226,17 +1288,18 @@ export function ContactSection({ scrollToTop }) {
   const hemanthLinkedIn = "https://www.linkedin.com/in/bommena-hemanth-2a2834118/";
   
   return (
-    <div className="relative w-full min-h-screen bg-[#080808] flex flex-col items-center justify-center p-6 lg:p-12 overflow-hidden snap-start font-sans">
+    <div className="relative w-full bg-[#080808] flex flex-col p-6 lg:p-12 pb-24 overflow-visible snap-start font-sans">
       <NetworkBackground />
+      <StarField count={25} />
       
       {/* Ambient glow effects */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       
       {/* Back to Top header */}
-      <div className="absolute top-0 left-0 right-0 z-30 w-full px-4 sm:px-8 py-4 sm:py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent backdrop-blur-md">
+      <div className="sticky top-0 z-50 w-full px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center bg-black/95 backdrop-blur-xl border-b border-[#D4AF37]/20 mb-8">
         <div>
-          <h2 className="text-3xl font-serif text-white tracking-wide">
+          <h2 className="text-2xl sm:text-3xl font-serif text-white tracking-wide">
             Let's <span className="text-[#D4AF37] italic">Connect</span>
           </h2>
           <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">The Next Step</p>
@@ -1248,7 +1311,7 @@ export function ContactSection({ scrollToTop }) {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-2xl mx-auto text-center space-y-8">
+      <div className="relative z-10 max-w-2xl mx-auto text-center space-y-8 py-4 reveal-on-scroll">
         
         {/* Made it so far message */}
         <div className="space-y-4">
