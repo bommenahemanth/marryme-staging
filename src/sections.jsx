@@ -911,7 +911,7 @@ export function FamilySection({ profile, scrollToTop }) {
             onClick={() => setFullscreenImage(profile.dadPhoto)}
           >
             {profile.dadPhoto && (
-              <img src={profile.dadPhoto} alt="Dad" className="w-full h-full object-cover object-[center_15%] md:object-[center_20%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+              <img src={profile.dadPhoto} alt="Dad" className="w-full h-full object-cover object-[center_5%] md:object-[center_20%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
             )}
             {/* Gradient blending overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
@@ -960,7 +960,7 @@ export function FamilySection({ profile, scrollToTop }) {
             onClick={() => setFullscreenImage(profile.momPhoto)}
           >
             {profile.momPhoto && (
-              <img src={profile.momPhoto} alt="Mom" className="w-full h-full object-cover object-[center_20%] md:object-[center_25%] scale-110 opacity-90 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700" />
+              <img src={profile.momPhoto} alt="Mom" className="w-full h-full object-cover object-[center_5%] md:object-[center_25%] scale-110 opacity-90 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700" />
             )}
             {/* Gradient blending overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
