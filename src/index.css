@@ -1977,7 +1977,7 @@ body {
 }
 
 /* Parent photos - better display on mobile */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* Ensure family cards have consistent heights */
   .grid.grid-cols-1.md\:grid-cols-3 > div {
     height: auto !important;
@@ -1985,16 +1985,16 @@ body {
   
   /* Family card photo containers - proper sizing */
   .grid.grid-cols-1.md\:grid-cols-3 > div > div:first-child {
-    height: 200px !important;
-    min-height: 200px;
+    height: 220px !important;
+    min-height: 220px;
   }
   
-  /* Ensure images fill container properly */
-  .grid.grid-cols-1.md\:grid-cols-3 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
+  /* FORCE object-top on ALL images in family grid on mobile */
+  .grid.grid-cols-1.md\:grid-cols-3 > div > div:first-child img,
+  .grid.grid-cols-1.md\:grid-cols-3 img.object-top,
+  .grid.grid-cols-1.md\:grid-cols-3 img[class*="object-"] {
+    object-position: top !important;
+    transform: none !important;
   }
 }
 

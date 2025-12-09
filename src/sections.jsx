@@ -911,7 +911,11 @@ export function FamilySection({ profile, scrollToTop }) {
             onClick={() => setFullscreenImage(profile.dadPhoto)}
           >
             {profile.dadPhoto && (
-              <img src={profile.dadPhoto} alt="Dad" className="w-full h-full object-cover object-[center_5%] md:object-[center_20%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+              <img 
+                src={profile.dadPhoto} 
+                alt="Dad" 
+                className="w-full h-full object-cover object-top md:object-[center_20%] opacity-90 group-hover:opacity-100 md:group-hover:scale-110 transition-all duration-700"
+              />
             )}
             {/* Gradient blending overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
@@ -960,7 +964,11 @@ export function FamilySection({ profile, scrollToTop }) {
             onClick={() => setFullscreenImage(profile.momPhoto)}
           >
             {profile.momPhoto && (
-              <img src={profile.momPhoto} alt="Mom" className="w-full h-full object-cover object-[center_5%] md:object-[center_25%] scale-110 opacity-90 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700" />
+              <img 
+                src={profile.momPhoto} 
+                alt="Mom" 
+                className="w-full h-full object-cover object-[center_calc(0%-20px)] md:object-[center_calc(25%-20px)] md:scale-110 opacity-90 group-hover:opacity-100 md:group-hover:scale-125 transition-all duration-700"
+              />
             )}
             {/* Gradient blending overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
@@ -1009,7 +1017,7 @@ export function FamilySection({ profile, scrollToTop }) {
             onClick={() => setFullscreenImage(profile.sisPhoto)}
           >
             {profile.sisPhoto && (
-              <img src={profile.sisPhoto} alt="Sister" className="w-full h-full object-cover object-[center_15%] md:object-[center_25%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+              <img src={profile.sisPhoto} alt="Sister" className="w-full h-full object-cover object-[center_40%] md:object-[center_40%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
             )}
             {/* Gradient blending overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
