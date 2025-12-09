@@ -802,3 +802,208 @@ export function QuickJumpMenu({ sections, currentSection, onNavigate }) {
     </div>
   );
 }
+
+// Floating Particles Background
+export function FloatingParticles() {
+  const particles = Array.from({ length: 20 }, (_, i) => ({
+    id: i,
+    left: `${Math.random() * 100}%`,
+    delay: `${Math.random() * 15}s`,
+    duration: `${15 + Math.random() * 10}s`
+  }));
+
+  return (
+    <div className="particles-container">
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          className="particle"
+          style={{
+            left: p.left,
+            animationDelay: p.delay,
+            animationDuration: p.duration
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Cinematic Loading Screen Component V3
+export function LoadingScreen({ onLoadComplete }) {
+  const [progress, setProgress] = useState(0);
+  const [phase, setPhase] = useState('loading');
+  const [isExiting, setIsExiting] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile on mount
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  // Critical images (hero, main profile) - must load first
+  const criticalImages = [
+    './images/mallorca.jpg',
+    './images/me.jpg',
+    './images/gallery-1.jpg',
+    './images/gallery-2.jpg'
+  ];
+
+  // Secondary images - background load
+  const secondaryImages = [
+    './images/gallery-3.jpg',
+    './images/gallery-4.jpg',
+    './images/gallery-5.jpg',
+    './images/dad.jpg',
+    './images/mother.JPG',
+    './images/potti.jpg',
+    './images/mom-dad.jpg',
+    './images/family/family-1.jpg',
+    './images/family/family-2.jpg',
+    './images/family/family-3.jpg',
+    './images/family/family-4.jpg'
+  ];
+
+  useEffect(() => {
+    const startTime = Date.now();
+    const MIN_LOAD_TIME = 5000;
+    let loadComplete = false;
+
+    const preloadImage = (src) => new Promise((resolve) => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = resolve;
+      img.src = src;
+    });
+
+    // Load critical first, then secondary in background
+    const preloadAll = async () => {
+      await Promise.all(criticalImages.map(preloadImage));
+      secondaryImages.forEach(src => preloadImage(src));
+      loadComplete = true;
+    };
+    preloadAll();
+
+    const progressInterval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const targetProgress = Math.min((elapsed / MIN_LOAD_TIME) * 100, 100);
+      setProgress(Math.round(targetProgress));
+
+      if (elapsed >= MIN_LOAD_TIME && loadComplete) {
+        clearInterval(progressInterval);
+        setPhase('ready');
+        setTimeout(() => {
+          setIsExiting(true);
+          setTimeout(() => onLoadComplete(), 1800);
+        }, 1200);
+      }
+    }, 50);
+
+    const fallback = setTimeout(() => {
+      clearInterval(progressInterval);
+      setProgress(100);
+      setPhase('ready');
+      setTimeout(() => {
+        setIsExiting(true);
+        setTimeout(() => onLoadComplete(), 1800);
+      }, 1200);
+    }, 10000);
+
+    return () => {
+      clearInterval(progressInterval);
+      clearTimeout(fallback);
+    };
+  }, [onLoadComplete]);
+
+  const displayText = phase === 'ready' ? "Let's Go" : "Crafting Your Experience";
+
+  // Fewer particles on mobile for performance
+  const particleCount = isMobile ? 12 : 20;
+  const particles = Array.from({ length: particleCount }, (_, i) => ({
+    id: i,
+    left: `${5 + Math.random() * 90}%`,
+    size: isMobile ? 1.5 + Math.random() * 2 : 2 + Math.random() * 3,
+    duration: 14 + Math.random() * 6,
+    delay: Math.random() * 8,
+    opacity: 0.3 + Math.random() * 0.4
+  }));
+
+  // Fewer rings on mobile
+  const ringCount = isMobile ? 3 : 4;
+  const rings = Array.from({ length: ringCount }, (_, i) => ({
+    id: i,
+    delay: i * 2.5
+  }));
+
+  return (
+    <div className={`loader-v7 phase-${phase} ${isExiting ? 'loader-exit' : ''}`}>
+      <div className="loader-dark-bg" />
+      
+      <div className="particles-layer">
+        {particles.map((p) => (
+          <div
+            key={p.id}
+            className="float-particle"
+            style={{
+              left: p.left,
+              width: `${p.size}px`,
+              height: `${p.size}px`,
+              animationDuration: `${p.duration}s`,
+              animationDelay: `${p.delay}s`,
+              opacity: p.opacity
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="rings-layer">
+        {rings.map((ring) => (
+          <div
+            key={ring.id}
+            className="expand-ring"
+            style={{ animationDelay: `${ring.delay}s` }}
+          />
+        ))}
+      </div>
+
+      <div className="ambient-glow" />
+
+      <div className="reveal-bars">
+        <div className="reveal-bar top" style={{ height: `${Math.max(0, 50 - progress / 2)}%` }} />
+        <div className="reveal-bar bottom" style={{ height: `${Math.max(0, 50 - progress / 2)}%` }} />
+      </div>
+
+      <div className="vignette-overlay" />
+
+      <div className="corner-accent top-left" />
+      <div className="corner-accent top-right" />
+      <div className="corner-accent bottom-left" />
+      <div className="corner-accent bottom-right" />
+
+      <div className="loader-content">
+        <div className={`loader-title ${phase === 'ready' ? 'title-ready' : ''}`}>
+          {displayText.split('').map((char, i) => (
+            <span 
+              key={`${phase}-${i}`}
+              className="title-char"
+              style={{ animationDelay: `${i * 0.04}s` }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
+        </div>
+
+        {phase === 'loading' && (
+          <div className="progress-bar-container">
+            <div className="progress-bar-track">
+              <div className="progress-bar-fill" style={{ width: `${progress}%` }}>
+                <div className="progress-bar-glow" />
+              </div>
+            </div>
+            <div className="progress-percent">{progress}%</div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

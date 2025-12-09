@@ -43,7 +43,9 @@ import {
   FactsModal,
   CursorTrail,
   SectionDivider,
-  TypeWriter
+  TypeWriter,
+  FloatingParticles,
+  LoadingScreen
 } from './components';
 import {
   HoroscopeSection,
@@ -63,6 +65,7 @@ export default function ShaadiLanding() {
   const [uploading, setUploading] = useState(false);
   const [editForm, setEditForm] = useState(DEFAULT_PROFILE);
   const [galleryImages, setGalleryImages] = useState(DEFAULT_PROFILE.galleryImages || []);
+  const [pageLoaded, setPageLoaded] = useState(false);
 
   const fileInputRef = useRef(null);
   const journeySectionRef = useRef(null);
@@ -212,9 +215,12 @@ export default function ShaadiLanding() {
   }
 
   return (
-    <div ref={containerRef} className="h-screen w-full overflow-y-scroll bg-black text-white font-sans selection:bg-[#D4AF37] selection:text-black scroll-smooth snap-y snap-proximity md:snap-mandatory">
+    <>
+      {!pageLoaded && <LoadingScreen onLoadComplete={() => setPageLoaded(true)} />}
+      <div ref={containerRef} className={`h-screen w-full overflow-y-scroll bg-black text-white font-sans selection:bg-[#D4AF37] selection:text-black scroll-smooth snap-y snap-proximity md:snap-mandatory ${pageLoaded ? "page-entrance" : "opacity-0"}`}>
       
       {/* Cursor Trail (Desktop only) */}
+      <FloatingParticles />
       <CursorTrail />
 
       {/* Scroll Progress Bar */}
@@ -327,7 +333,7 @@ export default function ShaadiLanding() {
                   text={`${profile.firstName} ${profile.lastName}`}
                   speed={100}
                   delay={300}
-                  className="font-bold bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent drop-shadow-lg"
+                  className="font-bold bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent drop-shadow-lg text-glow-gold"
                 />
               </h1>
               <button
@@ -595,5 +601,6 @@ export default function ShaadiLanding() {
       />
       {selectedFactItem && <FactsModal item={selectedFactItem} onClose={() => setSelectedFactItem(null)} />}
     </div>
+    </>
   );
 }
