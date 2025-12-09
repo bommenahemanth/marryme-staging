@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Languages,
   User,
@@ -43,58 +43,38 @@ function MarriageTab({ lang = 'en' }) {
       {/* Row 1: Birth Details + Marriage Indicators */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Birth Details */}
-        <div className="bg-gradient-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/30 rounded-xl p-5">
+        <div className="bg-gradient-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/30 rounded-xl p-5 hover:border-[#D4AF37]/60 transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/20 hover:-translate-y-1 opacity-0 animate-fadeInUp" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
           <h3 className="text-lg font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
-            <Sparkles size={18} /> {labels.birthDetails}
+            <Sparkles size={18} className="animate-pulse" /> {labels.birthDetails}
           </h3>
           <div className="grid grid-cols-3 gap-3">
-            <div className="bg-black/30 p-3 rounded-lg">
-              <span className="text-gray-500 text-xs uppercase block">{labels.name}</span>
-              <p className="text-white text-sm font-medium">{profile.name}</p>
-            </div>
-            <div className="bg-black/30 p-3 rounded-lg">
-              <span className="text-gray-500 text-xs uppercase block">{labels.dob}</span>
-              <p className="text-white text-sm font-medium">{profile.dob}</p>
-            </div>
-            <div className="bg-black/30 p-3 rounded-lg">
-              <span className="text-gray-500 text-xs uppercase block">{labels.time}</span>
-              <p className="text-white text-sm font-medium">{profile.time}</p>
-            </div>
-            <div className="bg-black/30 p-3 rounded-lg col-span-2">
-              <span className="text-gray-500 text-xs uppercase block">{labels.place}</span>
-              <p className="text-white text-xs font-medium">{profile.place}</p>
-            </div>
-            <div className="bg-black/30 p-3 rounded-lg">
-              <span className="text-gray-500 text-xs uppercase block">{labels.rashiNakshatra}</span>
-              <p className="text-white text-xs font-medium">{profile.rashi} / {profile.nakshatra}</p>
-            </div>
-            <div className="bg-black/30 p-3 rounded-lg">
-              <span className="text-gray-500 text-xs uppercase block">{labels.gotra}</span>
-              <p className="text-white text-sm font-medium">{profile.gotra}</p>
-            </div>
-            <div className="bg-black/30 p-3 rounded-lg">
-              <span className="text-gray-500 text-xs uppercase block">{labels.lagna}</span>
-              <p className="text-white text-xs font-medium">{profile.lagna}</p>
-            </div>
-            <div className="bg-black/30 p-3 rounded-lg">
-              <span className="text-gray-500 text-xs uppercase block">{labels.moonPhase}</span>
-              <p className="text-white text-xs font-medium">{profile.moonPhase}</p>
-            </div>
-            <div className="bg-black/30 p-3 rounded-lg col-span-3">
-              <span className="text-gray-500 text-xs uppercase block">{labels.lifePathNumber}</span>
-              <p className="text-white text-sm font-medium">{profile.lifePathNumber} — {profile.lifePathMeaning}</p>
-            </div>
+            {[
+              { label: labels.name, value: profile.name, span: 1 },
+              { label: labels.dob, value: profile.dob, span: 1 },
+              { label: labels.time, value: profile.time, span: 1 },
+              { label: labels.place, value: profile.place, span: 2, small: true },
+              { label: labels.rashiNakshatra, value: `${profile.rashi} / ${profile.nakshatra}`, span: 1, small: true },
+              { label: labels.gotra, value: profile.gotra, span: 1 },
+              { label: labels.lagna, value: profile.lagna, span: 1, small: true },
+              { label: labels.moonPhase, value: profile.moonPhase, span: 1, small: true },
+              { label: labels.lifePathNumber, value: `${profile.lifePathNumber} — ${profile.lifePathMeaning}`, span: 3 }
+            ].map((item, idx) => (
+              <div key={idx} className={`bg-black/30 p-3 rounded-lg hover:bg-black/50 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-[#D4AF37]/10 opacity-0 animate-fadeInUp ${item.span === 2 ? 'col-span-2' : item.span === 3 ? 'col-span-3' : ''}`} style={{ animationDelay: `${150 + idx * 50}ms`, animationFillMode: 'forwards' }}>
+                <span className="text-gray-500 text-xs uppercase block">{item.label}</span>
+                <p className={`text-white font-medium ${item.small ? 'text-xs' : 'text-sm'}`}>{item.value}</p>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Marriage Indicators */}
-        <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5 flex flex-col h-full">
+        <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5 flex flex-col h-full hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/20 hover:-translate-y-1 opacity-0 animate-fadeInUp" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
           <h3 className="text-lg font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
-            <Heart size={18} /> {marriageData.summary.title}
+            <Heart size={18} className="animate-pulse" /> {marriageData.summary.title}
           </h3>
           <div className="grid grid-cols-2 gap-4 flex-1">
             {marriageData.summary.items.map((item, idx) => (
-              <div key={idx} className="bg-black/40 p-4 rounded-lg border border-white/5 flex flex-col justify-center">
+              <div key={idx} className="bg-black/40 p-4 rounded-lg border border-white/5 flex flex-col justify-center hover:bg-black/60 hover:border-[#D4AF37]/30 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-[#D4AF37]/10 opacity-0 animate-fadeInUp" style={{ animationDelay: `${250 + idx * 80}ms`, animationFillMode: 'forwards' }}>
                 <div className="flex justify-between items-start mb-2">
                   <span className="text-[#D4AF37] font-bold text-sm">{item.label}</span>
                   <span className="text-white text-xs text-right">{item.value}</span>
@@ -109,35 +89,35 @@ function MarriageTab({ lang = 'en' }) {
       {/* Row 2: Navamsa + Partner Traits + Compatible Signs */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Navamsa D9 */}
-        <div className="bg-gradient-to-r from-purple-900/20 to-[#050505] border border-purple-500/20 rounded-xl p-5 flex flex-col">
+        <div className="bg-gradient-to-r from-purple-900/20 to-[#050505] border border-purple-500/20 rounded-xl p-5 flex flex-col hover:border-purple-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-purple-500/20 hover:-translate-y-1 opacity-0 animate-fadeInUp" style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}>
           <h3 className="text-base font-serif text-purple-400 mb-4 flex items-center gap-3">
-            <Compass size={16} /> {marriageData.navamsa.title}
+            <Compass size={16} className="animate-pulse" /> {marriageData.navamsa.title}
           </h3>
           <div className="grid grid-cols-2 gap-3 mb-4 flex-1">
-            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center">
+            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center hover:bg-black/60 hover:scale-[1.03] transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
               <span className="text-gray-500 text-xs uppercase block mb-1">Lagna</span>
               <span className="text-white text-base font-bold">{marriageData.navamsa.lagna}</span>
             </div>
-            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center">
+            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center hover:bg-black/60 hover:scale-[1.03] transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10">
               <span className="text-gray-500 text-xs uppercase block mb-1">Venus</span>
               <span className="text-green-400 text-sm font-bold">{marriageData.navamsa.venus}</span>
             </div>
-            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center">
+            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center hover:bg-black/60 hover:scale-[1.03] transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
               <span className="text-gray-500 text-xs uppercase block mb-1">Jupiter</span>
               <span className="text-white text-sm font-bold">{marriageData.navamsa.jupiter}</span>
             </div>
-            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center">
+            <div className="bg-black/40 p-4 rounded-lg text-center flex flex-col justify-center hover:bg-black/60 hover:scale-[1.03] transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
               <span className="text-gray-500 text-xs uppercase block mb-1">Moon</span>
               <span className="text-white text-sm font-bold">{marriageData.navamsa.moon}</span>
             </div>
           </div>
-          <p className="text-gray-300 text-sm italic bg-black/30 p-4 rounded-lg">{marriageData.navamsa.interpretation}</p>
+          <p className="text-gray-300 text-sm italic bg-black/30 p-4 rounded-lg hover:bg-black/50 transition-all duration-300">{marriageData.navamsa.interpretation}</p>
         </div>
 
         {/* Partner Traits */}
-        <div className="bg-[#050505] border border-pink-500/20 rounded-xl p-5 flex flex-col">
+        <div className="bg-[#050505] border border-pink-500/20 rounded-xl p-5 flex flex-col hover:border-pink-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-pink-500/20 hover:-translate-y-1 opacity-0 animate-fadeInUp" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
           <h3 className="text-base font-serif text-pink-400 mb-4 flex items-center gap-3">
-            <Heart size={16} /> {marriageData.partnerTraits.title}
+            <Heart size={16} className="animate-pulse" /> {marriageData.partnerTraits.title}
           </h3>
           <ul className="space-y-2 flex-1 flex flex-col justify-between">
             {marriageData.partnerTraits.traits.map((trait, idx) => {
@@ -150,7 +130,7 @@ function MarriageTab({ lang = 'en' }) {
                 <Scale key="sc" size={14} className="text-pink-400 flex-shrink-0" />
               ];
               return (
-                <li key={idx} className="text-gray-300 text-sm flex items-center gap-3 bg-black/30 p-3 rounded-lg">
+                <li key={idx} className="text-gray-300 text-sm flex items-center gap-3 bg-black/30 p-3 rounded-lg hover:bg-black/50 hover:translate-x-1 hover:shadow-lg hover:shadow-pink-500/10 transition-all duration-300 opacity-0 animate-fadeInUp" style={{ animationDelay: `${450 + idx * 60}ms`, animationFillMode: 'forwards' }}>
                   {icons[idx]} {trait}
                 </li>
               );
@@ -159,24 +139,24 @@ function MarriageTab({ lang = 'en' }) {
         </div>
 
         {/* Compatible Signs */}
-        <div className="bg-[#050505] border border-green-500/20 rounded-xl p-5 flex flex-col">
+        <div className="bg-[#050505] border border-green-500/20 rounded-xl p-5 flex flex-col hover:border-green-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-green-500/20 hover:-translate-y-1 opacity-0 animate-fadeInUp" style={{ animationDelay: '500ms', animationFillMode: 'forwards' }}>
           <h3 className="text-base font-serif text-green-400 mb-4 flex items-center gap-3">
-            <Star size={16} /> {marriageData.compatibleSigns.title}
+            <Star size={16} className="animate-pulse" /> {marriageData.compatibleSigns.title}
           </h3>
           <div className="flex-1 flex flex-col justify-center space-y-4">
-            <div className="bg-black/30 p-4 rounded-lg">
+            <div className="bg-black/30 p-4 rounded-lg hover:bg-black/50 transition-all duration-300">
               <p className="text-gray-500 text-xs uppercase mb-2">{labels.bestMatch}</p>
               <div className="flex flex-wrap gap-2">
                 {marriageData.compatibleSigns.best.map((sign, idx) => (
-                  <span key={idx} className="bg-green-900/40 text-green-400 px-3 py-1.5 rounded-full text-sm font-medium border border-green-500/30">{sign}</span>
+                  <span key={idx} className="bg-green-900/40 text-green-400 px-3 py-1.5 rounded-full text-sm font-medium border border-green-500/30 hover:bg-green-900/60 hover:border-green-500/60 hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300 cursor-default">{sign}</span>
                 ))}
               </div>
             </div>
-            <div className="bg-black/30 p-4 rounded-lg">
+            <div className="bg-black/30 p-4 rounded-lg hover:bg-black/50 transition-all duration-300">
               <p className="text-gray-500 text-xs uppercase mb-2">{labels.avoid}</p>
               <div className="flex flex-wrap gap-2">
                 {marriageData.compatibleSigns.avoid.map((sign, idx) => (
-                  <span key={idx} className="bg-red-900/40 text-red-400 px-3 py-1.5 rounded-full text-sm font-medium border border-red-500/30">{sign}</span>
+                  <span key={idx} className="bg-red-900/40 text-red-400 px-3 py-1.5 rounded-full text-sm font-medium border border-red-500/30 hover:bg-red-900/60 hover:border-red-500/60 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 cursor-default">{sign}</span>
                 ))}
               </div>
             </div>
@@ -187,13 +167,13 @@ function MarriageTab({ lang = 'en' }) {
       {/* Row 3: Dasha Timeline + Personality */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Dasha Timeline */}
-        <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5 flex flex-col h-full">
+        <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5 flex flex-col h-full hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/20 hover:-translate-y-1 opacity-0 animate-fadeInUp" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
           <h3 className="text-base font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
-            <Calendar size={16} /> {marriageData.dashaTimeline.title}
+            <Calendar size={16} className="animate-pulse" /> {marriageData.dashaTimeline.title}
           </h3>
           <div className="space-y-2 mb-4 flex-1">
             {marriageData.dashaTimeline.periods.map((period, idx) => (
-              <div key={idx} className={`flex items-center justify-between p-3 rounded-lg text-xs ${period.highlight ? 'bg-[#D4AF37]/20 border border-[#D4AF37]/50' : 'bg-black/30'}`}>
+              <div key={idx} className={`flex items-center justify-between p-3 rounded-lg text-xs hover:translate-x-1 transition-all duration-300 opacity-0 animate-fadeInUp ${period.highlight ? 'bg-[#D4AF37]/20 border border-[#D4AF37]/50 hover:bg-[#D4AF37]/30' : 'bg-black/30 hover:bg-black/50'}`} style={{ animationDelay: `${650 + idx * 60}ms`, animationFillMode: 'forwards' }}>
                 <div className="flex items-center gap-3">
                   <span className={`font-bold ${period.highlight ? 'text-[#D4AF37]' : 'text-white'}`}>{period.planet}</span>
                   <span className="text-gray-500">|</span>
@@ -203,21 +183,21 @@ function MarriageTab({ lang = 'en' }) {
               </div>
             ))}
           </div>
-          <div className="bg-green-900/20 border border-green-500/30 p-3 rounded-lg">
+          <div className="bg-green-900/20 border border-green-500/30 p-3 rounded-lg hover:bg-green-900/30 hover:border-green-500/50 hover:scale-[1.02] transition-all duration-300">
             <p className="text-green-400 font-bold text-center text-sm flex items-center justify-center gap-3">
-              <Target size={14} /> {lang === 'te' ? 'వివాహ సమయం' : 'Marriage Window'}: {marriageData.dashaTimeline.marriageWindow}
+              <Target size={14} className="animate-pulse" /> {lang === 'te' ? 'వివాహ సమయం' : 'Marriage Window'}: {marriageData.dashaTimeline.marriageWindow}
             </p>
           </div>
         </div>
 
         {/* Personality Profile */}
-        <div className="bg-[#050505] border border-blue-500/20 rounded-xl p-5 flex flex-col h-full">
+        <div className="bg-[#050505] border border-blue-500/20 rounded-xl p-5 flex flex-col h-full hover:border-blue-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/20 hover:-translate-y-1 opacity-0 animate-fadeInUp" style={{ animationDelay: '700ms', animationFillMode: 'forwards' }}>
           <h3 className="text-base font-serif text-blue-400 mb-4 flex items-center gap-3">
-            <Sparkles size={16} /> {marriageData.personality.title}
+            <Sparkles size={16} className="animate-pulse" /> {marriageData.personality.title}
           </h3>
           <div className="grid grid-cols-2 gap-4 flex-1">
             {marriageData.personality.traits.map((trait, idx) => (
-              <div key={idx} className="bg-black/40 p-4 rounded-lg flex flex-col justify-center">
+              <div key={idx} className="bg-black/40 p-4 rounded-lg flex flex-col justify-center hover:bg-black/60 hover:scale-[1.03] hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 opacity-0 animate-fadeInUp" style={{ animationDelay: `${750 + idx * 80}ms`, animationFillMode: 'forwards' }}>
                 <span className="text-blue-400 font-bold text-sm uppercase">{trait.domain}</span>
                 <p className="text-gray-300 text-sm mt-1">{trait.keywords}</p>
               </div>
@@ -233,10 +213,20 @@ function MarriageTab({ lang = 'en' }) {
 export function HoroscopeSection({ scrollToTop }) {
   const [lang, setLang] = useState('en');
   const [activeTab, setActiveTab] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const t = TRANSLATIONS[lang];
   const astroData = lang === 'te' ? ASTRO_DATA_TE : ASTRO_DATA;
 
   const handleLangToggle = () => setLang(prev => prev === 'en' ? 'te' : 'en');
+  
+  const handleTabChange = (idx) => {
+    if (idx === activeTab) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveTab(idx);
+      setIsTransitioning(false);
+    }, 150);
+  };
 
   return (
     <div className="relative w-full min-h-screen bg-[#080808] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-visible">
@@ -268,28 +258,31 @@ export function HoroscopeSection({ scrollToTop }) {
           {t.tabs.map((tab, idx) => (
             <button
               key={idx}
-              onClick={() => setActiveTab(idx)}
-              className={`flex-1 min-w-[100px] py-3 px-3 md:py-4 md:px-6 text-xs sm:text-sm md:text-base font-serif tracking-wide transition-colors ${activeTab === idx
-                  ? 'bg-[#D4AF37] text-black font-bold'
+              onClick={() => handleTabChange(idx)}
+              className={`flex-1 min-w-[100px] py-3 px-3 md:py-4 md:px-6 text-xs sm:text-sm md:text-base font-serif tracking-wide transition-all duration-300 relative overflow-hidden ${activeTab === idx
+                  ? 'bg-[#D4AF37] text-black font-bold shadow-lg shadow-[#D4AF37]/30'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
                 }`}
             >
-              {tab}
+              <span className="relative z-10">{tab}</span>
+              {activeTab === idx && (
+                <span className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] via-[#F4D03F] to-[#D4AF37] animate-shimmer" />
+              )}
             </button>
           ))}
         </div>
 
-        <div className="p-6 md:p-10 overflow-y-auto flex-grow">
+        <div className={`p-6 md:p-10 overflow-y-auto flex-grow transition-all duration-300 ${isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
           {activeTab === 0 && (
-            <div className="space-y-6">
+            <div className="space-y-6 animate-fadeInUp">
               {/* Row 1: Basic Details + Rasi Chart */}
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 {/* Basic Details - 2 cols */}
-                <div className="lg:col-span-2 bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5">
+                <div className="lg:col-span-2 bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5 hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-lg hover:shadow-[#D4AF37]/10 group">
                   <h3 className="text-lg font-serif text-[#D4AF37] mb-4 border-l-4 border-[#D4AF37] pl-3">{t.basicDetails}</h3>
                   <div className="space-y-3">
-                    {Object.entries(astroData.basicDetails).map(([key, val]) => (
-                      <div key={key} className="flex justify-between items-center bg-black/30 p-3 rounded-lg">
+                    {Object.entries(astroData.basicDetails).map(([key, val], index) => (
+                      <div key={key} className="flex justify-between items-center bg-black/30 p-3 rounded-lg hover:bg-black/50 transition-all duration-300 transform hover:translate-x-1" style={{ animationDelay: `${index * 50}ms` }}>
                         <span className="text-gray-400 text-sm uppercase tracking-wider">{t[key.toLowerCase()] || key}</span>
                         <span className="text-white font-medium text-right text-sm">{val}</span>
                       </div>
@@ -302,7 +295,7 @@ export function HoroscopeSection({ scrollToTop }) {
                 </div>
 
                 {/* Rasi Chart - 3 cols */}
-                <div className="lg:col-span-3 bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5">
+                <div className="lg:col-span-3 bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5 hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-lg hover:shadow-[#D4AF37]/10">
                   <div className="text-center mb-4">
                     <h3 className="text-xl font-serif text-[#D4AF37]">{t.chartTitle}</h3>
                     <p className="text-gray-500 text-xs uppercase tracking-widest">{t.chartSubtitle}</p>
@@ -368,13 +361,13 @@ export function HoroscopeSection({ scrollToTop }) {
               </div>
 
               {/* Row 2: Key Planetary Highlights */}
-              <div className="bg-gradient-to-r from-purple-900/10 to-[#050505] border border-purple-500/20 rounded-xl p-5">
+              <div className="bg-gradient-to-r from-purple-900/10 to-[#050505] border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-500 hover:shadow-lg hover:shadow-purple-500/10">
                 <h3 className="text-lg font-serif text-purple-400 mb-4 flex items-center gap-2">
-                  <Star size={18} /> {lang === 'te' ? 'గ్రహ స్థాన ముఖ్యాంశాలు' : 'Key Planetary Highlights'}
+                  <Star size={18} className="animate-pulse" /> {lang === 'te' ? 'గ్రహ స్థాన ముఖ్యాంశాలు' : 'Key Planetary Highlights'}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {CHART_HIGHLIGHTS[lang].map((item, idx) => (
-                    <div key={idx} className={`bg-black/40 p-4 rounded-lg border-l-4 ${
+                    <div key={idx} className={`bg-black/40 p-4 rounded-lg border-l-4 transform hover:scale-[1.02] hover:bg-black/60 transition-all duration-300 ${
                       item.color === 'yellow' ? 'border-yellow-500' :
                       item.color === 'blue' ? 'border-blue-500' :
                       item.color === 'pink' ? 'border-pink-500' :
@@ -397,7 +390,7 @@ export function HoroscopeSection({ scrollToTop }) {
               </div>
 
               {/* Row 3: Planets Table */}
-              <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5">
+              <div className="bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-5 hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-lg hover:shadow-[#D4AF37]/10">
                 <h3 className="text-lg font-serif text-[#D4AF37] mb-4 border-l-4 border-[#D4AF37] pl-3">{lang === 'te' ? 'గ్రహ స్థానాలు' : 'Planetary Positions'}</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
@@ -413,7 +406,7 @@ export function HoroscopeSection({ scrollToTop }) {
                     </thead>
                     <tbody className="text-gray-300 text-sm">
                       {astroData.planets.map((p, i) => (
-                        <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                        <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-all duration-300 hover:translate-x-1" style={{ animationDelay: `${i * 30}ms` }}>
                           <td className="py-3 font-medium text-white">{p.name}</td>
                           <td className="py-3">{p.sign}</td>
                           <td className="py-3 font-mono text-[#D4AF37]">{p.degree}</td>
@@ -432,9 +425,9 @@ export function HoroscopeSection({ scrollToTop }) {
               </div>
             </div>
           )}
-          {activeTab === 1 && <MarriageTab lang={lang} />}
+          {activeTab === 1 && <div className="animate-fadeInUp"><MarriageTab lang={lang} /></div>}
 
-          {activeTab === 2 && <CompatibilityTab t={t} lang={lang} />}
+          {activeTab === 2 && <div className="animate-fadeInUp"><CompatibilityTab t={t} lang={lang} /></div>}
         </div>
       </div>
     </div>
@@ -448,6 +441,38 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
   const minSwipeDistance = 50;
   const [fullscreenIndex, setFullscreenIndex] = useState(null);
   const images = galleryImages && galleryImages.length > 0 ? galleryImages : PLACEHOLDER_GALLERY;
+
+  // Lock body scroll when fullscreen modal is open
+  useEffect(() => {
+    if (fullscreenIndex !== null) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      // Also disable snap on the main container
+      const container = document.querySelector('[data-main-container]');
+      if (container) {
+        container.style.overflow = 'hidden';
+        container.style.scrollSnapType = 'none';
+      }
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      const container = document.querySelector('[data-main-container]');
+      if (container) {
+        container.style.overflow = '';
+        container.style.scrollSnapType = '';
+      }
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      const container = document.querySelector('[data-main-container]');
+      if (container) {
+        container.style.overflow = '';
+        container.style.scrollSnapType = '';
+      }
+    };
+  }, [fullscreenIndex]);
+
   return (
     <div className="relative w-full min-h-screen bg-[#050505] flex flex-col p-4 sm:p-4 sm:p-6 lg:p-12 overflow-visible snap-start font-sans">
       <NetworkBackground />
@@ -469,34 +494,34 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1400px] mx-auto w-full pb-20 reveal-on-scroll">
 
         {/* 1. BIO (Wide) */}
-        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-[#D4AF37]/30 rounded-3xl p-6 hover:border-[#D4AF37]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#D4AF37]/10 group">
+        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-[#D4AF37]/30 rounded-3xl p-6 hover:border-[#D4AF37]/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-[#D4AF37]/20 group opacity-0 animate-fadeInUp" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
           <h4 className="text-[#D4AF37] font-bold text-lg mb-4 flex items-center gap-2 uppercase tracking-wider">
-            <User className="w-5 h-5" /> When Not Working
+            <User className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" /> When Not Working
           </h4>
           <ul className="space-y-3">
-            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center hover:bg-yellow-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Activity size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Play badminton (I was great when my knees were younger)</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center hover:bg-yellow-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Lightbulb size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Giving unsolicited advice (<strong>'Uchitha salahalu'</strong>, literally) to young folks who reach out to me on LinkedIn.</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center hover:bg-yellow-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Smartphone size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Exploring new tech gadgets</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center hover:bg-yellow-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Footprints size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Walk 10 km daily (and pet <strong>'kukka bangaralu'</strong> on the way)</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center hover:bg-yellow-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Bot size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Get my hands dirty with new AI tools out there</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center hover:bg-yellow-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Smile size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Annoying my little sister</span>
             </li>
           </ul>
         </div>
 
         {/* 2. FAITH & CORE */}
-        <div className="col-span-1 bg-[#0a0a0f] border border-cyan-500/30 rounded-3xl p-6 hover:border-cyan-500/60 transition-all hover:-translate-y-1 flex flex-col justify-center text-center">
+        <div className="col-span-1 bg-[#0a0a0f] border border-cyan-500/30 rounded-3xl p-6 hover:border-cyan-500/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-500/20 flex flex-col justify-center text-center opacity-0 animate-fadeInUp" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
           <Sparkles className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
           <h3 className="text-lg font-bold text-cyan-400 mb-3">Faith</h3>
           <p className="text-sm text-gray-400 italic">
@@ -505,7 +530,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
         </div>
 
         {/* 3. LIFESTYLE */}
-        <div className="col-span-1 bg-[#0f0a05] border border-orange-500/30 rounded-3xl p-6 hover:border-orange-500/60 transition-all hover:-translate-y-1 flex flex-col justify-center">
+        <div className="col-span-1 bg-[#0f0a05] border border-orange-500/30 rounded-3xl p-6 hover:border-orange-500/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-orange-500/20 flex flex-col justify-center opacity-0 animate-fadeInUp" style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}>
           <h3 className="text-lg font-bold text-orange-400 mb-4 flex items-center gap-2 uppercase tracking-wider justify-center">
             <Leaf className="w-5 h-5 text-orange-400" /> Lifestyle
           </h3>
@@ -526,7 +551,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
         </div>
 
         {/* 3.5 CAUSES */}
-        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-violet-500/30 rounded-3xl p-6 hover:border-violet-500/60 transition-all hover:-translate-y-1">
+        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-violet-500/30 rounded-3xl p-6 hover:border-violet-500/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-violet-500/20 opacity-0 animate-fadeInUp" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
           <h3 className="text-xl font-serif text-violet-400 mb-4 flex items-center gap-3">
             <Heart className="w-6 h-6" /> Causes I Believe In
           </h3>
@@ -539,7 +564,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
               {icon: Compass, text: "Coral Reef Restoration"},
               {icon: Sparkles, text: "Bee Breeding & Protection"}
             ].map((item, i) => (
-              <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-500/10 rounded-lg text-sm text-violet-200 border border-violet-500/20 hover:bg-violet-500/20 transition-colors cursor-default">
+              <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-500/10 rounded-lg text-sm text-violet-200 border border-violet-500/20 hover:bg-violet-500/30 hover:border-violet-500/50 hover:scale-105 hover:shadow-lg hover:shadow-violet-500/20 transition-all duration-300 cursor-default">
                 <item.icon size={14} className="text-violet-400" /> {item.text}
               </span>
             ))}
@@ -547,7 +572,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
         </div>
 
         {/* 4. LOVES (Wide) */}
-        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-pink-500/20 rounded-3xl p-6 hover:border-pink-500/50 transition-all hover:-translate-y-1">
+        <div className="col-span-1 md:col-span-2 bg-[#0a0a0a] border border-pink-500/20 rounded-3xl p-6 hover:border-pink-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-pink-500/20 opacity-0 animate-fadeInUp" style={{ animationDelay: '500ms', animationFillMode: 'forwards' }}>
           <h3 className="text-xl font-serif text-pink-400 mb-4 flex items-center gap-3">
             <Heart className="w-6 h-6" /> Adorations
           </h3>
@@ -560,7 +585,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
               {icon: Baby, text: "2 year olds with buggalu & pilakalu"},
               {icon: Activity, text: "Badminton"}, {icon: Compass, text: "Tropical Islands"}, {icon: Coffee, text: "Boba"}
             ].map((item, i) => (
-              <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-500/5 rounded-lg text-sm text-pink-200 border border-pink-500/10 hover:bg-pink-500/20 transition-colors cursor-default">
+              <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-500/5 rounded-lg text-sm text-pink-200 border border-pink-500/10 hover:bg-pink-500/25 hover:border-pink-500/40 hover:scale-105 hover:shadow-lg hover:shadow-pink-500/20 transition-all duration-300 cursor-default">
                 <item.icon size={14} className="text-pink-400" /> {item.text}
               </span>
             ))}
@@ -568,55 +593,55 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
         </div>
 
         {/* 5. SUPERPOWERS */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-2 bg-[#0a110a] border border-green-500/30 rounded-3xl p-6 hover:border-green-500/60 transition-all hover:-translate-y-1">
+        <div className="col-span-1 md:col-span-2 lg:col-span-2 bg-[#0a110a] border border-green-500/30 rounded-3xl p-6 hover:border-green-500/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-green-500/20 opacity-0 animate-fadeInUp" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
           <h4 className="text-green-400 font-bold text-lg mb-4 flex items-center gap-2 uppercase tracking-wider">
             <Zap className="w-5 h-5" /> Superpowers
           </h4>
           <ul className="space-y-3">
-            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center hover:bg-green-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Share2 size={16} className="text-green-400 flex-shrink-0" /><span>Sharing memes faster than the flu spreads</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center hover:bg-green-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Map size={16} className="text-green-400 flex-shrink-0" /><span>Planning travel (Solo traveled 10+ European countries)</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center hover:bg-green-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Sparkles size={16} className="text-green-400 flex-shrink-0" /><span>Mahadev's grace, solid friendships, and a wonderful family</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center hover:bg-green-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <CreditCard size={16} className="text-green-400 flex-shrink-0" /><span>Credit card points wizard, maximizes every swipe</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center hover:bg-green-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Target size={16} className="text-green-400 flex-shrink-0" /><span>I stand by my word — sets a goal, stays persistent, gets it done</span>
             </li>
           </ul>
         </div>
 
         {/* 6. KRYPTONITE */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-2 bg-[#110a0a] border border-red-500/30 rounded-3xl p-6 hover:border-red-500/60 transition-all hover:-translate-y-1">
+        <div className="col-span-1 md:col-span-2 lg:col-span-2 bg-[#110a0a] border border-red-500/30 rounded-3xl p-6 hover:border-red-500/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-red-500/20 opacity-0 animate-fadeInUp" style={{ animationDelay: '700ms', animationFillMode: 'forwards' }}>
           <h4 className="text-red-400 font-bold text-lg mb-4 flex items-center gap-2 uppercase tracking-wider">
-            <AlertTriangle className="w-5 h-5" /> Not So Super
+            <AlertTriangle className="w-5 h-5 group-hover:animate-pulse" /> Not So Super
           </h4>
           <ul className="space-y-3">
-            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center hover:bg-red-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Flame size={16} className="text-red-400 flex-shrink-0" /><span>Potential to bring Kitchen to ashes</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center hover:bg-red-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Dog size={16} className="text-red-400 flex-shrink-0" /><span>Keep asking for a dog, baby cow, or an elephant (Please…)</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center hover:bg-red-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Heart size={16} className="text-red-400 flex-shrink-0" /><span>Self esteem could use a little work</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center hover:bg-red-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Carrot size={16} className="text-red-400 flex-shrink-0" /><span>Veggies? Meh, only if blended</span>
             </li>
-            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
+            <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center hover:bg-red-900/20 hover:translate-x-1 transition-all duration-300 cursor-default">
               <Smartphone size={16} className="text-red-400 flex-shrink-0" /><span>Got a soft spot for tech, wallet takes the hit</span>
             </li>
           </ul>
         </div>
 
         {/* 7. THE SEARCH - About You (Full Width) */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-4 bg-gradient-to-br from-[#1a1a1a] to-black border border-[#D4AF37]/40 rounded-3xl p-6 relative overflow-hidden group flex flex-col">
+        <div className="col-span-1 md:col-span-2 lg:col-span-4 bg-gradient-to-br from-[#1a1a1a] to-black border border-[#D4AF37]/40 rounded-3xl p-6 relative overflow-hidden group flex flex-col hover:border-[#D4AF37]/70 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 opacity-0 animate-fadeInUp" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
           <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4AF37] blur-[80px] opacity-10 pointer-events-none" />
 
           <h3 className="text-2xl font-serif text-[#D4AF37] mb-4 flex items-center gap-3">
@@ -650,11 +675,11 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
 
             <div className="sm:col-span-2">
               <h4 className="text-yellow-400 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wider">
-                <Star size={16} /> Bonus Points If...
+                <Star size={16} className="animate-pulse" /> Bonus Points If...
               </h4>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2">
                 {["Naruto Fan", "Great Meme Game", "Anime girl", "Lets me buy tech gadgets", "Dog Lover", "Spiritual", "Dress modern yet elegant", "Puts on Bindi & Kajal occasionally", "Welcome home a Pocket Pom", "Teaches me cooking", "Hits gym and drags me too", "Gets ready quick", "A Hiker", "Gets me Boba"].map((b, i) => (
-                  <span key={i} className="text-xs bg-yellow-400/10 text-yellow-200 px-2 py-1 rounded border border-yellow-400/20">{b}</span>
+                  <span key={i} className="text-xs bg-yellow-400/10 text-yellow-200 px-2.5 py-1.5 rounded-lg border border-yellow-400/20 hover:bg-yellow-400/25 hover:border-yellow-400/50 hover:scale-105 hover:shadow-lg hover:shadow-yellow-400/20 transition-all duration-300 cursor-default">{b}</span>
                 ))}
               </div>
             </div>
@@ -672,7 +697,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
         </div>
 
         {/* 8. LIFE IN FRAMES - Photo Gallery */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-4">
+        <div className="col-span-1 md:col-span-2 lg:col-span-4 opacity-0 animate-fadeInUp" style={{ animationDelay: '900ms', animationFillMode: 'forwards' }}>
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-xl font-serif text-white">Life in <span className="text-[#D4AF37] italic">Frames</span></h3>
@@ -682,28 +707,33 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
               href="https://www.instagram.com/bommenahemanth/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-4 py-2 rounded-full text-xs font-medium hover:scale-105 transition-transform"
+              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-4 py-2 rounded-full text-xs font-medium hover:scale-105 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300"
             >
               <Instagram className="w-3 h-3" />
               Instagram
             </a>
           </div>
           <p className="text-gray-400 text-xs mb-4 text-center"><span className="text-[#D4AF37]">Heads up!</span> I've lost some weight, so I might look different across photos. Also, all fake candids! Check out my Instagram for latest pics.</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 gallery-stagger">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {images.map((img, index) => (
               <div
                 key={index}
-                className="relative group rounded-xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#D4AF37]/20 active:scale-[0.98] gallery-item gallery-hover-zoom"
+                className="relative group rounded-xl overflow-hidden border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/30 active:scale-[0.98] hover:-translate-y-2 opacity-0 animate-fadeInUp"
+                style={{ animationDelay: `${1000 + index * 100}ms`, animationFillMode: 'forwards' }}
                 onClick={() => setFullscreenIndex(index)}
               >
                 <img
                   src={img}
                   alt={`Gallery ${index + 1}`}
-                  className="w-full aspect-square object-cover object-top transition-all duration-500 opacity-85 group-hover:opacity-100 group-hover:scale-110"
+                  className="w-full aspect-square object-cover object-top transition-all duration-700 ease-out opacity-85 group-hover:opacity-100 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Maximize2 className="text-[#D4AF37] w-5 h-5" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <Maximize2 className="text-[#D4AF37] w-6 h-6 drop-shadow-lg" />
+                  </div>
                 </div>
+                {/* Shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
               </div>
             ))}
           </div>
@@ -714,7 +744,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
       {/* Fullscreen Image Modal */}
       {fullscreenIndex !== null && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md lightbox-backdrop flex items-center justify-center p-4 animate-fadeIn"
+          className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-md lightbox-backdrop flex items-center justify-center p-4 animate-fadeIn"
           onClick={(e) => {
             if (e.target === e.currentTarget) setFullscreenIndex(null);
           }}
@@ -735,7 +765,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
             if (distance < -minSwipeDistance && fullscreenIndex > 0) setFullscreenIndex(fullscreenIndex - 1);
           }}
           tabIndex={0}
-          ref={(el) => el && el.focus()}
+          ref={(el) => el && el.focus({ preventScroll: true })}
         >
           {/* Desktop: Side arrows, Mobile: Bottom arrows */}
           <button
@@ -811,6 +841,37 @@ export function FamilySection({ profile, scrollToTop }) {
   const [touchEnd, setTouchEnd] = useState(null);
   const minSwipeDistance = 50;
 
+  // Lock body scroll when fullscreen modal is open
+  useEffect(() => {
+    if (fullscreenImage !== null || fullscreenGalleryIndex !== null) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      // Also disable snap on the main container
+      const container = document.querySelector('[data-main-container]');
+      if (container) {
+        container.style.overflow = 'hidden';
+        container.style.scrollSnapType = 'none';
+      }
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      const container = document.querySelector('[data-main-container]');
+      if (container) {
+        container.style.overflow = '';
+        container.style.scrollSnapType = '';
+      }
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      const container = document.querySelector('[data-main-container]');
+      if (container) {
+        container.style.overflow = '';
+        container.style.scrollSnapType = '';
+      }
+    };
+  }, [fullscreenImage, fullscreenGalleryIndex]);
+
   return (
     <div className="relative w-full bg-[#080808] flex flex-col py-4 px-4 lg:py-6 lg:px-8 overflow-visible snap-start font-sans">
       <NetworkBackground />
@@ -846,11 +907,11 @@ export function FamilySection({ profile, scrollToTop }) {
         {/* DAD CARD */}
         <div className="bg-[#0c0c0c]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-3xl overflow-hidden group hover:border-[#D4AF37]/60 transition-all duration-500 hover:-translate-y-3 active:scale-[0.98] active:scale-[0.98] hover:shadow-2xl hover:shadow-[#D4AF37]/20 flex flex-col h-full">
           <div 
-            className="h-52 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
+            className="h-56 sm:h-64 md:h-56 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
             onClick={() => setFullscreenImage(profile.dadPhoto)}
           >
             {profile.dadPhoto && (
-              <img src={profile.dadPhoto} alt="Dad" className="w-full h-full object-cover object-[center_35%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+              <img src={profile.dadPhoto} alt="Dad" className="w-full h-full object-cover object-[center_15%] md:object-[center_20%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
             )}
             {/* Gradient blending overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
@@ -895,11 +956,11 @@ export function FamilySection({ profile, scrollToTop }) {
         {/* MOM CARD - Center, Elevated */}
         <div className="bg-[#0c0c0c]/80 backdrop-blur-sm border-2 border-[#D4AF37]/50 rounded-3xl overflow-hidden group hover:border-[#D4AF37] hover:shadow-[0_0_60px_rgba(212,175,55,0.3)] transition-all duration-500 hover:-translate-y-5 flex flex-col h-full relative z-20 scale-105">
           <div 
-            className="h-60 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
+            className="h-64 sm:h-72 md:h-64 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
             onClick={() => setFullscreenImage(profile.momPhoto)}
           >
             {profile.momPhoto && (
-              <img src={profile.momPhoto} alt="Mom" className="w-full h-full object-cover object-[center_40%] scale-110 opacity-90 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700" />
+              <img src={profile.momPhoto} alt="Mom" className="w-full h-full object-cover object-[center_20%] md:object-[center_25%] scale-110 opacity-90 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700" />
             )}
             {/* Gradient blending overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
@@ -944,11 +1005,11 @@ export function FamilySection({ profile, scrollToTop }) {
         {/* SISTER CARD */}
         <div className="bg-[#0c0c0c]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-3xl overflow-hidden group hover:border-[#D4AF37]/60 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-[#D4AF37]/20 flex flex-col h-full">
           <div 
-            className="h-52 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
+            className="h-56 sm:h-64 md:h-56 bg-gradient-to-b from-gray-800 to-black relative cursor-pointer overflow-hidden"
             onClick={() => setFullscreenImage(profile.sisPhoto)}
           >
             {profile.sisPhoto && (
-              <img src={profile.sisPhoto} alt="Sister" className="w-full h-full object-cover object-[center_40%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+              <img src={profile.sisPhoto} alt="Sister" className="w-full h-full object-cover object-[center_15%] md:object-[center_25%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
             )}
             {/* Gradient blending overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
@@ -1022,7 +1083,7 @@ export function FamilySection({ profile, scrollToTop }) {
       {/* Fullscreen Image Modal */}
       {fullscreenImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer animate-fadeIn"
+          className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer animate-fadeIn"
           onClick={() => setFullscreenImage(null)}
         >
           <div className="relative max-w-5xl max-h-[90vh] animate-lightbox">
@@ -1044,7 +1105,7 @@ export function FamilySection({ profile, scrollToTop }) {
       {/* Fullscreen Gallery Modal with Navigation */}
       {fullscreenGalleryIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md lightbox-backdrop flex items-center justify-center p-4 animate-fadeIn"
+          className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-md lightbox-backdrop flex items-center justify-center p-4 animate-fadeIn"
           onClick={(e) => {
             if (e.target === e.currentTarget) setFullscreenGalleryIndex(null);
           }}
@@ -1065,7 +1126,7 @@ export function FamilySection({ profile, scrollToTop }) {
             if (distance < -minSwipeDistance && fullscreenGalleryIndex > 0) setFullscreenGalleryIndex(fullscreenGalleryIndex - 1);
           }}
           tabIndex={0}
-          ref={(el) => el && el.focus()}
+          ref={(el) => el && el.focus({ preventScroll: true })}
         >
           {/* Desktop: Side arrows */}
           <button
@@ -1291,6 +1352,8 @@ export function GallerySection({ profile, scrollToTop }) {
 
 // --- Contact / CTA Section ---
 export function ContactSection({ scrollToTop }) {
+  const [hoveredButton, setHoveredButton] = useState(null);
+  
   const whatsappMessage = encodeURIComponent(
     `Namaste Srinivas Garu 🙏\n\nWe came across Hemanth's profile and found it very interesting.\n\nWe would like to take this conversation forward.\n\nWarm regards`
   );
@@ -1298,15 +1361,27 @@ export function ContactSection({ scrollToTop }) {
   const fatherWhatsApp = `https://wa.me/919000196092?text=${whatsappMessage}`;
   const hemanthInstagram = "https://www.instagram.com/bommenahemanth/";
   const hemanthLinkedIn = "https://www.linkedin.com/in/bommena-hemanth-2a2834118/";
+
+  const socialButtons = [
+    { id: 'instagram', href: hemanthInstagram, icon: <Instagram className="w-4 h-4" />, label: 'Instagram', gradient: 'from-purple-600 via-pink-500 to-orange-400', shadow: 'shadow-pink-500/30' },
+    { id: 'linkedin', href: hemanthLinkedIn, icon: <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>, label: 'LinkedIn', bg: 'bg-[#0A66C2]', shadow: 'shadow-blue-500/30' },
+    { id: 'facebook', href: "https://www.facebook.com/bommenahemanth", icon: <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>, label: 'Facebook', bg: 'bg-[#1877F2]', shadow: 'shadow-blue-600/30' },
+    { id: 'email', href: "mailto:bommenahemanth@gmail.com?subject=Hey%20Hemanth!%20Your%20profile%20caught%20my%20eye%20%E2%9C%A8&body=Hi%20Hemanth!%20%F0%9F%91%8B%0A%0AI%20just%20went%20through%20your%20profile%20and%20really%20enjoyed%20reading%20it!%0AYou%20seem%20like%20a%20genuine%20and%20fun%20person.%0A%0AWould%20love%20to%20get%20to%20know%20you%20better.%20%F0%9F%98%8A%0A%0ALooking%20forward%20to%20hearing%20from%20you!", icon: <Mail className="w-4 h-4" />, label: 'Email', bg: 'bg-red-600', shadow: 'shadow-red-500/30' },
+    { id: 'whatsapp', href: "https://wa.me/918124269822?text=Hey%20Hemanth!%20%F0%9F%91%8B%0A%0AJust%20stumbled%20upon%20your%20profile%20and%20couldn't%20resist%20saying%20hi!%20%E2%9C%A8%0ALet's%20chat%20and%20see%20if%20our%20stars%20align%20%F0%9F%8C%9F", icon: <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>, label: 'WhatsApp', bg: 'bg-[#25D366]', shadow: 'shadow-green-500/30' },
+    { id: 'imessage', href: "sms:+14699967434&body=Hey%20Hemanth!%20%F0%9F%91%8B%0A%0AFound%20your%20profile%20and%20loved%20it!%20%E2%9C%A8%0ALet's%20connect%20and%20see%20where%20this%20goes%20%F0%9F%98%8A", icon: <MessageCircle className="w-4 h-4" />, label: 'iMessage', bg: 'bg-[#007AFF]', shadow: 'shadow-blue-400/30' },
+    { id: 'facetime', href: "facetime-audio:bommenahemanth@gmail.com", icon: <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>, label: 'FaceTime', bg: 'bg-[#34C759]', shadow: 'shadow-green-400/30' },
+    { id: 'call', href: "tel:+14699967434", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>, label: 'Call (US)', bg: 'bg-emerald-600', shadow: 'shadow-emerald-500/30' },
+  ];
   
   return (
     <div className="relative w-full bg-[#080808] flex flex-col p-6 lg:p-12 pb-24 overflow-visible snap-start font-sans">
       <NetworkBackground />
       <StarField count={25} />
       
-      {/* Ambient glow effects */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
+      {/* Animated ambient glow effects */}
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none animate-pulse" style={{ animationDuration: '4s' }} />
+      <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-pink-500/5 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }} />
       
       {/* Back to Top header */}
       <div className="sticky top-0 z-50 w-full px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center bg-black/95 backdrop-blur-xl border-b border-[#D4AF37]/20 mb-8">
@@ -1316,7 +1391,7 @@ export function ContactSection({ scrollToTop }) {
           </h2>
           <p className="text-gray-400 uppercase tracking-[0.2em] text-xs mt-1">The Next Step</p>
         </div>
-        <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20">
+        <button onClick={scrollToTop} className="group flex items-center gap-2 text-xs text-[#D4AF37] hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/10">
           <span>Back to Top</span>
           <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
         </button>
@@ -1326,95 +1401,56 @@ export function ContactSection({ scrollToTop }) {
       <div className="relative z-10 max-w-2xl mx-auto text-center space-y-8 py-4 reveal-on-scroll">
         
         {/* Made it so far message */}
-        <div className="space-y-4">
+        <div className="space-y-4 opacity-0 animate-fadeInUp" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
           <h3 className="text-4xl sm:text-5xl font-serif">
-            <span className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent">Made it this far?</span> <span className="text-[#D4AF37]">✨</span>
+            <span className="bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent animate-shimmer bg-[length:200%_100%]">Made it this far?</span> <span className="text-[#D4AF37] inline-block animate-bounce" style={{ animationDuration: '2s' }}>✨</span>
           </h3>
-          <p className="text-gray-300 text-lg">
+          <p className="text-gray-300 text-lg opacity-0 animate-fadeInUp" style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}>
             If you liked my profile and want to take things forward, feel free to reach out!
           </p>
         </div>
 
         {/* Social Buttons */}
-        <div className="space-y-4">
-          <p className="text-gray-400 text-sm uppercase tracking-wider">Connect with Hemanth</p>
-                    <div className="flex flex-col gap-3 max-w-xl mx-auto">
-            {/* All social buttons - single centered row */}
+        <div className="space-y-4 opacity-0 animate-fadeInUp" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
+          <p className="text-gray-400 text-sm uppercase tracking-wider flex items-center justify-center gap-2">
+            <span className="w-8 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/50"></span>
+            Connect with Hemanth
+            <span className="w-8 h-px bg-gradient-to-l from-transparent to-[#D4AF37]/50"></span>
+          </p>
+          <div className="flex flex-col gap-3 max-w-xl mx-auto">
+            {/* All social buttons - animated grid */}
             <div className="flex justify-center gap-3 flex-wrap">
-              <a 
-                href={hemanthInstagram}
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-              >
-                <Instagram className="w-4 h-4" />
-                Instagram
-              </a>
-              <a 
-                href={hemanthLinkedIn}
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#0A66C2] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                LinkedIn
-              </a>
-              <a 
-                href="https://www.facebook.com/bommenahemanth"
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                Facebook
-              </a>
-              <a 
-                href="mailto:bommenahemanth@gmail.com?subject=Hey%20Hemanth!%20Your%20profile%20caught%20my%20eye%20%E2%9C%A8&body=Hi%20Hemanth!%20%F0%9F%91%8B%0A%0AI%20just%20went%20through%20your%20profile%20and%20really%20enjoyed%20reading%20it!%0AYou%20seem%20like%20a%20genuine%20and%20fun%20person.%0A%0AWould%20love%20to%20get%20to%20know%20you%20better.%20%F0%9F%98%8A%0A%0ALooking%20forward%20to%20hearing%20from%20you!"
-                className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-              >
-                <Mail className="w-4 h-4" />
-                Email
-              </a>
-              <a 
-                href="https://wa.me/918124269822?text=Hey%20Hemanth!%20%F0%9F%91%8B%0A%0AJust%20stumbled%20upon%20your%20profile%20and%20couldn't%20resist%20saying%20hi!%20%E2%9C%A8%0ALet's%20chat%20and%20see%20if%20our%20stars%20align%20%F0%9F%8C%9F"
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                WhatsApp
-              </a>
-              <a 
-                href="sms:+14699967434&body=Hey%20Hemanth!%20%F0%9F%91%8B%0A%0AFound%20your%20profile%20and%20loved%20it!%20%E2%9C%A8%0ALet's%20connect%20and%20see%20where%20this%20goes%20%F0%9F%98%8A"
-                className="flex items-center gap-2 bg-[#007AFF] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-                title="iMessage (US)"
-              >
-                <MessageCircle className="w-4 h-4" />
-                iMessage
-              </a>
-              <a 
-                href="facetime-audio:bommenahemanth@gmail.com"
-                className="flex items-center gap-2 bg-[#34C759] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-                title="FaceTime Audio"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
-                FaceTime
-              </a>
-              <a 
-                href="tel:+14699967434"
-                className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-transform text-sm"
-                title="Call US Number"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                Call (US)
-              </a>
+              {socialButtons.map((btn, idx) => (
+                <a 
+                  key={btn.id}
+                  href={btn.href}
+                  target={btn.href.startsWith('http') ? "_blank" : undefined}
+                  rel={btn.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                  onMouseEnter={() => setHoveredButton(btn.id)}
+                  onMouseLeave={() => setHoveredButton(null)}
+                  className={`group relative flex items-center gap-2 ${btn.gradient ? `bg-gradient-to-r ${btn.gradient}` : btn.bg} text-white px-4 py-2.5 rounded-full font-medium text-sm overflow-hidden opacity-0 animate-fadeInUp transition-all duration-500 ${hoveredButton === btn.id ? `scale-110 ${btn.shadow} shadow-xl -translate-y-1` : hoveredButton && hoveredButton !== btn.id ? 'opacity-60 scale-95' : ''}`}
+                  style={{ 
+                    animationDelay: `${500 + idx * 80}ms`, 
+                    animationFillMode: 'forwards',
+                  }}
+                >
+                  {/* Shine effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                  {/* Icon with bounce */}
+                  <span className={`relative z-10 transition-transform duration-300 ${hoveredButton === btn.id ? 'animate-bounce' : ''}`} style={{ animationDuration: '0.5s' }}>
+                    {btn.icon}
+                  </span>
+                  {/* Label */}
+                  <span className="relative z-10">{btn.label}</span>
+                </a>
+              ))}
             </div>
           </div>
         </div>
 
         {/* Talk to Father */}
-        <div className="pt-6 border-t border-white/10 space-y-3">
-          <p className="text-[#D4AF37] text-sm font-medium mb-3 bg-[#D4AF37]/10 px-4 py-2 rounded-lg inline-block">
+        <div className="pt-6 border-t border-white/10 space-y-3 opacity-0 animate-fadeInUp" style={{ animationDelay: '1000ms', animationFillMode: 'forwards' }}>
+          <p className="text-[#D4AF37] text-sm font-medium mb-3 bg-[#D4AF37]/10 px-4 py-2 rounded-lg inline-block border border-[#D4AF37]/20 hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-105 cursor-default">
             ✨ No strict caste preferences? I'd love to hear from you!
           </p>
           <p className="text-gray-400 text-sm">
@@ -1424,14 +1460,18 @@ export function ContactSection({ scrollToTop }) {
             href={fatherWhatsApp}
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform shadow-lg shadow-[#25D366]/20"
+            className="group relative inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-3 rounded-full font-medium transition-all duration-500 shadow-lg shadow-[#25D366]/20 hover:shadow-xl hover:shadow-[#25D366]/40 hover:scale-110 hover:-translate-y-1 overflow-hidden"
           >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Message Father on WhatsApp
+            {/* Animated ring */}
+            <span className="absolute inset-0 rounded-full border-2 border-white/30 scale-100 group-hover:scale-150 group-hover:opacity-0 transition-all duration-500" />
+            {/* Pulse effect */}
+            <span className="absolute inset-0 rounded-full bg-white/10 scale-0 group-hover:scale-100 transition-transform duration-300" />
+            <svg className="w-5 h-5 relative z-10 group-hover:animate-bounce" style={{ animationDuration: '0.5s' }} fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span className="relative z-10">Message Father on WhatsApp</span>
           </a>
 
           {/* Share Profile Section */}
-          <div className="mt-8 pt-6 border-t border-white/10">
+          <div className="mt-8 pt-6 border-t border-white/10 opacity-0 animate-fadeInUp" style={{ animationDelay: '1200ms', animationFillMode: 'forwards' }}>
             <p className="text-gray-400 text-sm mb-3">
               Know someone who might be interested? Share this profile!
             </p>
@@ -1439,22 +1479,28 @@ export function ContactSection({ scrollToTop }) {
               href="https://wa.me/?text=Hey%21%20I%20found%20Hemanth%27s%20profile%20and%20thought%20you%20might%20be%20interested.%20Would%20you%20like%20to%20connect%20with%20him%3F%20%F0%9F%92%8D%0A%0ACheck%20out%20his%20profile%20here%3A%20https%3A%2F%2Fbommenahemanth.github.io%2Fmarryme%0A%0APS%3A%20Open%20it%20on%20a%20laptop%20for%20the%20full%20experience%20%28trust%20me%2C%20it%27s%20worth%20it%21%29%20%F0%9F%92%BB%E2%9C%A8"
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50"
+              className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600 bg-[length:200%_100%] hover:bg-right text-white px-6 py-3 rounded-full font-medium transition-all duration-700 shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/50 hover:scale-110 hover:-translate-y-1 overflow-hidden"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {/* Animated gradient */}
+              <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-purple-500 to-violet-600 bg-[length:200%_100%] animate-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Sparkle effect */}
+              <span className="absolute top-1 right-2 w-1 h-1 bg-white rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
+              <span className="absolute bottom-2 left-4 w-1 h-1 bg-white rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping" style={{ animationDelay: '0.2s' }} />
+              <svg className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
               </svg>
-              Share Profile on WhatsApp
+              <span className="relative z-10">Share Profile on WhatsApp</span>
             </a>
           </div>
         </div>
 
         {/* Farewell section */}
-        <div className="pt-8 mt-4">
-          <div className="relative bg-gradient-to-br from-[#D4AF37]/15 via-[#D4AF37]/5 to-transparent border border-[#D4AF37]/30 rounded-2xl p-6 overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-2xl"></div>
+        <div className="pt-8 mt-4 opacity-0 animate-fadeInUp" style={{ animationDelay: '1400ms', animationFillMode: 'forwards' }}>
+          <div className="group relative bg-gradient-to-br from-[#D4AF37]/15 via-[#D4AF37]/5 to-transparent border border-[#D4AF37]/30 rounded-2xl p-6 overflow-hidden hover:border-[#D4AF37]/50 transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/10 hover:-translate-y-1">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#D4AF37]/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4">
-              <div className="text-4xl">🤝</div>
+              <div className="text-4xl group-hover:scale-125 group-hover:rotate-12 transition-transform duration-500">🤝</div>
               <div className="text-center sm:text-left">
                 <p className="text-gray-200 text-lg font-medium mb-1">
                   Didn't quite click? <span className="text-[#D4AF37] font-semibold">No worries!</span>
@@ -1468,13 +1514,13 @@ export function ContactSection({ scrollToTop }) {
         </div>
 
         {/* Built with love footer */}
-        <div className="pt-10 mt-6 border-t border-white/5">
+        <div className="pt-10 mt-6 border-t border-white/5 opacity-0 animate-fadeInUp" style={{ animationDelay: '1600ms', animationFillMode: 'forwards' }}>
           <div className="text-center max-w-3xl mx-auto">
-            <p className="text-gray-500 text-xs leading-relaxed">
+            <p className="text-gray-500 text-xs leading-relaxed hover:text-gray-400 transition-colors duration-300">
               Built with Gemini 2.5 Pro, VS Code + GitHub Copilot (Claude Opus 4.5), GitHub Pages & a sleepless weekend ☕
             </p>
-            <p className="text-gray-400 text-sm mt-2">
-              Feedback is a gift — <span className="text-[#D4AF37]">Got thoughts? Text me.</span>
+            <p className="text-gray-400 text-sm mt-2 group">
+              Feedback is a gift — <span className="text-[#D4AF37] group-hover:animate-pulse cursor-pointer">Got thoughts? Text me.</span>
             </p>
           </div>
         </div>

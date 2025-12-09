@@ -18,6 +18,7 @@ import {
   Loader2,
   Sparkles,
   RotateCw,
+  RefreshCw,
   Trophy,
   ArrowUp,
   Cpu,
@@ -225,14 +226,17 @@ function NetworkBackground() {
 
 function FactsModal({ item, onClose }) {
   return (
-    <div onClick={onClose} className="fixed inset-0 z-[150] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in zoom-in duration-300 cursor-pointer">
-      <div onClick={(e) => e.stopPropagation()} className="bg-[#0f110f] w-full max-w-md rounded-2xl border border-[#D4AF37]/50 shadow-[0_0_50px_rgba(212,175,55,0.2)] p-8 relative overflow-hidden cursor-default">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37] blur-[100px] opacity-10 pointer-events-none" />
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+    <div onClick={onClose} className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 cursor-pointer animate-[fadeIn_0.3s_ease-out]">
+      <div 
+        onClick={(e) => e.stopPropagation()} 
+        className="bg-[#0f110f] w-full max-w-md rounded-2xl border border-[#D4AF37]/50 shadow-[0_0_50px_rgba(212,175,55,0.2)] p-8 relative overflow-hidden cursor-default animate-[modalPop_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)]"
+      >
+        <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37] blur-[100px] opacity-10 pointer-events-none animate-pulse" />
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors hover:rotate-90 duration-300">
           <X size={24} />
         </button>
         <div className="text-center mb-8">
-          <div className="w-20 h-20 rounded-full bg-black border-2 border-[#D4AF37] p-4 flex items-center justify-center shadow-lg mx-auto mb-4">
+          <div className="w-20 h-20 rounded-full bg-black border-2 border-[#D4AF37] p-4 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.3)] mx-auto mb-4 animate-[logoBounce_0.5s_ease-out_0.2s_both]">
             <img
               src={item.logo || `https://logo.clearbit.com/${item.domain}`}
               alt="logo"
@@ -240,14 +244,18 @@ function FactsModal({ item, onClose }) {
               onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentElement.innerHTML = `<span class="text-[#D4AF37] font-bold text-2xl">${item.org[0]}</span>`; }}
             />
           </div>
-          <h3 className="text-2xl font-serif bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent font-bold">
+          <h3 className="text-2xl font-serif bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent font-bold animate-[slideUp_0.4s_ease-out_0.3s_both]">
             {item.org}
           </h3>
-          <p className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase mt-2">Did You Know?</p>
+          <p className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase mt-2 animate-[slideUp_0.4s_ease-out_0.4s_both]">Did You Know?</p>
         </div>
         <ul className="space-y-4">
           {(item.facts || []).map((fact, idx) => (
-            <li key={idx} className="flex gap-3 text-sm text-gray-300 leading-relaxed border-b border-white/5 pb-2 last:border-0">
+            <li 
+              key={idx} 
+              className="flex gap-3 text-sm text-gray-300 leading-relaxed border-b border-white/5 pb-2 last:border-0 animate-[slideUp_0.4s_ease-out_both]"
+              style={{ animationDelay: `${0.5 + idx * 0.1}s` }}
+            >
               <span className="font-serif text-[#D4AF37] font-bold text-lg leading-none mt-0.5">{idx + 1}.</span>
               <span>{fact}</span>
             </li>
@@ -264,6 +272,18 @@ const CompatibilityTab = ({ t, lang = "en" }) => {
   const [result, setResult] = useState(null);
   const [citySuggestions, setCitySuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const cityDropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (cityDropdownRef.current && !cityDropdownRef.current.contains(e.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleCityChange = (e) => {
     const val = e.target.value;
@@ -294,7 +314,10 @@ const CompatibilityTab = ({ t, lang = "en" }) => {
         total: 36,
         verdictTitle: analysis.verdictTitle,
         verdictDesc: analysis.verdictDesc,
-        details: analysis.details
+        details: analysis.details,
+        note: analysis.note,
+        analyzeNew: analysis.analyzeNew,
+        gunas: analysis.gunas
       });
       setAnalyzing(false);
     }, 2500);
@@ -308,41 +331,44 @@ const CompatibilityTab = ({ t, lang = "en" }) => {
       </div>
 
       {!result && !analyzing && (
-        <div className="max-w-md mx-auto w-full bg-[#111] border border-white/10 p-8 rounded-2xl shadow-2xl">
+        <div className="max-w-md mx-auto w-full bg-[#111] border border-white/10 p-8 rounded-2xl shadow-2xl hover:border-[#D4AF37]/30 transition-all duration-500 hover:shadow-[#D4AF37]/10">
           <h4 className="text-white font-bold mb-6 flex items-center gap-2 border-b border-white/10 pb-4">
-            <User className="text-[#D4AF37]" size={20} /> {t.partnerDetails}
+            <User className="text-[#D4AF37] animate-pulse" size={20} /> {t.partnerDetails}
           </h4>
           <div className="space-y-4">
-            <div>
+            <div className="transform transition-all duration-300 hover:translate-x-1">
               <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Full Name</label>
               <input
                 type="text"
-                className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] outline-none transition-colors"
+                className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] focus:shadow-[0_0_15px_rgba(212,175,55,0.2)] outline-none transition-all duration-300"
                 placeholder="Partner's Full Name"
                 value={partnerDetails.name}
                 onChange={e => setPartnerDetails({ ...partnerDetails, name: e.target.value })}
               />
             </div>
-            <div className="relative">
+            <div ref={cityDropdownRef} className="relative transform transition-all duration-300 hover:translate-x-1 z-30">
               <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Place of Birth</label>
               <div className="relative">
                 <input
                   type="text"
-                  className="w-full bg-black border border-white/20 rounded-lg p-3 pl-10 text-white focus:border-[#D4AF37] outline-none transition-colors"
+                  className="w-full bg-black border border-white/20 rounded-lg p-3 pl-10 text-white focus:border-[#D4AF37] focus:shadow-[0_0_15px_rgba(212,175,55,0.2)] outline-none transition-all duration-300"
                   placeholder="Enter birth place..."
                   value={partnerDetails.city}
                   onChange={handleCityChange}
+                  onFocus={() => partnerDetails.city.length > 0 && setShowSuggestions(true)}
+                  autoComplete="off"
                 />
                 <MapIcon className="absolute left-3 top-3.5 text-gray-500 w-4 h-4" />
               </div>
               {showSuggestions && citySuggestions.length > 0 && (
-                <ul className="absolute z-50 w-full bg-[#1a1a1a] border border-white/10 rounded-lg mt-1 max-h-40 overflow-y-auto shadow-xl">
-                  {citySuggestions.map((city, idx) => (
+                <ul className="absolute z-[100] left-0 right-0 w-full bg-[#1a1a1a] border border-[#D4AF37]/30 rounded-lg mt-1 max-h-48 overflow-y-auto shadow-2xl shadow-black/50 animate-fadeInUp scrollbar-thin scrollbar-thumb-[#D4AF37]/30 scrollbar-track-transparent">
+                  {citySuggestions.slice(0, 8).map((city, idx) => (
                     <li
                       key={`${city}-${idx}`}
                       onClick={() => selectCity(city)}
-                      className="px-4 py-2 text-sm text-gray-300 hover:bg-[#D4AF37] hover:text-black cursor-pointer"
+                      className="px-4 py-3 text-sm text-gray-300 hover:bg-[#D4AF37] hover:text-black cursor-pointer transition-all duration-200 border-b border-white/5 last:border-0 flex items-center gap-2"
                     >
+                      <MapIcon className="w-3 h-3 text-[#D4AF37]" />
                       {city}
                     </li>
                   ))}
@@ -350,21 +376,21 @@ const CompatibilityTab = ({ t, lang = "en" }) => {
               )}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
+              <div className="transform transition-all duration-300 hover:translate-x-1">
                 <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Date of Birth</label>
                 <input
                   type="date"
-                  className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] outline-none transition-colors cursor-pointer [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-50 [&::-webkit-calendar-picker-indicator]:hover:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                  className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] focus:shadow-[0_0_15px_rgba(212,175,55,0.2)] outline-none transition-all duration-300 cursor-pointer [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-50 [&::-webkit-calendar-picker-indicator]:hover:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   value={partnerDetails.date}
                   onChange={e => setPartnerDetails({ ...partnerDetails, date: e.target.value })}
                   onClick={e => e.target.showPicker && e.target.showPicker()}
                 />
               </div>
-              <div>
+              <div className="transform transition-all duration-300 hover:translate-x-1">
                 <label className="text-[10px] text-gray-500 uppercase font-bold mb-1 block">Time of Birth</label>
                 <input
                   type="time"
-                  className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] outline-none transition-colors cursor-pointer [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-50 [&::-webkit-calendar-picker-indicator]:hover:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                  className="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-[#D4AF37] focus:shadow-[0_0_15px_rgba(212,175,55,0.2)] outline-none transition-all duration-300 cursor-pointer [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-50 [&::-webkit-calendar-picker-indicator]:hover:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   value={partnerDetails.time}
                   onChange={e => setPartnerDetails({ ...partnerDetails, time: e.target.value })}
                   onClick={e => e.target.showPicker && e.target.showPicker()}
@@ -375,9 +401,9 @@ const CompatibilityTab = ({ t, lang = "en" }) => {
           <button
             onClick={handleAnalyze}
             disabled={!partnerDetails.name || !partnerDetails.date || !partnerDetails.city}
-            className="w-full mt-6 py-3 bg-gradient-to-r from-[#BF953F] to-[#B38728] text-black font-bold rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full mt-6 py-3 bg-gradient-to-r from-[#BF953F] to-[#B38728] text-black font-bold rounded-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg hover:shadow-[#D4AF37]/30"
           >
-            <Sparkles size={18} /> {t.analyze}
+            <Sparkles size={18} className="animate-pulse" /> {t.analyze}
           </button>
         </div>
       )}
@@ -395,16 +421,16 @@ const CompatibilityTab = ({ t, lang = "en" }) => {
       )}
 
       {result && (
-        <div className="max-w-5xl mx-auto w-full h-full overflow-y-auto pb-8 px-2 scrollbar-hide animate-in zoom-in duration-500">
-          <div className="flex flex-col items-center mb-10">
+        <div className="max-w-5xl mx-auto w-full h-full overflow-y-auto pb-8 px-2 scrollbar-hide animate-in fade-in duration-500">
+          <div className="flex flex-col items-center mb-10 animate-fadeInUp">
             <div className="relative mb-4">
-              <div className="w-40 h-40 rounded-full border-[6px] border-[#D4AF37] flex items-center justify-center bg-black shadow-[0_0_60px_rgba(212,175,55,0.4)]">
+              <div className="w-40 h-40 rounded-full border-[6px] border-[#D4AF37] flex items-center justify-center bg-black shadow-[0_0_60px_rgba(212,175,55,0.4)] animate-pulse-slow">
                 <div className="text-center">
                   <span className="block text-5xl font-serif font-bold text-white">{result.score}</span>
                   <span className="block text-xs text-gray-500 uppercase tracking-widest mt-1 font-bold">/ 36 {result.gunas || 'Gunas'}</span>
                 </div>
               </div>
-              <div className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full text-sm font-bold shadow-xl whitespace-nowrap border ${result.score > 18 ? 'bg-green-900/90 border-green-500 text-green-100' : 'bg-red-900/90 border-red-500 text-red-100'}`}>
+              <div className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full text-sm font-bold shadow-xl whitespace-nowrap border animate-bounce-subtle ${result.score > 18 ? 'bg-green-900/90 border-green-500 text-green-100' : 'bg-red-900/90 border-red-500 text-red-100'}`}>
                 {result.verdictTitle}
               </div>
             </div>
@@ -413,19 +439,19 @@ const CompatibilityTab = ({ t, lang = "en" }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             {result.details.map((item, idx) => (
-              <div key={idx} className="bg-[#111] border border-white/10 rounded-xl p-5 hover:border-[#D4AF37]/40 transition-all hover:shadow-lg hover:shadow-[#D4AF37]/5 flex gap-4">
-                <div className={`p-3 rounded-full h-fit ${item.score === item.total ? 'bg-green-500/20 text-green-400' : item.score > 0 ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'bg-red-500/20 text-red-400'}`}>
+              <div key={idx} className="bg-[#111] border border-white/10 rounded-xl p-5 hover:border-[#D4AF37]/40 transition-all duration-500 hover:shadow-lg hover:shadow-[#D4AF37]/10 hover:-translate-y-1 flex gap-4 opacity-0 animate-fadeInUp" style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'forwards' }}>
+                <div className={`p-3 rounded-full h-fit transition-transform duration-300 hover:scale-110 ${item.score === item.total ? 'bg-green-500/20 text-green-400' : item.score > 0 ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'bg-red-500/20 text-red-400'}`}>
                   <item.icon size={24} />
                 </div>
-                <div>
+                <div className="flex-1">
                   <div className="flex justify-between items-center mb-1">
                     <h5 className="text-white font-bold text-base">{item.category}</h5>
                     <span className="text-xs font-mono text-gray-500 bg-black px-2 py-1 rounded border border-white/10">{item.score} / {item.total}</span>
                   </div>
-                  <div className="w-full bg-white/5 rounded-full h-1 mb-2">
+                  <div className="w-full bg-white/5 rounded-full h-1.5 mb-2 overflow-hidden">
                     <div
-                      className={`h-full rounded-full ${item.score === item.total ? 'bg-green-500' : item.score > 0 ? 'bg-[#D4AF37]' : 'bg-red-500'}`}
-                      style={{ width: `${(item.score / item.total) * 100}%` }}
+                      className={`h-full rounded-full transition-all duration-1000 ease-out ${item.score === item.total ? 'bg-green-500' : item.score > 0 ? 'bg-[#D4AF37]' : 'bg-red-500'}`}
+                      style={{ width: `${(item.score / item.total) * 100}%`, transitionDelay: `${idx * 100 + 300}ms` }}
                     />
                   </div>
                   <p className="text-xs text-gray-400 font-sans leading-relaxed mb-2">{item.desc}</p>
@@ -434,10 +460,17 @@ const CompatibilityTab = ({ t, lang = "en" }) => {
             ))}
           </div>
 
-          <div className="text-center border-t border-white/10 pt-6">
-            <p className="text-gray-500 text-xs italic mb-4">{result.note}</p>
-            <button onClick={() => setResult(null)} className="px-6 py-2 bg-white/5 hover:bg-white/10 text-white rounded-full text-sm border border-white/10 transition-colors">
-              {result.analyzeNew}
+          <div className="text-center border-t border-white/10 pt-8 mt-4 animate-fadeInUp" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
+            <p className="text-gray-400 text-sm italic mb-6">{result.note}</p>
+            <button 
+              onClick={() => setResult(null)} 
+              className="group relative px-8 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B38728] text-black font-bold rounded-full text-sm shadow-lg shadow-[#D4AF37]/30 hover:shadow-[#D4AF37]/50 transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <RefreshCw size={16} className="group-hover:rotate-180 transition-transform duration-500" />
+                {result.analyzeNew || 'Analyze Another Profile'}
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#F4D03F] to-[#D4AF37] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
           </div>
         </div>
@@ -510,58 +543,41 @@ export function useScrollReveal(threshold = 0.2) {
 }
 
 // TypeWriter Effect Component - types out text character by character
-export function TypeWriter({ text, speed = 80, delay = 500, className = '', onComplete }) {
+export function TypeWriter({ text, speed = 80, delay = 500, className = '', onComplete, startImmediately = false }) {
   const [displayText, setDisplayText] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
-  const ref = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const timer = setTimeout(() => {
-      let index = 0;
-      const typeInterval = setInterval(() => {
+    // Reset when text changes
+    setDisplayText('');
+    setIsComplete(false);
+    
+    let index = 0;
+    let typeInterval = null;
+    
+    const startTyping = () => {
+      typeInterval = setInterval(() => {
         if (index < text.length) {
           setDisplayText(text.slice(0, index + 1));
           index++;
         } else {
-          clearInterval(typeInterval);
+          if (typeInterval) clearInterval(typeInterval);
           setIsComplete(true);
           onComplete && onComplete();
         }
       }, speed);
+    };
 
-      return () => clearInterval(typeInterval);
-    }, delay);
+    const timer = setTimeout(startTyping, delay);
 
-    return () => clearTimeout(timer);
-  }, [isVisible, text, speed, delay, onComplete]);
+    return () => {
+      clearTimeout(timer);
+      if (typeInterval) clearInterval(typeInterval);
+    };
+  }, [text, speed, delay, onComplete]);
 
   return (
-    <span ref={ref} className={className}>
+    <span className={className}>
       {displayText}
       {!isComplete && <span className="animate-pulse">|</span>}
     </span>
@@ -858,10 +874,11 @@ export function LoadingScreen({ onLoadComplete }) {
     './images/mother.JPG',
     './images/potti.jpg',
     './images/mom-dad.jpg',
-    './images/family/family-1.jpg',
-    './images/family/family-2.jpg',
-    './images/family/family-3.jpg',
-    './images/family/family-4.jpg'
+    './images/family/family1.jpg',
+    './images/family/family3.jpg',
+    './images/family/family4.jpg',
+    './images/family/family5.jpg',
+    './images/family/IMG_3929.jpg'
   ];
 
   useEffect(() => {

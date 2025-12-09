@@ -171,7 +171,7 @@ export const TIMELINE_DATA = [
   {
     id: 3,
     date: "Dec 2021 - May 2023",
-    role: "Sr Data Analyst - Merch & Supply Chain",
+    role: "Sr Data Analyst - Merch Analytics",
     org: "THG",
     loc: "Manchester, UK",
     logo: "/marryme/images/logos/thg.png",

@@ -137,6 +137,8 @@ export default function ShaadiLanding() {
   // Scroll progress and section navigation
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState(0);
+  const [showSectionLabel, setShowSectionLabel] = useState(false);
+  const labelTimeoutRef = useRef(null);
   const containerRef = useRef(null);
   
   const sections = [
@@ -157,20 +159,75 @@ export default function ShaadiLanding() {
       const scrollHeight = container.scrollHeight - container.clientHeight;
       const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
       setScrollProgress(progress);
-
-      // Determine active section
-      const sectionElements = container.querySelectorAll('[data-section]');
-      sectionElements.forEach((el, idx) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-          setActiveSection(idx);
-        }
-      });
     };
 
     container.addEventListener('scroll', handleScroll);
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Intersection Observer for active section detection
+  useEffect(() => {
+    if (!pageLoaded) return;
+    
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Ensure we start at the top when page loads
+    container.scrollTop = 0;
+    setActiveSection(0);
+
+    // Use scroll position to determine active section
+    const handleSectionScroll = () => {
+      const sectionElements = container.querySelectorAll('[data-section]');
+      if (sectionElements.length === 0) return;
+      
+      const containerRect = container.getBoundingClientRect();
+      const containerCenter = containerRect.top + containerRect.height / 2;
+      
+      let closestIdx = 0;
+      let closestDistance = Infinity;
+      
+      sectionElements.forEach((section, idx) => {
+        const rect = section.getBoundingClientRect();
+        const sectionCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionCenter - containerCenter);
+        
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIdx = idx;
+        }
+      });
+      
+      setActiveSection((prev) => {
+        if (prev !== closestIdx) {
+          // Show label when section changes
+          setShowSectionLabel(true);
+          // Clear any existing timeout
+          if (labelTimeoutRef.current) {
+            clearTimeout(labelTimeoutRef.current);
+          }
+          // Hide after 2 seconds
+          labelTimeoutRef.current = setTimeout(() => {
+            setShowSectionLabel(false);
+          }, 2000);
+        }
+        return closestIdx;
+      });
+    };
+
+    // Initial check after a small delay to let DOM settle
+    setTimeout(handleSectionScroll, 100);
+    
+    // Listen to scroll
+    container.addEventListener('scroll', handleSectionScroll, { passive: true });
+
+    return () => {
+      container.removeEventListener('scroll', handleSectionScroll);
+      if (labelTimeoutRef.current) {
+        clearTimeout(labelTimeoutRef.current);
+      }
+    };
+  }, [pageLoaded]);
 
   // Scroll reveal observer for content animations
   useEffect(() => {
@@ -217,7 +274,7 @@ export default function ShaadiLanding() {
   return (
     <>
       {!pageLoaded && <LoadingScreen onLoadComplete={() => setPageLoaded(true)} />}
-      <div ref={containerRef} className={`h-screen w-full overflow-y-scroll bg-black text-white font-sans selection:bg-[#D4AF37] selection:text-black scroll-smooth snap-y snap-proximity md:snap-mandatory ${pageLoaded ? "page-entrance" : "opacity-0"}`}>
+      <div ref={containerRef} data-main-container className={`h-screen w-full overflow-y-scroll bg-black text-white font-sans selection:bg-[#D4AF37] selection:text-black scroll-smooth snap-y snap-proximity md:snap-mandatory ${pageLoaded ? "opacity-100" : "opacity-0"}`} style={{ transition: 'opacity 0.8s ease-out' }}>
       
       {/* Cursor Trail (Desktop only) */}
       <FloatingParticles />
@@ -231,7 +288,7 @@ export default function ShaadiLanding() {
         />
       </div>
 
-      {/* Section Dots Navigation - Hidden on mobile */}
+      {/* Section Dots Navigation - Desktop */}
       <nav className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col gap-3">
         {sections.map((section, idx) => (
           <button
@@ -240,70 +297,54 @@ export default function ShaadiLanding() {
             className="group relative flex items-center justify-end"
             aria-label={`Go to ${section.label}`}
           >
-            <span className={`absolute right-6 px-2 py-1 rounded text-xs font-medium whitespace-nowrap transition-all duration-200 ${
-              activeSection === idx 
-                ? 'opacity-100 bg-[#D4AF37] text-black' 
-                : 'opacity-0 group-hover:opacity-100 bg-white/10 text-white'
+            <span className={`absolute right-7 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all duration-500 ease-out backdrop-blur-sm ${
+              activeSection === idx && showSectionLabel
+                ? 'opacity-100 translate-x-0 bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-black shadow-lg shadow-[#D4AF37]/30' 
+                : 'opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 bg-white/10 text-white'
             }`}>
               {section.label}
             </span>
-            <span className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
+            <span className={`rounded-full border-2 transition-all duration-500 ease-out ${
               activeSection === idx 
-                ? 'bg-[#D4AF37] border-[#D4AF37] scale-125' 
-                : 'bg-transparent border-white/40 hover:border-[#D4AF37] hover:scale-110'
+                ? 'bg-[#D4AF37] border-[#D4AF37] w-3.5 h-3.5 shadow-[0_0_12px_rgba(212,175,55,0.6)]' 
+                : 'bg-transparent border-white/40 w-2.5 h-2.5 hover:border-[#D4AF37] hover:scale-125'
             }`} />
           </button>
         ))}
       </nav>
 
-      {/* Mobile Navigation - Minimal dots, expand on touch */}
-      <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[100] flex md:hidden flex-col gap-0.5 pr-1">
+      {/* Mobile Navigation - Minimal dots with auto-show labels */}
+      <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[100] flex md:hidden flex-col gap-1 pr-2">
         {sections.map((section, idx) => (
           <button
             key={section.id}
-            onClick={(e) => {
-              // Hide all labels first
-              document.querySelectorAll('.mobile-nav-label').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateX(10px)';
-              });
-              document.querySelectorAll('.mobile-nav-dot').forEach(el => {
-                el.style.transform = 'scale(1)';
-              });
-              // Show this label
-              const label = e.currentTarget.querySelector('.mobile-nav-label');
-              const dot = e.currentTarget.querySelector('.mobile-nav-dot');
-              if (label) { label.style.opacity = '1'; label.style.transform = 'translateX(0)'; }
-              if (dot) { dot.style.transform = 'scale(1.5)'; }
-              // Hide after 2 seconds
-              setTimeout(() => {
-                document.querySelectorAll('.mobile-nav-label').forEach(el => {
-                  el.style.opacity = '0';
-                  el.style.transform = 'translateX(10px)';
-                });
-                document.querySelectorAll('.mobile-nav-dot').forEach(el => {
-                  el.style.transform = 'scale(1)';
-                });
-              }, 2000);
+            onClick={() => {
+              setShowSectionLabel(true);
+              if (labelTimeoutRef.current) clearTimeout(labelTimeoutRef.current);
+              labelTimeoutRef.current = setTimeout(() => setShowSectionLabel(false), 2000);
               scrollToSection(idx);
             }}
-            className="group relative flex items-center justify-end py-2 pr-2 touch-manipulation"
+            className="group relative flex items-center justify-end py-1.5 touch-manipulation"
             aria-label={`Go to ${section.label}`}
           >
-            {/* Label - appears on touch */}
+            {/* Label - appears when active section changes */}
             <span 
-              className="mobile-nav-label absolute right-6 px-2 py-1 bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] rounded text-[10px] text-black font-medium whitespace-nowrap transition-all duration-200 opacity-0 translate-x-2.5 pointer-events-none shadow-lg"
+              className={`absolute right-5 px-2 py-1 rounded-md text-[10px] font-semibold whitespace-nowrap transition-all duration-500 ease-out pointer-events-none backdrop-blur-sm ${
+                activeSection === idx && showSectionLabel
+                  ? 'opacity-100 translate-x-0 bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-black shadow-lg'
+                  : 'opacity-0 translate-x-3'
+              }`}
             >
               {section.label}
             </span>
             {/* Dot */}
             <span 
-              className={`mobile-nav-dot rounded-full transition-all duration-300 ${
+              className={`rounded-full transition-all duration-500 ease-out ${
                 activeSection === idx 
-                  ? 'bg-[#D4AF37] w-2 h-2 shadow-[0_0_6px_rgba(212,175,55,0.8)] animate-dot-pulse animate-dot-pulse' 
-                  : 'bg-white/50 w-1.5 h-1.5'
+                  ? 'bg-[#D4AF37] w-2.5 h-2.5 shadow-[0_0_8px_rgba(212,175,55,0.8)]' 
+                  : 'bg-white/40 w-1.5 h-1.5'
               }`}
-            ></span>
+            />
           </button>
         ))}
       </div>
@@ -329,12 +370,14 @@ export default function ShaadiLanding() {
           <div className="flex flex-col justify-center max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto md:mx-0 animate-fadeInUp">
             <div className="mb-4 sm:mb-6 group relative">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif tracking-tight leading-tight mb-2">
-                <TypeWriter 
-                  text={`${profile.firstName} ${profile.lastName}`}
-                  speed={100}
-                  delay={300}
-                  className="font-bold bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent drop-shadow-lg text-glow-gold"
-                />
+                {pageLoaded && (
+                  <TypeWriter 
+                    text={`${profile.firstName} ${profile.lastName}`}
+                    speed={80}
+                    delay={200}
+                    className="font-bold bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] bg-clip-text text-transparent"
+                  />
+                )}
               </h1>
               <button
                 onClick={() => setIsEditing(true)}
@@ -534,7 +577,7 @@ export default function ShaadiLanding() {
                   </div>
 
                   <div
-                    onClick={() => setSelectedFactItem(item)}
+                    onClick={(e) => { e.stopPropagation(); e.preventDefault(); setSelectedFactItem(item); }}
                     className="relative flex-shrink-0 z-10 cursor-pointer group"
                   >
                     <div className="w-14 h-14 rounded-full bg-black border-[3px] border-[#D4AF37] p-2 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.6)]">
@@ -592,15 +635,15 @@ export default function ShaadiLanding() {
         <ContactSection scrollToTop={scrollToTop} />
       </div>
 
-      <ProfileEditModal
-        isOpen={isEditing}
-        onClose={() => setIsEditing(false)}
-        data={editForm}
-        onChange={setEditForm}
-        onSave={saveProfile}
-      />
-      {selectedFactItem && <FactsModal item={selectedFactItem} onClose={() => setSelectedFactItem(null)} />}
-    </div>
+      </div>
+    <ProfileEditModal
+      isOpen={isEditing}
+      onClose={() => setIsEditing(false)}
+      data={editForm}
+      onChange={setEditForm}
+      onSave={saveProfile}
+    />
+    {selectedFactItem && <FactsModal item={selectedFactItem} onClose={() => setSelectedFactItem(null)} />}
     </>
   );
 }
