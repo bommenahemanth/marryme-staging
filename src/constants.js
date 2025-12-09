@@ -80,7 +80,7 @@ export const ALL_CITIES = [
 export const DEFAULT_PROFILE = {
   firstName: "Bommena",
   lastName: "Hemanth",
-  quote: "Looking for a Telugu Waifu\nto share memes & travel.",
+  quote: "Looking for a Telugu Waifu\nto share memes & travel",
   age: "28 Years",
   height: "5.8 ft",
   caste: "No Bar",
@@ -94,11 +94,19 @@ export const DEFAULT_PROFILE = {
   languages: "Telugu, English, Bhaiya thoda pyaaz daalo",
   visaStatus: "H1B - i140 Started",
   photoBase64: "./images/mallorca.jpg",
-  dadPhoto: "./images/father.jpg",
+  dadPhoto: "./images/dad.jpg",
   momPhoto: "./images/mother.JPG",
-  sisPhoto: "./images/potti.jpg",
+  sisPhoto: "./images/potti.jpg?v=2",
+  momDadPhoto: "./images/mom-dad.jpg",
   familyPhoto: null,
-  galleryImages: null
+  galleryImages: [
+    "./images/gallery-3.jpg",
+    "./images/gallery-5.jpg",
+    "./images/gallery-2.jpg",
+    "./images/me.jpg",
+    "./images/gallery-1.jpg",
+    "./images/gallery-4.jpg"
+  ]
 };
 
 export const SKILLS = [
@@ -183,28 +191,6 @@ export const TIMELINE_DATA = [
     ]
   },
   {
-    id: 4,
-    date: "Jul 2018 - Sep 2020",
-    role: "Data Analyst - Supply Chain",
-    org: "Tata Consultancy Services",
-    loc: "Hyderabad, India",
-    logo: "/marryme/images/logos/tcs.png",
-    domain: "tcs.com",
-    tagline: "Sold my time",
-    responsibilities: [
-      "SQL & Excel for demand planning (+12% accuracy)",
-      "ML models in AWS SageMaker (+10% revenue)",
-      "Tableau dashboards (-7 days inventory on hand)"
-    ],
-    facts: [
-      "India's MOST VALUABLE company — crossed $200 BILLION market cap in 2021",
-      "600,000+ employees in 46 countries — 4th largest employer in all of India",
-      "$31 BILLION revenue in FY2025 — larger than entire economies of 100+ countries",
-      "First Indian IT company to hit $100 BILLION market cap (2018)",
-      "Part of 156-year-old TATA Group — India's oldest & most respected conglomerate"
-    ]
-  },
-  {
     id: 5,
     date: "Oct 2020 - Sep 2021",
     role: "MSc Analytics - Operations Research",
@@ -224,6 +210,28 @@ export const TIMELINE_DATA = [
       "Birthplace of the MODERN COMPUTER — Alan Turing built the first stored-program computer here in 1948",
       "26 NOBEL PRIZE winners including Ernest Rutherford who split the atom",
       "40,000+ students from 160+ countries — UK's largest single-site university"
+    ]
+  },
+  {
+    id: 4,
+    date: "Jul 2018 - Sep 2020",
+    role: "Data Analyst - Supply Chain",
+    org: "Tata Consultancy Services",
+    loc: "Hyderabad, India",
+    logo: "/marryme/images/logos/tcs.png",
+    domain: "tcs.com",
+    tagline: "Sold my time",
+    responsibilities: [
+      "SQL & Excel for demand planning (+12% accuracy)",
+      "ML models in AWS SageMaker (+10% revenue)",
+      "Tableau dashboards (-7 days inventory on hand)"
+    ],
+    facts: [
+      "India's MOST VALUABLE company — crossed $200 BILLION market cap in 2021",
+      "600,000+ employees in 46 countries — 4th largest employer in all of India",
+      "$31 BILLION revenue in FY2025 — larger than entire economies of 100+ countries",
+      "First Indian IT company to hit $100 BILLION market cap (2018)",
+      "Part of 156-year-old TATA Group — India's oldest & most respected conglomerate"
     ]
   },
   {
@@ -415,7 +423,7 @@ export const ASTRO_DATA = {
     { name: "Mars ♂️", sign: "Virgo", house: 3, degree: "12°", nature: "Neutral", effect: "Analytical, hardworking, strategic, courageous" },
     { name: "Mercury ☿", sign: "Taurus", house: 11, degree: "4°", nature: "Benefic", effect: "Practical communication, business mindset" },
     { name: "Jupiter ♃", sign: "Capricorn ♑", house: 7, degree: "6°", nature: "Debilitated", effect: "Mature spouse, delayed but lasting marriage" },
-    { name: "Venus ♀️", sign: "Pisces", house: 9, degree: "26°", nature: "Exalted ✨", effect: "Deeply romantic, idealistic, spiritual partner" },
+    { name: "Venus ♀️", sign: "Pisces", house: 9, degree: "26°", nature: "Exalted", effect: "Deeply romantic, idealistic, spiritual partner" },
     { name: "Saturn ♄", sign: "Aquarius ♒", house: 8, degree: "8°", nature: "Own Sign", effect: "Transformation, delays but long-term stability" },
     { name: "Rahu ☊", sign: "Virgo", house: 3, degree: "24°", nature: "Shadow", effect: "Ambition, communication skill, technical aptitude" },
     { name: "Ketu ☋", sign: "Pisces", house: 9, degree: "24°", nature: "Shadow", effect: "Spiritual, philosophical, past-life wisdom" }

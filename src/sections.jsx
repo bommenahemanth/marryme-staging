@@ -475,22 +475,22 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
           </h4>
           <ul className="space-y-3">
             <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
-              <Activity size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Play badminton (I was great when my knees were younger).</span>
+              <Activity size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Play badminton (I was great when my knees were younger)</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
-              <Lightbulb size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Give unsolicited advice (<strong>'Uchitha salahalu'</strong>, literally) to young folks who reach out to me on LinkedIn.</span>
+              <Lightbulb size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Giving unsolicited advice (<strong>'Uchitha salahalu'</strong>, literally) to young folks who reach out to me on LinkedIn.</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
-              <Smartphone size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Exploring new tech gadgets.</span>
+              <Smartphone size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Exploring new tech gadgets</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
-              <Footprints size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Walk 10 km daily (and pet <strong>'kukka bangaralu'</strong> on the way).</span>
+              <Footprints size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Walk 10 km daily (and pet <strong>'kukka bangaralu'</strong> on the way)</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
-              <Bot size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Get my hands dirty with new AI tools out there.</span>
+              <Bot size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Get my hands dirty with new AI tools out there</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-yellow-900/10 p-2 rounded items-center">
-              <Smile size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Annoying my little sister.</span>
+              <Smile size={16} className="text-[#D4AF37] flex-shrink-0" /><span>Annoying my little sister</span>
             </li>
           </ul>
         </div>
@@ -530,7 +530,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
           <h3 className="text-xl font-serif text-violet-400 mb-4 flex items-center gap-3">
             <Heart className="w-6 h-6" /> Causes I Believe In
           </h3>
-          <p className="text-gray-400 text-sm mb-4 italic">A promise to myself — monthly donations until my last breath.</p>
+          <p className="text-gray-400 text-sm mb-4 italic">A promise to myself, monthly donations until my last breath</p>
           <div className="flex flex-wrap gap-3">
             {[
               {icon: Mountain, text: "Elephant Habitat Protection"},
@@ -574,19 +574,19 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
           </h4>
           <ul className="space-y-3">
             <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
-              <Share2 size={16} className="text-green-400 flex-shrink-0" /><span>Sharing memes faster than the flu spreads.</span>
+              <Share2 size={16} className="text-green-400 flex-shrink-0" /><span>Sharing memes faster than the flu spreads</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
-              <Map size={16} className="text-green-400 flex-shrink-0" /><span>Planning travel (Solo traveled 10+ European countries).</span>
+              <Map size={16} className="text-green-400 flex-shrink-0" /><span>Planning travel (Solo traveled 10+ European countries)</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
-              <Sparkles size={16} className="text-green-400 flex-shrink-0" /><span>Mahadev's grace, solid friendships, and a wonderful family.</span>
+              <Sparkles size={16} className="text-green-400 flex-shrink-0" /><span>Mahadev's grace, solid friendships, and a wonderful family</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
-              <CreditCard size={16} className="text-green-400 flex-shrink-0" /><span>Credit card points wizard, maximizes every swipe.</span>
+              <CreditCard size={16} className="text-green-400 flex-shrink-0" /><span>Credit card points wizard, maximizes every swipe</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-green-900/10 p-2 rounded items-center">
-              <Target size={16} className="text-green-400 flex-shrink-0" /><span>Keeps my word. Sets a goal, stays persistent, gets it done.</span>
+              <Target size={16} className="text-green-400 flex-shrink-0" /><span>I stand by my word — sets a goal, stays persistent, gets it done</span>
             </li>
           </ul>
         </div>
@@ -598,19 +598,19 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
           </h4>
           <ul className="space-y-3">
             <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
-              <Flame size={16} className="text-red-400 flex-shrink-0" /><span>Potential to bring Kitchen to ashes.</span>
+              <Flame size={16} className="text-red-400 flex-shrink-0" /><span>Potential to bring Kitchen to ashes</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
-              <Dog size={16} className="text-red-400 flex-shrink-0" /><span>Keep asking for a dog, baby cow, or an elephant (Please…).</span>
+              <Dog size={16} className="text-red-400 flex-shrink-0" /><span>Keep asking for a dog, baby cow, or an elephant (Please…)</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
-              <Heart size={16} className="text-red-400 flex-shrink-0" /><span>Self esteem could use a little work.</span>
+              <Heart size={16} className="text-red-400 flex-shrink-0" /><span>Self esteem could use a little work</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
-              <Carrot size={16} className="text-red-400 flex-shrink-0" /><span>Veggies? Meh, only if blended.</span>
+              <Carrot size={16} className="text-red-400 flex-shrink-0" /><span>Veggies? Meh, only if blended</span>
             </li>
             <li className="flex gap-3 text-sm text-gray-300 bg-red-900/10 p-2 rounded items-center">
-              <Smartphone size={16} className="text-red-400 flex-shrink-0" /><span>Got a soft spot for tech, wallet takes the hit.</span>
+              <Smartphone size={16} className="text-red-400 flex-shrink-0" /><span>Got a soft spot for tech, wallet takes the hit</span>
             </li>
           </ul>
         </div>
@@ -653,7 +653,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
                 <Star size={16} /> Bonus Points If...
               </h4>
               <div className="flex flex-wrap gap-3">
-                {["Naruto Fan", "Great Meme Game", "Anime girl", "Lets me buy tech gadgets", "Dog Lover", "Spiritual", "Dress modern yet elegant", "Puts on Bindi & Kajal occasionally", "Welcome home a Pocket Pom", "Teaches me cooking", "Hits gym and drags me too", "Gets ready quick", "Hiker", "Gets me Boba"].map((b, i) => (
+                {["Naruto Fan", "Great Meme Game", "Anime girl", "Lets me buy tech gadgets", "Dog Lover", "Spiritual", "Dress modern yet elegant", "Puts on Bindi & Kajal occasionally", "Welcome home a Pocket Pom", "Teaches me cooking", "Hits gym and drags me too", "Gets ready quick", "A Hiker", "Gets me Boba"].map((b, i) => (
                   <span key={i} className="text-xs bg-yellow-400/10 text-yellow-200 px-2 py-1 rounded border border-yellow-400/20">{b}</span>
                 ))}
               </div>
@@ -662,10 +662,10 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
             {/* Quote inside About You */}
             <div className="sm:col-span-2 lg:col-span-4 mt-4 pt-4 border-t border-white/10 text-center">
               <p className="text-gray-300 text-sm italic mb-2 leading-relaxed">
-                "I understand everyone has their flaws, but ideally I hope for a partner with high EQ, someone who can point out my mistakes and help me grow into a better version of myself each day. I see feedback as a gift, and I'm willing to work on myself."
+                "I understand everyone has their flaws, but ideally I hope for a partner with high EQ, someone who can point out my mistakes and help me grow into a better version of myself each day. I see feedback as a gift, and I'm willing to work on myself. It would be wonderful if you feel the same way, so we can gently lift each other up and grow together."
               </p>
               <span className="text-[#D4AF37] font-serif text-sm font-bold">
-                "Gayyali danivi ina parledu if you tick the above boxes."
+                "Gayyali ina parledu if you tick the above boxes"
               </span>
             </div>
           </div>
@@ -689,7 +689,7 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
             </a>
           </div>
           <p className="text-gray-400 text-xs mb-4 text-center"><span className="text-[#D4AF37]">Heads up!</span> I've lost some weight, so I might look different across photos. Also, all fake candids! Check out my Instagram for latest pics.</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 gallery-stagger">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 gallery-stagger">
             {images.map((img, index) => (
               <div
                 key={index}
@@ -745,11 +745,12 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
             <ChevronLeft size={24} />
           </button>
 
-          <div className="relative max-w-5xl max-h-[80vh] md:max-h-[90vh] animate-lightbox">
+          <div className="relative max-w-5xl max-h-[80vh] md:max-h-[90vh]">
             <img 
+              key={fullscreenIndex}
               src={images[fullscreenIndex]} 
               alt="Fullscreen" 
-              className="max-w-full max-h-[70vh] md:max-h-[90vh] object-contain rounded-2xl shadow-2xl shadow-[#D4AF37]/20"
+              className="max-w-full max-h-[70vh] md:max-h-[90vh] object-contain rounded-2xl shadow-2xl shadow-[#D4AF37]/20 animate-slide-in"
             />
             <button 
               className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all border border-white/20"
@@ -793,12 +794,13 @@ export function AboutMeSection({ scrollToTop, galleryImages }) {
 }
 
 // --- Family Section ---
-// Family gallery images (excluding photos 2, 7, 8 as requested)
+// Family gallery images - order: 2,5,3,4,1,6
 const FAMILY_PHOTOS = [
   'images/family/family1.jpg',
+  'images/family/family5.jpg',
   'images/family/family3.jpg',
   'images/family/family4.jpg',
-  'images/family/family5.jpg',
+  'images/mom-dad.jpg',
   'images/family/IMG_3929.jpg',
 ].map(img => import.meta.env.BASE_URL + img);
 
@@ -848,9 +850,11 @@ export function FamilySection({ profile, scrollToTop }) {
             onClick={() => setFullscreenImage(profile.dadPhoto)}
           >
             {profile.dadPhoto && (
-              <img src={profile.dadPhoto} alt="Dad" className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+              <img src={profile.dadPhoto} alt="Dad" className="w-full h-full object-cover object-[center_35%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+            {/* Gradient blending overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/5 via-transparent to-[#D4AF37]/5" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#D4AF37]/5" />
           </div>
           <div className="p-4 flex-grow flex flex-col bg-gradient-to-b from-[#0c0c0c] to-[#080808]">
@@ -895,9 +899,11 @@ export function FamilySection({ profile, scrollToTop }) {
             onClick={() => setFullscreenImage(profile.momPhoto)}
           >
             {profile.momPhoto && (
-              <img src={profile.momPhoto} alt="Mom" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+              <img src={profile.momPhoto} alt="Mom" className="w-full h-full object-cover object-[center_40%] scale-110 opacity-90 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+            {/* Gradient blending overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/5 via-transparent to-[#D4AF37]/5" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#D4AF37]/10" />
           </div>
           <div className="p-4 flex-grow flex flex-col bg-gradient-to-b from-[#0c0c0c] to-[#080808]">
@@ -917,7 +923,7 @@ export function FamilySection({ profile, scrollToTop }) {
               </div>
               <div className="flex items-start gap-3">
                 <Users size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
-                <p className="text-gray-300 text-sm leading-relaxed">She said: "Apes together strong."</p>
+                <p className="text-gray-300 text-sm leading-relaxed">She said: "Apes together strong"</p>
               </div>
               <div className="flex items-start gap-3">
                 <Scale size={16} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
@@ -942,9 +948,11 @@ export function FamilySection({ profile, scrollToTop }) {
             onClick={() => setFullscreenImage(profile.sisPhoto)}
           >
             {profile.sisPhoto && (
-              <img src={profile.sisPhoto} alt="Sister" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+              <img src={profile.sisPhoto} alt="Sister" className="w-full h-full object-cover object-[center_40%] opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+            {/* Gradient blending overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/5 via-transparent to-[#D4AF37]/5" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#D4AF37]/5" />
           </div>
           <div className="p-4 flex-grow flex flex-col bg-gradient-to-b from-[#0c0c0c] to-[#080808]">
@@ -989,7 +997,7 @@ export function FamilySection({ profile, scrollToTop }) {
         <h3 className="text-xl font-serif text-white text-center mb-4">
           Family <span className="text-[#D4AF37] italic">Moments</span>
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 gallery-stagger">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 gallery-stagger">
           {FAMILY_PHOTOS.map((img, index) => (
             <div
               key={index}
@@ -999,8 +1007,11 @@ export function FamilySection({ profile, scrollToTop }) {
               <img
                 src={img}
                 alt={`Family ${index + 1}`}
-                className="w-full aspect-square object-cover object-top transition-all duration-500 opacity-85 group-hover:opacity-100 group-hover:scale-110"
+                className="w-full aspect-square object-cover object-[center_25%] transition-all duration-500 opacity-85 group-hover:opacity-100 group-hover:scale-110"
               />
+              {/* Gradient blending overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/5 via-transparent to-[#D4AF37]/5" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           ))}
@@ -1064,11 +1075,12 @@ export function FamilySection({ profile, scrollToTop }) {
             <ChevronLeft size={24} />
           </button>
 
-          <div className="relative max-w-6xl max-h-[80vh] md:max-h-[90vh] animate-lightbox">
+          <div className="relative max-w-6xl max-h-[80vh] md:max-h-[90vh]">
             <img
+              key={fullscreenGalleryIndex}
               src={FAMILY_PHOTOS[fullscreenGalleryIndex]}
               alt="Fullscreen"
-              className="max-w-full max-h-[65vh] md:max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl shadow-[#D4AF37]/30"
+              className="max-w-full max-h-[65vh] md:max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl shadow-[#D4AF37]/30 animate-slide-in"
             />
             <button
               className="absolute top-4 right-4 p-3 bg-black/50 backdrop-blur rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 border border-white/20 hover:scale-110"
@@ -1403,7 +1415,7 @@ export function ContactSection({ scrollToTop }) {
         {/* Talk to Father */}
         <div className="pt-6 border-t border-white/10 space-y-3">
           <p className="text-[#D4AF37] text-sm font-medium mb-3 bg-[#D4AF37]/10 px-4 py-2 rounded-lg inline-block">
-            ✨ No strict caste preferences? We'd love to hear from you!
+            ✨ No strict caste preferences? I'd love to hear from you!
           </p>
           <p className="text-gray-400 text-sm">
             Want to speak with family? Connect with my father directly
@@ -1424,7 +1436,7 @@ export function ContactSection({ scrollToTop }) {
               Know someone who might be interested? Share this profile!
             </p>
             <a 
-              href="https://wa.me/?text=Hey!%20I%20found%20Hemanth's%20profile%20and%20thought%20you%20might%20be%20interested.%20Would%20you%20like%20to%20connect%20with%20him%3F%20%F0%9F%92%8D%0A%0ACheck%20out%20his%20profile%20here%3A%20https%3A%2F%2Fbommenahemanth.github.io%2Fmarryme"
+              href="https://wa.me/?text=Hey%21%20I%20found%20Hemanth%27s%20profile%20and%20thought%20you%20might%20be%20interested.%20Would%20you%20like%20to%20connect%20with%20him%3F%20%F0%9F%92%8D%0A%0ACheck%20out%20his%20profile%20here%3A%20https%3A%2F%2Fbommenahemanth.github.io%2Fmarryme%0A%0APS%3A%20Open%20it%20on%20a%20laptop%20for%20the%20full%20experience%20%28trust%20me%2C%20it%27s%20worth%20it%21%29%20%F0%9F%92%BB%E2%9C%A8"
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50"
@@ -1459,7 +1471,7 @@ export function ContactSection({ scrollToTop }) {
         <div className="pt-10 mt-6 border-t border-white/5">
           <div className="text-center max-w-3xl mx-auto">
             <p className="text-gray-500 text-xs leading-relaxed">
-              Built with Gemini 2.5 Pro, VS Code + GitHub Copilot (Claude Opus 4.5), GitHub Pages & two sleepless weekends ☕
+              Built with Gemini 2.5 Pro, VS Code + GitHub Copilot (Claude Opus 4.5), GitHub Pages & a sleepless weekend ☕
             </p>
             <p className="text-gray-400 text-sm mt-2">
               Feedback is a gift — <span className="text-[#D4AF37]">Got thoughts? Text me.</span>

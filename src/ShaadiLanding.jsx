@@ -14,7 +14,7 @@ import {
   Globe,
   Edit2,
   Loader2,
-  RotateCw,
+
   Trophy,
   ArrowUp,
   Cpu,
@@ -182,7 +182,7 @@ export default function ShaadiLanding() {
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
     );
 
     revealElements.forEach((el) => observer.observe(el));
@@ -311,8 +311,8 @@ export default function ShaadiLanding() {
             backgroundPosition: '60% 25%'
           }}
         />
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black via-black/80 to-transparent/30" />
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-black/50" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black via-black/70 via-50% to-transparent" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
 
         <div className="relative z-20 w-full px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-12 flex-1 flex flex-col justify-center">
 
@@ -380,7 +380,7 @@ export default function ShaadiLanding() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 md:gap-x-10 lg:gap-x-16 gap-y-4 md:gap-y-5 lg:gap-y-6 mb-8 stagger-fade-in">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 md:gap-x-6 lg:gap-x-8 gap-y-4 md:gap-y-5 lg:gap-y-6 mb-8 stagger-fade-in md:max-w-3xl lg:max-w-4xl">
               <DetailItem icon={Calendar} value={profile.age} label="Age" />
               <DetailItem icon={Ruler} value={profile.height} label="Height" />
               <DetailItem icon={User} value={profile.caste} label="Caste (reach out only if no concern)" />
@@ -456,7 +456,8 @@ export default function ShaadiLanding() {
         </div>
 
         <div className="max-w-4xl mx-auto px-4 pb-4 relative z-10 w-full reveal-on-scroll reveal-delay-2">
-          <div className="absolute left-1/2 top-0 w-[2px] h-full -translate-x-1/2 bg-gradient-to-b from-[#D4AF37]/50 via-white/10 to-transparent timeline-line-animated" />
+          {/* Timeline line - positioned to connect logos only */}
+          <div className="absolute left-1/2 w-[2px] -translate-x-1/2 bg-[#D4AF37]" style={{ top: '100px', bottom: '100px' }} />
 
           <div className="space-y-8 animate-in slide-in-from-bottom-20 duration-1000">
             {TIMELINE_DATA.map((item, idx) => {
@@ -465,19 +466,24 @@ export default function ShaadiLanding() {
 
               return (
                 <div key={item.id} className={`relative flex flex-col md:flex-row items-center gap-8 ${isEven ? 'md:flex-row-reverse slide-in-right' : 'slide-in-left'}`} style={{ animationDelay: `${idx * 0.15}s` }}>
-                  <div className="flex-1 w-full md:w-[45%] h-[200px] sm:h-[180px] group perspective-1000 flip-card-3d">
+                  {/* FLIP CARD */}
+                  <div className="flex-1 w-full md:w-[45%] h-[200px] sm:h-[180px]" style={{ perspective: '1000px' }}>
                     <div
-                      className="relative w-full h-full transition-transform duration-700 cursor-pointer"
-                      style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+                      className="relative w-full h-full cursor-pointer"
+                      style={{ 
+                        transformStyle: 'preserve-3d',
+                        transition: 'transform 0.6s ease',
+                        transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                      }}
                       onClick={() => toggleFlip(item.id)}
                     >
-                      <div
-                        className="absolute inset-0 bg-[#050505] border border-[#D4AF37]/20 rounded-xl p-3 shadow-2xl flex flex-col hover:border-[#D4AF37]/50 hover:shadow-[#D4AF37]/10 active:scale-[0.98] transition-all duration-300 hover:-translate-y-1 z-20 scale-100 hover:scale-[1.02]"
-                        style={{ backfaceVisibility: 'hidden' }}
+                      {/* FRONT FACE */}
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-br from-[#1a1608] via-[#0d0b05] to-[#050505] border border-[#D4AF37]/30 rounded-xl p-3 shadow-2xl flex flex-col hover:border-[#D4AF37]/60 hover:shadow-[#D4AF37]/20 active:scale-[0.98] transition-all duration-300"
+                        style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
                       >
                         <div className="text-[#D4AF37] text-[10px] font-black tracking-[0.2em] uppercase mb-1 border-b border-[#D4AF37]/20 pb-1 flex justify-between items-center">
                           <span>{item.date}</span>
-                          <RotateCw size={12} className="opacity-50" />
                         </div>
                         <div className="flex-grow flex flex-col justify-center text-left">
                           <h3 className="text-lg font-serif text-white mb-0.5 leading-tight">{item.role}</h3>
@@ -497,24 +503,25 @@ export default function ShaadiLanding() {
                         </div>
                       </div>
 
-                      <div
-                        className="absolute inset-0 bg-[#050505] border border-[#D4AF37] rounded-xl p-3 shadow-[0_0_40px_rgba(212,175,55,0.1)] flex flex-col overflow-hidden z-20"
-                        style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                      {/* BACK FACE */}
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-br from-[#1a1608] via-[#0d0b05] to-[#050505] border border-[#D4AF37] rounded-xl p-3 shadow-[0_0_40px_rgba(212,175,55,0.15)] flex flex-col"
+                        style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
                       >
                         <div className="flex items-center gap-2 mb-2 border-b border-[#D4AF37]/30 pb-1">
                           <Trophy className="text-[#D4AF37]" size={12} />
                           <span className="text-white font-serif text-xs">Responsibilities</span>
                         </div>
-                        <ul className="flex-grow space-y-1.5 overflow-hidden pr-1 flex flex-col justify-center">
-                          {item.responsibilities.slice(0, 3).map((resp, i) => (
+                        <ul className="flex-grow space-y-1.5 pr-1 flex flex-col justify-center">
+                          {item.responsibilities && item.responsibilities.map((resp, i) => (
                             <li key={i} className="flex gap-2 text-[10px] text-gray-300 leading-tight">
                               <span className="text-[#D4AF37] mt-0.5">•</span>
                               <span>{resp}</span>
                             </li>
                           ))}
                         </ul>
-                        <div className="mt-1 pt-1 text-center border-t border-white/5">
-                          <span className="text-[8px] text-[#D4AF37]/60 uppercase tracking-widest hover:text-[#D4AF37] transition-colors">Click to Flip Back</span>
+                        <div className="mt-1 pt-1 text-center border-t border-white/10">
+                          <span className="text-[9px] text-[#D4AF37] uppercase tracking-widest">👆 Tap to flip back</span>
                         </div>
                       </div>
                     </div>
@@ -524,11 +531,11 @@ export default function ShaadiLanding() {
                     onClick={() => setSelectedFactItem(item)}
                     className="relative flex-shrink-0 z-10 cursor-pointer group"
                   >
-                    <div className="w-14 h-14 rounded-full bg-black border-[3px] border-[#D4AF37] p-2 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-transform group-hover:scale-110 animate-pulse hover:animate-none">
+                    <div className="w-14 h-14 rounded-full bg-black border-[3px] border-[#D4AF37] p-2 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.6)]">
                       <img
                         src={item.logo || `https://logo.clearbit.com/${item.domain}`}
                         alt={item.org}
-                        className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                        className="w-full h-full object-contain"
                         loading="lazy"
                         onError={(e) => { 
                           e.target.onerror = null;
@@ -537,8 +544,8 @@ export default function ShaadiLanding() {
                         }}
                       />
                     </div>
-                    <div className={`absolute -top-7 left-1/2 -translate-x-1/2 bg-[#D4AF37] text-black text-[9px] px-2 py-0.5 rounded whitespace-nowrap font-bold pointer-events-none font-serif transition-opacity ${idx === 0 ? 'opacity-100 animate-bounce' : 'opacity-0 group-hover:opacity-100'}`}>
-                      Click Logo
+                    <div className={`absolute -top-7 left-0 right-0 flex justify-center pointer-events-none transition-opacity ${idx === 0 ? 'opacity-100 animate-bounce' : 'opacity-0 group-hover:opacity-100'}`}>
+                      <span className="bg-[#D4AF37] text-black text-[9px] px-2 py-0.5 rounded whitespace-nowrap font-bold font-serif">Click Logo</span>
                     </div>
                   </div>
                   <div className="flex-1 hidden md:block" />
@@ -551,7 +558,7 @@ export default function ShaadiLanding() {
         
       </div>
 
-      <SectionDivider variant="diamond" />
+      <SectionDivider  />
 
       {/* ==================== PAGE 3: HOROSCOPE ==================== */}
       <div ref={horoscopeSectionRef} data-section="horoscope" className="relative w-full min-h-screen snap-start">
@@ -565,7 +572,7 @@ export default function ShaadiLanding() {
         <AboutMeSection scrollToTop={scrollToTop} galleryImages={galleryImages} />
       </div>
 
-      <SectionDivider variant="diamond" />
+      <SectionDivider  />
 
       {/* ==================== PAGE 5: FAMILY ==================== */}
       <div ref={familySectionRef} data-section="family" className="relative w-full snap-start">

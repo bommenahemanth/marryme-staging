@@ -1319,6 +1319,33 @@ button:focus:not(:focus-visible) {
   100% { transform: translateX(0); }
 }
 
+/* Gallery slide animation */
+@keyframes slideInFromRight {
+  from { 
+    opacity: 0; 
+    transform: translateX(60px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0) scale(1); 
+  }
+}
+
+@keyframes slideInFromLeft {
+  from { 
+    opacity: 0; 
+    transform: translateX(-60px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0) scale(1); 
+  }
+}
+
+.animate-slide-in {
+  animation: slideInFromRight 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
 /* Button press effect */
 .btn-press:active {
   transform: scale(0.95);
@@ -1687,13 +1714,71 @@ button:focus:not(:focus-visible) {
   animation: logoPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
 
-/* Enhanced flip card shadow */
+/* Enhanced flip card with proper 3D perspective */
+.flip-card-container {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  z-index: 2;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Hover effect for flip cards */
+.flip-card-container:hover .flip-card-inner:not(.flipped) .flip-card-front {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+}
+
+/* Legacy support */
 .flip-card-3d {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
   transition: box-shadow 0.3s ease;
 }
 
 .flip-card-3d:hover {
   box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+}
+
+/* Ensure proper 3D transform for flip container */
+.flip-card-3d > div {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* Perspective utility class */
+.perspective-1000 {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
 }
 
 /* Form field glow */
@@ -1762,4 +1847,155 @@ button:focus:not(:focus-visible) {
   .timeline-line-animated {
     animation-duration: 1.5s;
   }
+}
+
+/* ===== ENHANCED SMOOTH SCROLLING ===== */
+* {
+  scroll-behavior: smooth !important;
+}
+
+html {
+  scroll-behavior: smooth !important;
+  scroll-padding-top: 0;
+}
+
+body {
+  scroll-behavior: smooth !important;
+}
+
+/* Smoother section transitions */
+[data-section] {
+  scroll-margin-top: 0;
+  transition: all 0.3s ease-out;
+}
+
+/* Remove snap for smoother free scroll */
+.smooth-scroll-container {
+  scroll-snap-type: none !important;
+}
+
+/* Mobile smooth scroll improvements */
+@media (max-width: 768px) {
+  html, body {
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  [data-section] {
+    scroll-snap-align: none;
+  }
+}
+
+/* ===== MOBILE PERFORMANCE & UI FIXES ===== */
+
+/* Faster, snappier reveal-on-scroll on mobile */
+@media (max-width: 768px) {
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(15px); /* Reduced from 40px */
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Faster than 0.8s */
+  }
+  
+  .reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Reduce staggered delays on mobile */
+  .reveal-delay-1 { transition-delay: 0.05s; }
+  .reveal-delay-2 { transition-delay: 0.1s; }
+  .reveal-delay-3 { transition-delay: 0.15s; }
+  .reveal-delay-4 { transition-delay: 0.2s; }
+  .reveal-delay-5 { transition-delay: 0.25s; }
+  .reveal-delay-6 { transition-delay: 0.3s; }
+}
+
+/* Inner Circle (Family Section) - reduce gaps on mobile */
+@media (max-width: 768px) {
+  /* Reduce the grid gap in family section */
+  .grid.grid-cols-1.md\:grid-cols-3 {
+    gap: 1rem !important;
+  }
+  
+  /* Remove the scale-105 on mom card for mobile - it causes gaps */
+  .scale-105 {
+    transform: scale(1) !important;
+  }
+  
+  /* Reduce padding in family section */
+  [data-section] .reveal-on-scroll.grid {
+    gap: 0.75rem;
+  }
+}
+
+/* Parent photos - better display on mobile */
+@media (max-width: 768px) {
+  /* Ensure family cards have consistent heights */
+  .grid.grid-cols-1.md\:grid-cols-3 > div {
+    height: auto !important;
+  }
+  
+  /* Family card photo containers - proper sizing */
+  .grid.grid-cols-1.md\:grid-cols-3 > div > div:first-child {
+    height: 200px !important;
+    min-height: 200px;
+  }
+  
+  /* Ensure images fill container properly */
+  .grid.grid-cols-1.md\:grid-cols-3 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+}
+
+/* Reduce transition durations on mobile for snappier feel */
+@media (max-width: 768px) {
+  .transition-all {
+    transition-duration: 0.2s !important;
+  }
+  
+  /* Disable hover translate on mobile - causes jank */
+  .hover\:-translate-y-1:hover,
+  .hover\:-translate-y-3:hover,
+  .hover\:-translate-y-5:hover {
+    transform: none !important;
+  }
+}
+
+/* Ensure smooth scrolling works on all mobile browsers */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Improve scroll performance */
+  .overflow-visible,
+  .overflow-hidden {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Reduce blur effects on mobile for performance */
+  .blur-\[120px\] {
+    filter: blur(60px) !important;
+  }
+  
+  .backdrop-blur-xl {
+    backdrop-filter: blur(12px) !important;
+  }
+}
+
+/* Force GPU acceleration for smooth animations */
+.reveal-on-scroll,
+.transition-all,
+.transition-transform {
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* After animation completes, remove will-change for memory */
+.reveal-on-scroll.revealed {
+  will-change: auto;
 }
